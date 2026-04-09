@@ -1,0 +1,13 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" fill="#D9DDD7"/>
+  <rect y="317" width="512" height="195" fill="#1F3D2B"/>
+  <circle cx="256" cy="228" r="175" fill="#F6F5F0"/>
+  <circle cx="256" cy="228" r="169" stroke="#304B3A" stroke-width="2"/>
+  <path d="M138 133C170 104 212 89 256 89C300 89 342 104 374 133" stroke="#304B3A" stroke-width="3" stroke-linecap="round"/>
+  <path d="M138 323C170 352 212 367 256 367C300 367 342 352 374 323" stroke="#304B3A" stroke-width="3" stroke-linecap="round"/>
+  <text x="256" y="120" text-anchor="middle" fill="#304B3A" font-family="'Times New Roman', serif" font-size="28" letter-spacing="4">PLANO &amp; TERRA</text>
+  <text x="256" y="357" text-anchor="middle" fill="#304B3A" font-family="'Times New Roman', serif" font-size="28" letter-spacing="4">PLANO &amp; TERRA</text>
+  <text x="176" y="270" fill="#2C523B" font-family="'Times New Roman', serif" font-size="150" font-weight="700">C</text>
+  <text x="223" y="276" fill="#3A342E" font-family="'Times New Roman', serif" font-size="72" font-style="italic">&amp;</text>
+  <text x="270" y="270" fill="#2C523B" font-family="'Times New Roman', serif" font-size="150" font-weight="700">T</text>
+</svg>
