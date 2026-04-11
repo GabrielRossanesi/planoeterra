@@ -44,7 +44,7 @@
   <link rel="apple-touch-icon" href="./assets/logo-plano-terra.svg">
   <link rel="stylesheet" href="./styles.css">
 </head>
-<body>
+<body class="home-page">
   <div class="page-shell">
     <header class="site-header" id="inicio">
       <div class="container nav-wrap">
@@ -62,242 +62,363 @@
         </button>
 
         <nav class="site-nav" id="site-menu" aria-label="Navegação principal">
-          <a href="#inicio">Início</a>
-          <a href="#servicos">Serviços</a>
-          <a href="./projetos.html">Projetos</a>
-          <a href="#sobre">Sobre</a>
-          <a href="#equipamentos">Equipamentos</a>
-          <a href="#contato">Contato</a>
-          <a
-            class="icon-link"
-            href="https://www.instagram.com/planoeterra/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Instagram da Plano & Terra"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95Zm8.95 1.35a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1ZM12 6.8A5.2 5.2 0 1 1 6.8 12 5.2 5.2 0 0 1 12 6.8Zm0 1.8A3.4 3.4 0 1 0 15.4 12 3.4 3.4 0 0 0 12 8.6Z"/>
-            </svg>
-          </a>
-          <a
-            class="button button-primary nav-cta"
-            href="https://wa.me/5511985222291?text=Olá,%20gostaria%20de%20regularizar%20meu%20terreno"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Fale conosco no WhatsApp
-          </a>
+          <div class="nav-primary">
+            <a href="#servicos">Serviços</a>
+            <a href="./projetos.html">Projetos</a>
+          </div>
+          <div class="nav-secondary">
+            <a
+              class="icon-link"
+              href="https://www.instagram.com/planoeterra/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram da Plano & Terra"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95Zm8.95 1.35a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1ZM12 6.8A5.2 5.2 0 1 1 6.8 12 5.2 5.2 0 0 1 12 6.8Zm0 1.8A3.4 3.4 0 1 0 15.4 12 3.4 3.4 0 0 0 12 8.6Z"/>
+              </svg>
+            </a>
+            <a
+              class="button button-primary nav-cta"
+              href="https://wa.me/5511985222291?text=Olá,%20gostaria%20de%20solicitar%20um%20atendimento%20da%20Plano%20%26%20Terra"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Solicitar atendimento
+            </a>
+          </div>
+          <div class="nav-mobile-links">
+            <a href="#metodo">Método</a>
+            <a href="#contato">Contato</a>
+          </div>
         </nav>
       </div>
     </header>
 
     <main>
-      <section class="hero">
-        <div class="hero-backdrop"></div>
-        <div class="topo topo-left" aria-hidden="true"></div>
-        <div class="topo topo-right" aria-hidden="true"></div>
-        <div class="container hero-grid">
-          <div class="hero-copy reveal">
-            <span class="eyebrow">Precisão técnica para proteger seu patrimônio</span>
-            <h1>Regularize seu terreno<br>com segurança técnica.</h1>
-            <p class="lead">
-              Topografia e agrimensura aplicadas à regularização de imóveis urbanos e rurais, com leitura territorial precisa e base técnica confiável.
+      <section class="home-hero" id="topo" aria-labelledby="hero-title">
+        <div class="home-hero-backdrop"></div>
+        <div class="home-hero-overlay"></div>
+        <div class="home-hero-grid">
+          <div class="home-hero-copy">
+            <span class="eyebrow">Plano & Terra</span>
+            <p class="home-brandline reveal">Topografia e agrimensura</p>
+            <h1 class="reveal" id="hero-title">Precisão técnica para decidir sobre a terra.</h1>
+            <p class="home-hero-lead reveal">
+              Regularização, georreferenciamento e levantamentos com leitura clara de áreas urbanas e rurais.
             </p>
-            <p class="hero-warning">
-              Executamos levantamento, georreferenciamento e documentação técnica para reduzir inconsistências, apoiar exigências legais e orientar cada etapa com clareza.
-            </p>
-            <div class="hero-actions">
+            <div class="home-hero-actions reveal">
               <a
                 class="button button-primary"
-                href="https://wa.me/5511985222291?text=Olá,%20gostaria%20de%20regularizar%20meu%20terreno"
+                href="https://wa.me/5511985222291?text=Olá,%20gostaria%20de%20solicitar%20um%20atendimento%20da%20Plano%20%26%20Terra"
                 target="_blank"
                 rel="noreferrer"
               >
-                Solicitar diagnóstico agora
+                Solicitar atendimento
               </a>
-              <a class="button button-secondary" href="#servicos">Ver serviços</a>
+              <a class="button button-secondary" href="./projetos.html">Ver projetos executados</a>
             </div>
-            <div class="hero-trust">
-              <div>
-                <strong>Base técnica consistente</strong>
-                <span>Dados territoriais organizados para instruir processos com mais segurança e previsibilidade.</span>
-              </div>
-              <div>
-                <strong>Execução com método</strong>
-                <span>Atuação urbana e rural com critérios de medição, documentação e responsabilidade técnica.</span>
-              </div>
-            </div>
+            <ul class="home-hero-highlights reveal" aria-label="Principais frentes de atuação">
+              <li>Usucapião</li>
+              <li>Georreferenciamento</li>
+              <li>Drone + RTK</li>
+            </ul>
           </div>
 
-          <div class="hero-panel reveal">
-            <div class="hero-card">
-              <span class="card-tag">Diagnóstico inicial</span>
-              <h2>Leitura técnica do território para orientar a regularização.</h2>
-              <ul class="hero-list">
-                <li>Levantamentos para usucapião e regularização fundiária</li>
-                <li>Georreferenciamento urbano e rural com precisão territorial</li>
-                <li>Diagnóstico objetivo para definir o próximo passo técnico</li>
-              </ul>
-            </div>
+          <div class="home-hero-aside reveal" aria-label="Escopo de atuação">
+            <figure class="home-hero-visual">
+              <div class="hero-visual-frame">
+                <div class="hero-visual-media" role="img" aria-label="Visual aéreo de terreno com leitura técnica"></div>
+                <figcaption class="hero-visual-caption">
+                  <strong>Leitura aérea precisa</strong>
+                  <span>Território urbano e rural com apoio técnico visual.</span>
+                </figcaption>
+              </div>
+            </figure>
           </div>
+        </div>
+
+        <div class="home-hero-footer reveal">
+          <ul class="home-hero-footnotes" aria-label="Serviços em destaque">
+            <li>Levantamento para usucapião</li>
+            <li>Georreferenciamento urbano e rural</li>
+            <li>Peças técnicas para regularização</li>
+          </ul>
         </div>
       </section>
 
-      <section class="services section" id="servicos">
+      <section class="home-method-band section reveal" id="metodo">
         <div class="container">
-          <div class="section-heading reveal">
-            <span class="eyebrow">Serviços estratégicos</span>
-            <h2>Soluções técnicas para regularizar, valorizar e proteger seu imóvel.</h2>
-            <p>Atendemos desde regularização básica até projetos complexos com precisão técnica.</p>
+          <div class="home-method-band-head">
+            <div>
+              <span class="eyebrow">Método aplicado</span>
+              <h2>Três etapas. Uma leitura clara.</h2>
+            </div>
+            <p>Diagnóstico, captação e entrega conectados em um fluxo técnico direto.</p>
           </div>
 
-          <div class="services-grid">
-            <article class="service-card reveal">
-              <div class="service-icon">
-                <svg viewBox="0 0 64 64" aria-hidden="true">
-                  <path d="M12 46h40M20 46V22l12-8 12 8v24M26 46V32h12v14" />
+          <div class="method-band-track">
+            <article class="method-step-card reveal">
+              <div class="method-step-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M4 18 9 13l3 3 8-8" />
+                  <path d="M18 8h2v2" />
                 </svg>
               </div>
-              <h3>Levantamento para Usucapião</h3>
-              <p>Documentação técnica detalhada para apoiar processos de reconhecimento de posse com clareza e segurança.</p>
+              <span class="method-step-number">01</span>
+              <h3>Diagnóstico</h3>
+              <p>Leitura da área e definição do escopo.</p>
+              <div class="method-step-visual method-step-visual-a" aria-hidden="true"></div>
             </article>
 
-            <article class="service-card reveal">
-              <div class="service-icon">
-                <svg viewBox="0 0 64 64" aria-hidden="true">
-                  <path d="M14 48 32 14l18 34M22 34h20M32 14v36" />
+            <article class="method-step-card reveal">
+              <div class="method-step-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M5 19h14" />
+                  <path d="M7 19V9l5-4 5 4v10" />
+                  <path d="M12 5v14" />
                 </svg>
               </div>
-              <h3>Georreferenciamento Urbano</h3>
-              <p>Levantamentos precisos para delimitação, atualização cadastral e regularização de imóveis em áreas urbanas.</p>
+              <span class="method-step-number">02</span>
+              <h3>Captação</h3>
+              <p>Drone, RTK e medição compatível com a área.</p>
+              <div class="method-step-visual method-step-visual-b" aria-hidden="true"></div>
             </article>
 
-            <article class="service-card reveal">
-              <div class="service-icon">
-                <svg viewBox="0 0 64 64" aria-hidden="true">
-                  <path d="M12 44c10-10 30-10 40 0M12 34c10-10 30-10 40 0M12 24c10-10 30-10 40 0" />
+            <article class="method-step-card reveal">
+              <div class="method-step-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M7 4h7l5 5v11H7z" />
+                  <path d="M14 4v5h5" />
+                  <path d="M10 14h6" />
+                  <path d="M10 18h4" />
                 </svg>
               </div>
-              <h3>Georreferenciamento Rural</h3>
-              <p>Precisão em áreas rurais com leitura territorial confiável para processos de regularização e gestão da propriedade.</p>
+              <span class="method-step-number">03</span>
+              <h3>Entrega</h3>
+              <p>Peças técnicas organizadas para decisão e regularização.</p>
+              <div class="method-step-visual method-step-visual-c" aria-hidden="true"></div>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="urgency section">
-        <div class="container urgency-wrap reveal">
-          <div>
-            <span class="eyebrow">Ação no momento certo</span>
-            <h2>Quanto mais você espera, maior o risco.</h2>
-          </div>
-          <p>
-            Terrenos irregulares podem impedir vendas, financiamentos e até resultar em perda do imóvel. Regularize enquanto ainda há tempo.
-          </p>
-          <a
-            class="button button-primary"
-            href="https://wa.me/5511985222291?text=Olá,%20gostaria%20de%20regularizar%20meu%20terreno"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Falar com especialista agora
-          </a>
-        </div>
-      </section>
-
-      <section class="equipment section" id="equipamentos">
+      <section class="home-services section" id="servicos">
         <div class="container">
-          <div class="section-heading reveal">
-            <span class="eyebrow">Autoridade em campo</span>
-            <h2>Tecnologia aplicada à topografia com padrão profissional elevado.</h2>
-            <p>Utilizamos tecnologia de ponta para garantir máxima precisão em todos os levantamentos.</p>
+          <div class="home-services-head reveal">
+            <div class="home-section-head">
+              <span class="eyebrow">Atuação principal</span>
+              <h2>Serviços centrais da operação.</h2>
+            </div>
+            <p>Três frentes para regularizar, delimitar e documentar com mais segurança.</p>
           </div>
 
-          <div class="equipment-grid">
-            <article class="equipment-card reveal">
-              <span class="equipment-index">01</span>
-              <h3>Taqueômetro</h3>
-              <p>Leituras confiáveis para medições detalhadas e controle técnico em levantamentos complexos.</p>
+          <div class="home-services-cards">
+            <article class="service-spotlight-card reveal">
+              <div class="service-spotlight-media service-spotlight-media-a" aria-hidden="true"></div>
+              <div class="service-spotlight-copy">
+                <h3>Usucapião</h3>
+                <p>Perímetro e peças técnicas para instrução segura.</p>
+              </div>
             </article>
-            <article class="equipment-card reveal">
-              <span class="equipment-index">02</span>
-              <h3>Teodolito</h3>
-              <p>Precisão angular para demarcações, alinhamentos e análises topográficas com rigor metodológico.</p>
+
+            <article class="service-spotlight-card reveal">
+              <div class="service-spotlight-media service-spotlight-media-b" aria-hidden="true"></div>
+              <div class="service-spotlight-copy">
+                <h3>Georreferenciamento urbano</h3>
+                <p>Cadastro e leitura espacial com maior precisão.</p>
+              </div>
             </article>
-            <article class="equipment-card reveal">
-              <span class="equipment-index">03</span>
-              <h3>RTK</h3>
-              <p>Geoposicionamento de alta acurácia para projetos que exigem coordenadas confiáveis em tempo real.</p>
-            </article>
-            <article class="equipment-card reveal">
-              <span class="equipment-index">04</span>
-              <h3>Drone</h3>
-              <p>Captação aérea estratégica para leitura territorial ampla, documentação visual e ganho de eficiência.</p>
+
+            <article class="service-spotlight-card reveal">
+              <div class="service-spotlight-media service-spotlight-media-c" aria-hidden="true"></div>
+              <div class="service-spotlight-copy">
+                <h3>Georreferenciamento rural</h3>
+                <p>Mapeamento confiável para gestão e regularização.</p>
+              </div>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="about section" id="sobre">
-        <div class="container about-grid">
-          <div class="about-copy reveal">
-            <span class="eyebrow">Sobre a empresa</span>
-            <h2>Precisão, responsabilidade técnica e visão estratégica em cada projeto.</h2>
-            <p>
-              A Plano & Terra é especialista em soluções topográficas, atuando com precisão, responsabilidade técnica e foco na regularização de imóveis urbanos e rurais.
-            </p>
-            <p>
-              Unimos leitura territorial, método e atendimento próximo para transformar processos complexos em decisões seguras para nossos clientes.
-            </p>
-          </div>
-
-          <div class="about-panel reveal">
-            <div class="about-stat">
-              <strong>Atuação técnica</strong>
-              <span>Projetos conduzidos com critério, organização e clareza documental.</span>
-            </div>
-            <div class="about-stat">
-              <strong>Foco em segurança</strong>
-              <span>Redução de riscos para venda, financiamento e proteção patrimonial.</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="testimonials section">
+      <section class="home-practice section" aria-labelledby="practice-title">
         <div class="container">
-          <div class="section-heading reveal">
-            <span class="eyebrow">Prova social</span>
-            <h2>Confiança transmitida em cada atendimento.</h2>
+          <div class="home-practice-head reveal">
+            <span class="eyebrow">Como funciona na prática</span>
+            <h2 id="practice-title">Visual, técnico e direto ao ponto.</h2>
           </div>
 
-          <div class="testimonial-grid">
-            <blockquote class="testimonial-card reveal">
-              <p>"Atendimento rápido e extremamente profissional."</p>
-            </blockquote>
-            <blockquote class="testimonial-card reveal">
-              <p>"Resolvi meu problema de documentação com segurança."</p>
-            </blockquote>
-            <blockquote class="testimonial-card reveal">
-              <p>"Equipe clara, técnica e muito cuidadosa em todas as etapas."</p>
-            </blockquote>
+          <div class="practice-flow">
+            <article class="practice-row reveal">
+              <div class="practice-media practice-media-a" aria-hidden="true"></div>
+              <div class="practice-copy">
+                <div class="practice-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M4 18 9 13l3 3 8-8" />
+                    <path d="M18 8h2v2" />
+                  </svg>
+                </div>
+                <span class="practice-index">01</span>
+                <h3>Diagnóstico</h3>
+                <ul>
+                  <li>Leitura da área e do contexto</li>
+                  <li>Definição do escopo técnico</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="practice-row practice-row-reverse reveal">
+              <div class="practice-media practice-media-b" aria-hidden="true"></div>
+              <div class="practice-copy">
+                <div class="practice-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 19h14" />
+                    <path d="M7 19V9l5-4 5 4v10" />
+                    <path d="M12 5v14" />
+                  </svg>
+                </div>
+                <span class="practice-index">02</span>
+                <h3>Levantamento</h3>
+                <ul>
+                  <li>Drone, RTK e medição em campo</li>
+                  <li>Captação compatível com a área</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="practice-row reveal">
+              <div class="practice-media practice-media-c" aria-hidden="true"></div>
+              <div class="practice-copy">
+                <div class="practice-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M7 4h7l5 5v11H7z" />
+                    <path d="M14 4v5h5" />
+                    <path d="M10 14h6" />
+                    <path d="M10 18h4" />
+                  </svg>
+                </div>
+                <span class="practice-index">03</span>
+                <h3>Entrega</h3>
+                <ul>
+                  <li>Material técnico organizado</li>
+                  <li>Base pronta para decisão</li>
+                </ul>
+              </div>
+            </article>
           </div>
         </div>
       </section>
 
-      <section class="final-cta section" id="contato">
-        <div class="container final-cta-wrap reveal">
-          <span class="eyebrow">Decisão estratégica</span>
-          <h2>Não deixe seu patrimônio em risco.</h2>
-          <p>Fale agora com a Plano & Terra e dê o primeiro passo para regularizar seu terreno com segurança técnica.</p>
-          <a
-            class="button button-primary button-large"
-            href="https://wa.me/5511985222291?text=Olá,%20gostaria%20de%20regularizar%20meu%20terreno"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Falar no WhatsApp agora
-          </a>
+      <section class="home-projects section">
+        <div class="container">
+          <div class="home-projects-head reveal">
+            <div class="home-section-head">
+              <span class="eyebrow">Prova de capacidade</span>
+              <h2>Projetos que comunicam execução.</h2>
+            </div>
+            <a class="text-link" href="./projetos.html">Explorar projetos</a>
+          </div>
+
+          <div class="home-projects-grid">
+            <article class="project-tile project-tile-featured reveal">
+              <div class="project-tile-media project-showcase-media-main" aria-hidden="true"></div>
+              <div class="project-tile-overlay">
+                <span class="project-tile-type">Usucapião</span>
+                <h3>Leitura técnica do perímetro</h3>
+                <a class="project-tile-link" href="./projetos.html">Ver detalhes</a>
+              </div>
+            </article>
+
+            <article class="project-tile reveal">
+              <div class="project-tile-media project-showcase-media-urban" aria-hidden="true"></div>
+              <div class="project-tile-overlay">
+                <span class="project-tile-type">Urbano</span>
+                <h3>Conferência de área</h3>
+                <a class="project-tile-link" href="./projetos.html">Ver detalhes</a>
+              </div>
+            </article>
+
+            <article class="project-tile reveal">
+              <div class="project-tile-media project-showcase-media-rural" aria-hidden="true"></div>
+              <div class="project-tile-overlay">
+                <span class="project-tile-type">Rural</span>
+                <h3>Mapeamento territorial</h3>
+                <a class="project-tile-link" href="./projetos.html">Ver detalhes</a>
+              </div>
+            </article>
+
+            <article class="project-tile reveal">
+              <div class="project-tile-media project-showcase-media-main" aria-hidden="true"></div>
+              <div class="project-tile-overlay">
+                <span class="project-tile-type">3D / galeria</span>
+                <h3>Prévia para detalhamento técnico</h3>
+                <a class="project-tile-link" href="./projetos.html">Ver detalhes</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-authority section">
+        <div class="container">
+          <div class="authority-grid reveal">
+            <div class="authority-item">
+              <div class="authority-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 3v18" />
+                  <path d="M4 12h16" />
+                </svg>
+              </div>
+              <span>Atuação urbana e rural</span>
+            </div>
+            <div class="authority-item">
+              <div class="authority-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M4 18 9 13l3 3 8-8" />
+                </svg>
+              </div>
+              <span>Tecnologia RTK e drone</span>
+            </div>
+            <div class="authority-item">
+              <div class="authority-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M7 4h7l5 5v11H7z" />
+                  <path d="M14 4v5h5" />
+                </svg>
+              </div>
+              <span>Material técnico validado</span>
+            </div>
+            <div class="authority-item">
+              <div class="authority-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M5 19h14" />
+                  <path d="M7 19V9l5-4 5 4v10" />
+                </svg>
+              </div>
+              <span>Precisão em campo</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-cta section" id="contato">
+        <div class="container">
+          <div class="home-cta-wrap reveal">
+            <span class="eyebrow">Contato direto</span>
+            <h2>Fale com a Plano & Terra e avance com mais segurança técnica.</h2>
+            <p>Atendimento direto para regularização, georreferenciamento e levantamento topográfico.</p>
+            <div class="home-cta-actions">
+              <a
+                class="button button-primary button-large"
+                href="https://wa.me/5511985222291?text=Olá,%20gostaria%20de%20solicitar%20um%20atendimento%20da%20Plano%20%26%20Terra"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Solicitar atendimento via WhatsApp
+              </a>
+              <a class="button button-secondary button-large" href="tel:+5511985222291">Ligar agora</a>
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -318,7 +439,7 @@
 
     <a
       class="whatsapp-float"
-      href="https://wa.me/5511985222291?text=Olá,%20gostaria%20de%20regularizar%20meu%20terreno"
+      href="https://wa.me/5511985222291?text=Olá,%20gostaria%20de%20solicitar%20um%20atendimento%20da%20Plano%20%26%20Terra"
       target="_blank"
       rel="noreferrer"
       aria-label="Falar no WhatsApp"

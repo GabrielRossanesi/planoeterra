@@ -2,8 +2,9 @@ const body = document.body;
 const header = document.querySelector(".site-header");
 const menuToggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".site-nav");
-const navLinks = document.querySelectorAll('.site-nav a[href^="#"]');
+const navLinks = document.querySelectorAll(".site-nav a");
 const revealItems = document.querySelectorAll(".reveal");
+const homeHero = document.querySelector(".home-hero");
 
 revealItems.forEach((item, index) => {
   item.style.setProperty("--reveal-delay", `${Math.min(index * 70, 320)}ms`);
@@ -11,12 +12,22 @@ revealItems.forEach((item, index) => {
 
 const syncHeaderState = () => {
   header.classList.toggle("scrolled", window.scrollY > 24);
+
+  if (homeHero) {
+    const heroShift = Math.min(window.scrollY, 180);
+    document.documentElement.style.setProperty("--hero-shift", `${heroShift}`);
+  }
 };
 
 syncHeaderState();
 window.addEventListener("scroll", syncHeaderState, { passive: true });
 
 if (menuToggle && nav) {
+  const closeMenu = () => {
+    menuToggle.setAttribute("aria-expanded", "false");
+    body.classList.remove("menu-open");
+  };
+
   menuToggle.addEventListener("click", () => {
     const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
     menuToggle.setAttribute("aria-expanded", String(!isExpanded));
@@ -24,10 +35,19 @@ if (menuToggle && nav) {
   });
 
   navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      menuToggle.setAttribute("aria-expanded", "false");
-      body.classList.remove("menu-open");
-    });
+    link.addEventListener("click", closeMenu);
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMenu();
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 1100) {
+      closeMenu();
+    }
   });
 }
 

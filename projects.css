@@ -411,8 +411,8 @@ body.modal-open {
     linear-gradient(180deg, rgba(255, 253, 249, 0.985), rgba(248, 244, 237, 0.96)),
     radial-gradient(circle at top left, rgba(31, 61, 43, 0.065), transparent 38%);
   overflow: hidden;
-  transform: translateY(22px);
-  opacity: 0;
+  transform: none;
+  opacity: 1;
   transition:
     transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -1350,6 +1350,434 @@ dialog.project-modal[open] .project-modal-shell {
 
   .project-card-actions {
     padding: 0 1rem 1rem;
+  }
+}
+
+.projects-page .nav-primary a.is-active {
+  color: #fff;
+}
+
+.projects-page .nav-primary a.is-active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.projects-hero {
+  min-height: calc(100svh - var(--header-height));
+  padding: 2.05rem 0 2.35rem;
+}
+
+.projects-hero-backdrop {
+  background:
+    linear-gradient(96deg, rgba(4, 9, 7, 0.98) 0%, rgba(6, 12, 9, 0.95) 24%, rgba(8, 16, 11, 0.82) 48%, rgba(8, 16, 11, 0.44) 72%, rgba(8, 16, 11, 0.12) 100%),
+    radial-gradient(circle at 76% 18%, rgba(196, 171, 120, 0.14), transparent 20%),
+    radial-gradient(circle at 16% 24%, rgba(137, 169, 147, 0.12), transparent 18%),
+    url("./drone.avif");
+}
+
+.projects-hero-grid {
+  grid-template-columns: minmax(0, 0.96fr) minmax(360px, 0.74fr);
+  gap: 4rem;
+  align-items: end;
+}
+
+.projects-hero-copy {
+  max-width: 540px;
+}
+
+.projects-hero-kicker {
+  margin: 0;
+  max-width: 20rem;
+  color: rgba(247, 242, 232, 0.74);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.projects-hero-copy h1 {
+  max-width: 9.1ch;
+  margin-top: 1rem;
+  font-size: clamp(3rem, 4.8vw, 4.9rem);
+}
+
+.projects-hero-lead {
+  max-width: 25rem;
+  margin-top: 1rem;
+  font-size: 1rem;
+  line-height: 1.72;
+}
+
+.projects-hero-support,
+.projects-hero-metrics,
+.projects-hero-panel {
+  display: none;
+}
+
+.projects-hero-actions {
+  margin-top: 1.45rem;
+}
+
+.projects-hero-highlights {
+  list-style: none;
+  margin: 1.15rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.projects-hero-highlights li {
+  padding: 0.72rem 1rem;
+  color: rgba(244, 246, 245, 0.84);
+  line-height: 1;
+  font-size: 0.88rem;
+  border-radius: 999px;
+  border: 1px solid rgba(214, 231, 220, 0.14);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+    rgba(9, 18, 13, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+}
+
+.projects-hero-visual {
+  width: min(100%, 430px);
+  margin-left: auto;
+}
+
+.projects-hero-frame {
+  position: relative;
+  padding: 0.82rem;
+  border-radius: 30px;
+  border: 1px solid rgba(214, 231, 220, 0.14);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)),
+    linear-gradient(145deg, rgba(8, 17, 12, 0.68), rgba(12, 24, 17, 0.38));
+  box-shadow:
+    0 28px 72px rgba(5, 14, 9, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.projects-hero-media {
+  min-height: 430px;
+  border-radius: 26px;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(6, 12, 9, 0.08), rgba(6, 12, 9, 0.48)),
+    linear-gradient(145deg, rgba(196, 171, 120, 0.12), transparent 48%),
+    url("./drone.avif");
+  background-size: cover;
+  background-position: 62% center;
+}
+
+.projects-hero-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 84px 84px;
+  opacity: 0.18;
+}
+
+.projects-hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 14%;
+  border: 1px solid rgba(214, 231, 220, 0.18);
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+.projects-hero-caption {
+  position: absolute;
+  left: 1.15rem;
+  bottom: 1.15rem;
+  display: grid;
+  gap: 0.2rem;
+  max-width: 220px;
+  padding: 0.95rem 1rem;
+  border-radius: 20px;
+  border: 1px solid rgba(214, 231, 220, 0.14);
+  color: #f7faf8;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03)),
+    rgba(6, 12, 9, 0.5);
+  box-shadow:
+    0 18px 36px rgba(5, 14, 9, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.projects-hero-caption strong {
+  font-size: 0.96rem;
+}
+
+.projects-hero-caption span {
+  color: rgba(247, 250, 248, 0.74);
+  line-height: 1.55;
+}
+
+.projects-catalog {
+  padding-top: 5rem;
+}
+
+.projects-page .section-heading {
+  max-width: 42rem;
+  margin-bottom: 1.75rem;
+}
+
+.projects-page .section-heading h2 {
+  font-size: clamp(2.3rem, 3.8vw, 3.95rem);
+  line-height: 1.02;
+}
+
+.projects-page .section-heading p {
+  max-width: 31rem;
+  line-height: 1.72;
+}
+
+.catalog-toolbar {
+  gap: 1.15rem;
+}
+
+.catalog-summary-card {
+  border-radius: 24px;
+  padding: 1.15rem;
+  box-shadow:
+    0 18px 42px rgba(12, 33, 23, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.54);
+}
+
+.catalog-summary-card strong {
+  font-size: 1.45rem;
+}
+
+.catalog-summary-card p {
+  line-height: 1.65;
+}
+
+.project-filter {
+  min-height: 46px;
+  padding: 0.72rem 1.05rem;
+  font-size: 0.88rem;
+}
+
+.projects-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.project-card {
+  min-height: 420px;
+  border-radius: 28px;
+  border: 1px solid rgba(214, 231, 220, 0.12);
+  background: rgba(7, 13, 10, 0.58);
+  box-shadow: 0 22px 56px rgba(5, 14, 9, 0.18);
+}
+
+.project-card::before {
+  display: none;
+}
+
+.project-card-main {
+  position: relative;
+  height: 100%;
+}
+
+.project-card-main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(6, 12, 9, 0.06), rgba(6, 12, 9, 0.82));
+}
+
+.project-card-media {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+}
+
+.project-card-media img {
+  height: 100%;
+}
+
+.project-card-body {
+  position: absolute;
+  inset: auto 1rem 1rem;
+  z-index: 2;
+  padding: 1rem;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+    rgba(6, 12, 9, 0.58);
+  border: 1px solid rgba(214, 231, 220, 0.12);
+  backdrop-filter: blur(18px);
+}
+
+.project-card-badge {
+  color: rgba(247, 250, 248, 0.86);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(214, 231, 220, 0.12);
+}
+
+.project-card-tag {
+  color: #f4ebd4;
+  background: rgba(196, 171, 120, 0.14);
+  border: 1px solid rgba(196, 171, 120, 0.22);
+}
+
+.project-card-location {
+  color: rgba(247, 250, 248, 0.72);
+  font-size: 0.82rem;
+}
+
+.project-card-title {
+  color: #f7faf8;
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  line-height: 1.04;
+}
+
+.project-card-service,
+.project-card-description {
+  display: none;
+}
+
+.project-card-footer {
+  margin-top: 0.35rem;
+  padding-top: 0;
+  border-top: 0;
+  color: rgba(247, 250, 248, 0.88);
+}
+
+.project-card-footer span {
+  color: rgba(247, 250, 248, 0.66);
+}
+
+.project-card-footer strong::after {
+  content: "->";
+}
+
+.project-card-actions {
+  display: none;
+}
+
+.project-card-3d-preview {
+  left: 1rem;
+  right: auto;
+  bottom: auto;
+  top: 1rem;
+  padding: 0.8rem 0.9rem;
+  border-radius: 18px;
+}
+
+.project-card-3d-copy strong {
+  font-size: 0.86rem;
+}
+
+.project-card-3d-copy span {
+  font-size: 0.76rem;
+}
+
+.projects-empty-state {
+  border-radius: 28px;
+}
+
+.projects-cta {
+  padding-top: 5rem;
+}
+
+.projects-cta-wrap {
+  padding: 3.2rem 2.8rem;
+  border-radius: 32px;
+  box-shadow:
+    0 28px 72px rgba(12, 33, 23, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.56);
+}
+
+.projects-cta-wrap h2 {
+  font-size: clamp(2.3rem, 3.8vw, 3.8rem);
+  line-height: 1.02;
+}
+
+.projects-cta-wrap p {
+  max-width: 42rem;
+  margin: 1rem auto 0;
+  line-height: 1.72;
+}
+
+.project-modal-shell {
+  border-radius: 32px;
+}
+
+.project-stage-frame {
+  border-radius: 28px;
+}
+
+.project-detail-block,
+.project-summary-card,
+.project-tech-card {
+  border-radius: 24px;
+}
+
+@media (max-width: 1180px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1100px) {
+  .projects-hero-grid,
+  .catalog-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-hero-visual {
+    margin-left: 0;
+  }
+
+  .projects-hero-media {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 820px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .projects-hero {
+    padding: 2.2rem 0 2rem;
+  }
+
+  .projects-hero-copy h1 {
+    max-width: 9ch;
+    font-size: clamp(2.6rem, 10vw, 3.6rem);
+  }
+
+  .projects-hero-media {
+    min-height: 300px;
+  }
+
+  .projects-hero-caption {
+    left: 1rem;
+    right: 1rem;
+    max-width: none;
+  }
+
+  .catalog-summary,
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-cta-wrap {
+    padding: 2.3rem 1.4rem;
   }
 }
 
