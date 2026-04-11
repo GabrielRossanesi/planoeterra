@@ -5,7 +5,7 @@ import {
 } from "./projects-data.js";
 
 const MODEL_VIEWER_SRC =
-  "https://modelviewer.dev/node_modules/@google/model-viewer/dist/model-viewer.min.js";
+  "https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js";
 
 const projectsGrid = document.getElementById("projects-grid");
 const filtersContainer = document.getElementById("project-filters");
@@ -38,33 +38,83 @@ const state = {
 let modelViewerPromise = null;
 let stageRenderToken = 0;
 
+const cubeIcon = `
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 2 4.5 6.25v11.5L12 22l7.5-4.25V6.25L12 2Zm0 1.96 5.66 3.2L12 10.36 6.34 7.16 12 3.96Zm-6 4.58 5.1 2.9v7.64L6 16.2V8.54Zm12 0v7.66l-5.1 2.88v-7.64L18 8.54Z" />
+  </svg>
+`;
+
+const hasPublished3D = (project) => Boolean(project.has3dModel && project.model3dUrl);
+
 const filteredProjects = () =>
   state.activeCategory === "Todos"
     ? projects
     : projects.filter((project) => project.category === state.activeCategory);
 
-const createCardMarkup = (project) => `
-  <button class="project-card" type="button" data-project-slug="${project.slug}" aria-label="Ver detalhes do projeto ${project.title}">
-    <span class="project-card-media">
-      <img src="${project.coverImage}" alt="${project.title} em ${project.location}" loading="lazy" decoding="async">
-      <span class="project-card-glow"></span>
-    </span>
-    <span class="project-card-body">
-      <span class="project-card-meta">
-        <span class="project-card-badge">${project.category}</span>
-        <span class="project-card-tag">${project.areaLabel}</span>
-      </span>
-      <span class="project-card-location">${project.location}</span>
-      <strong class="project-card-title">${project.title}</strong>
-      <span class="project-card-service">${project.serviceType}</span>
-      <span class="project-card-description">${project.shortDescription}</span>
-      <span class="project-card-footer">
-        <span>${project.status}</span>
-        <strong>Ver projeto</strong>
-      </span>
-    </span>
-  </button>
-`;
+const createCardMarkup = (project) => {
+  const projectHasPublished3D = hasPublished3D(project);
+  const badgeLabel = project.modelBadgeLabel || "Visualização 3D";
+  const ctaLabel = project.modelCtaLabel || "Abrir modelo";
+
+  return `
+    <article class="project-card ${projectHasPublished3D ? "has-3d" : ""}">
+      <button class="project-card-main" type="button" data-project-slug="${project.slug}" aria-label="Ver detalhes do projeto ${project.title}">
+        <span class="project-card-media">
+          <img src="${project.coverImage}" alt="${project.title} em ${project.location}" loading="lazy" decoding="async">
+          <span class="project-card-glow"></span>
+          ${
+            projectHasPublished3D
+              ? `
+                <span class="project-card-3d-preview" data-open-visual="3d" aria-hidden="true">
+                  <span class="project-card-3d-icon">${cubeIcon}</span>
+                  <span class="project-card-3d-copy">
+                    <strong>${badgeLabel}</strong>
+                    <span>${ctaLabel}</span>
+                  </span>
+                </span>
+              `
+              : ""
+          }
+        </span>
+        <span class="project-card-body">
+          <span class="project-card-meta">
+            <span class="project-card-badge">${project.category}</span>
+            <span class="project-card-tag">${project.areaLabel}</span>
+          </span>
+          <span class="project-card-location">${project.location}</span>
+          <strong class="project-card-title">${project.title}</strong>
+          <span class="project-card-service">${project.serviceType}</span>
+          <span class="project-card-description">${project.shortDescription}</span>
+          <span class="project-card-footer">
+            <span>${project.status}</span>
+            <strong>${projectHasPublished3D ? "Detalhes e mídia" : "Ver projeto"}</strong>
+          </span>
+        </span>
+      </button>
+      ${
+        projectHasPublished3D
+          ? `
+            <div class="project-card-actions">
+              <button
+                class="project-card-3d-button"
+                type="button"
+                data-project-slug="${project.slug}"
+                data-open-visual="3d"
+                aria-label="Abrir modelo 3D do projeto ${project.title}"
+              >
+                <span class="project-card-3d-button-icon">${cubeIcon}</span>
+                <span class="project-card-3d-button-copy">
+                  <strong>${ctaLabel}</strong>
+                  <span>Modelo demonstrativo disponível</span>
+                </span>
+              </button>
+            </div>
+          `
+          : ""
+      }
+    </article>
+  `;
+};
 
 const applyGridEntrance = () => {
   const cards = projectsGrid.querySelectorAll(".project-card");
@@ -134,9 +184,9 @@ const renderGallery = (project) => {
 };
 
 const renderVisualTabs = (project) => {
-  const hasPublished3D = Boolean(project.has3dModel && project.model3dUrl);
+  const projectHasPublished3D = hasPublished3D(project);
 
-  if (!hasPublished3D) {
+  if (!projectHasPublished3D) {
     visualTabs.innerHTML = `
       <div class="project-visual-hint">
         <span class="project-visual-chip">Imagem técnica</span>
@@ -151,30 +201,36 @@ const renderVisualTabs = (project) => {
   }
 
   visualTabs.innerHTML = `
-    <button
-      class="project-visual-tab ${state.activeVisual === "3d" ? "is-active" : ""}"
-      type="button"
-      data-visual-mode="3d"
-      aria-pressed="${String(state.activeVisual === "3d")}"
-    >
-      Modelo 3D
-    </button>
-    <button
-      class="project-visual-tab ${state.activeVisual === "image" ? "is-active" : ""}"
-      type="button"
-      data-visual-mode="image"
-      aria-pressed="${String(state.activeVisual === "image")}"
-    >
-      Imagens
-    </button>
+    <div class="project-visual-tab-group">
+      <button
+        class="project-visual-tab ${state.activeVisual === "3d" ? "is-active" : ""}"
+        type="button"
+        data-visual-mode="3d"
+        aria-pressed="${String(state.activeVisual === "3d")}"
+      >
+        Modelo 3D
+      </button>
+      <button
+        class="project-visual-tab ${state.activeVisual === "image" ? "is-active" : ""}"
+        type="button"
+        data-visual-mode="image"
+        aria-pressed="${String(state.activeVisual === "image")}"
+      >
+        Imagens
+      </button>
+    </div>
+    <p class="project-visual-support">${project.modelSupportText || "Modelo demonstrativo de visualização topográfica em 3D."}</p>
   `;
 };
 
 const renderImageStage = (project, note = project.viewerHint) => {
   const image = project.gallery[state.activeImageIndex] || project.coverImage;
-  const caption = project.has3dModel
-    ? "Área preparada para mídia 3D"
-    : "Galeria estática premium";
+  const projectHasPublished3D = hasPublished3D(project);
+  const caption = projectHasPublished3D
+    ? project.modelBadgeLabel || "Visualização 3D disponível"
+    : project.has3dModel
+      ? "Área preparada para mídia 3D"
+      : "Galeria estática premium";
 
   visualStage.innerHTML = `
     <div class="project-stage-frame is-image">
@@ -284,23 +340,28 @@ const render3DStage = async (project) => {
   modelViewer.setAttribute("src", project.model3dUrl);
   modelViewer.setAttribute("poster", project.coverImage);
   modelViewer.setAttribute("camera-controls", "");
+  modelViewer.setAttribute("auto-rotate", "");
+  modelViewer.setAttribute("auto-rotate-delay", "1800");
+  modelViewer.setAttribute("interaction-prompt-threshold", "1500");
   modelViewer.setAttribute("touch-action", "pan-y");
   modelViewer.setAttribute("shadow-intensity", "1");
   modelViewer.setAttribute("exposure", "1.08");
   modelViewer.setAttribute("loading", "eager");
   modelViewer.setAttribute("alt", `Modelo 3D do projeto ${project.title}`);
+  modelViewer.style.setProperty("--poster-color", "transparent");
+  modelViewer.style.setProperty("--progress-bar-color", "#d6b67a");
 
   const caption = document.createElement("div");
   caption.className = "project-stage-caption";
   caption.innerHTML = `
-    <span>Visualização 3D interativa</span>
-    <strong>Rotação e zoom habilitados</strong>
+    <span>${project.modelBadgeLabel || "Visualização 3D interativa"}</span>
+    <strong>Rotação suave, zoom e leitura topográfica</strong>
   `;
 
   const note = document.createElement("p");
   note.className = "project-stage-note";
   note.textContent =
-    "Use o mouse ou o toque para orbitar o modelo. O carregamento é feito sob demanda para preservar a performance.";
+    `${project.modelSupportText || "Modelo demonstrativo de visualização topográfica em 3D."} Use o mouse ou o toque para orbitar, aproximar e afastar com fluidez.`;
 
   modelViewer.addEventListener(
     "error",
@@ -325,9 +386,9 @@ const render3DStage = async (project) => {
 };
 
 const renderVisualStage = (project) => {
-  const hasPublished3D = Boolean(project.has3dModel && project.model3dUrl);
+  const projectHasPublished3D = hasPublished3D(project);
 
-  if (state.activeVisual === "3d" && hasPublished3D) {
+  if (state.activeVisual === "3d" && projectHasPublished3D) {
     render3DStage(project);
     return;
   }
@@ -335,10 +396,15 @@ const renderVisualStage = (project) => {
   renderImageStage(project);
 };
 
-const populateModal = (project) => {
+const populateModal = (project, options = {}) => {
   state.activeProject = project;
   state.activeImageIndex = 0;
-  state.activeVisual = project.has3dModel && project.model3dUrl ? "3d" : "image";
+  state.activeVisual =
+    options.visual === "image"
+      ? "image"
+      : hasPublished3D(project)
+        ? "3d"
+        : "image";
 
   modalCategory.textContent = project.category;
   modalStatus.textContent = project.status;
@@ -385,8 +451,8 @@ const resetModalState = () => {
   visualStage.innerHTML = "";
 };
 
-const openModal = (project) => {
-  populateModal(project);
+const openModal = (project, options = {}) => {
+  populateModal(project, options);
   document.body.classList.add("modal-open");
 
   if (typeof modal.showModal === "function") {
@@ -431,7 +497,8 @@ projectsGrid.addEventListener("click", (event) => {
     return;
   }
 
-  openModal(project);
+  const preferredVisual = event.target.closest("[data-open-visual]")?.dataset.openVisual;
+  openModal(project, preferredVisual ? { visual: preferredVisual } : {});
 });
 
 visualTabs.addEventListener("click", (event) => {

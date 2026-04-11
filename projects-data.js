@@ -258,11 +258,14 @@ const baseProjects = [
     status: "Em portfólio",
     year: "2025",
     areaLabel: "11,7 ha",
-    modelReadyLabel: "Fallback estático ativo",
-    has3dModel: false,
-    model3dUrl: "",
+    modelReadyLabel: "Modelo 3D publicado",
+    has3dModel: true,
+    model3dUrl: "./ex3d.glb",
+    modelBadgeLabel: "Topografia 3D",
+    modelCtaLabel: "Ver topografia 3D",
+    modelSupportText: "Modelo demonstrativo de visualização topográfica em 3D.",
     viewerHint:
-      "Para este case, a apresentação prioriza imagens técnicas e galeria estática com ênfase em leitura topográfica.",
+      "Este case já conta com um modelo .glb publicado, com abertura refinada, rotação, zoom e fallback seguro para a visualização técnica.",
     summary: [
       { label: "Serviço", value: "Levantamento topográfico" },
       { label: "Área", value: "11,7 ha" },
@@ -273,7 +276,7 @@ const baseProjects = [
       { label: "Escopo", value: "Planialtimetria para suporte de implantação" },
       { label: "Leitura", value: "Camadas técnicas organizadas para interpretação rápida" },
       { label: "Uso", value: "Apoio ao planejamento e compatibilização de projeto" },
-      { label: "Mídia", value: "Galeria premium com cobertura visual do terreno" },
+      { label: "Mídia", value: "Galeria premium com viewer 3D publicado" },
     ],
     deliverables: [
       "Base topográfica com pontos e curvas organizadas visualmente",
