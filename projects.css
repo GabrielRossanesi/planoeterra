@@ -991,9 +991,9 @@ dialog.project-modal[open] .project-modal-shell {
 
 .project-stage-frame.is-model {
   background:
-    radial-gradient(circle at 50% 78%, rgba(196, 171, 120, 0.18), transparent 30%),
-    radial-gradient(circle at 50% 30%, rgba(137, 169, 147, 0.14), transparent 34%),
-    linear-gradient(180deg, rgba(7, 13, 10, 0.98), rgba(12, 22, 16, 0.96));
+    radial-gradient(circle at 50% 72%, rgba(196, 171, 120, 0.24), transparent 32%),
+    radial-gradient(circle at 50% 24%, rgba(225, 234, 229, 0.08), transparent 30%),
+    linear-gradient(180deg, rgba(15, 23, 18, 0.98), rgba(9, 16, 12, 0.96));
 }
 
 .project-stage-frame.is-model::after {
@@ -1021,6 +1021,7 @@ dialog.project-modal[open] .project-modal-shell {
 .project-model-viewer {
   display: block;
   background: transparent;
+  filter: saturate(1.06) contrast(1.06) brightness(1.08);
 }
 
 .project-stage-caption,

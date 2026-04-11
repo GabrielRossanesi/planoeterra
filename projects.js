@@ -334,8 +334,14 @@ const render3DStage = async (project) => {
 
   const wrapper = document.createElement("div");
   wrapper.className = "project-stage-frame is-model";
+  let didFinishLoading = false;
+  const localFileMessage =
+    window.location.protocol === "file:"
+      ? " Se esta página foi aberta direto como arquivo local, teste via servidor HTTP local ou publicação do site para liberar o carregamento do .glb."
+      : "";
 
   const modelViewer = document.createElement("model-viewer");
+  const viewerConfig = project.model3dViewerConfig || {};
   modelViewer.className = "project-model-viewer";
   modelViewer.setAttribute("src", project.model3dUrl);
   modelViewer.setAttribute("poster", project.coverImage);
@@ -348,8 +354,34 @@ const render3DStage = async (project) => {
   modelViewer.setAttribute("exposure", "1.08");
   modelViewer.setAttribute("loading", "eager");
   modelViewer.setAttribute("alt", `Modelo 3D do projeto ${project.title}`);
+  modelViewer.setAttribute("environment-image", "neutral");
+  modelViewer.setAttribute("interaction-prompt", "auto");
   modelViewer.style.setProperty("--poster-color", "transparent");
   modelViewer.style.setProperty("--progress-bar-color", "#d6b67a");
+
+  if (viewerConfig.orientation) {
+    modelViewer.setAttribute("orientation", viewerConfig.orientation);
+  }
+
+  if (viewerConfig.cameraOrbit) {
+    modelViewer.setAttribute("camera-orbit", viewerConfig.cameraOrbit);
+  }
+
+  if (viewerConfig.cameraTarget) {
+    modelViewer.setAttribute("camera-target", viewerConfig.cameraTarget);
+  }
+
+  if (viewerConfig.fieldOfView) {
+    modelViewer.setAttribute("field-of-view", viewerConfig.fieldOfView);
+  }
+
+  if (viewerConfig.minCameraOrbit) {
+    modelViewer.setAttribute("min-camera-orbit", viewerConfig.minCameraOrbit);
+  }
+
+  if (viewerConfig.maxCameraOrbit) {
+    modelViewer.setAttribute("max-camera-orbit", viewerConfig.maxCameraOrbit);
+  }
 
   const caption = document.createElement("div");
   caption.className = "project-stage-caption";
@@ -363,9 +395,37 @@ const render3DStage = async (project) => {
   note.textContent =
     `${project.modelSupportText || "Modelo demonstrativo de visualização topográfica em 3D."} Use o mouse ou o toque para orbitar, aproximar e afastar com fluidez.`;
 
+  const loadingTimeout = window.setTimeout(() => {
+    if (
+      didFinishLoading ||
+      !state.activeProject ||
+      state.activeProject.slug !== project.slug ||
+      state.activeVisual !== "3d"
+    ) {
+      return;
+    }
+
+    renderImageStage(
+      project,
+      `O modelo 3D não respondeu a tempo nesta visualização. Exibindo o fallback estático para manter a experiência estável.${localFileMessage}`
+    );
+  }, 4500);
+
+  modelViewer.addEventListener(
+    "load",
+    () => {
+      didFinishLoading = true;
+      window.clearTimeout(loadingTimeout);
+      wrapper.classList.add("is-ready");
+    },
+    { once: true }
+  );
+
   modelViewer.addEventListener(
     "error",
     () => {
+      didFinishLoading = true;
+      window.clearTimeout(loadingTimeout);
       if (
         !state.activeProject ||
         state.activeProject.slug !== project.slug ||
@@ -375,7 +435,7 @@ const render3DStage = async (project) => {
       }
       renderImageStage(
         project,
-        "O arquivo 3D ainda não está disponível nesta demonstração. A área permanece estável com a imagem técnica de fallback."
+        `O arquivo 3D não pôde ser carregado nesta visualização. A área permanece estável com a imagem técnica de fallback.${localFileMessage}`
       );
     },
     { once: true }

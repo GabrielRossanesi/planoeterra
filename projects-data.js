@@ -264,6 +264,14 @@ const baseProjects = [
     modelBadgeLabel: "Topografia 3D",
     modelCtaLabel: "Ver topografia 3D",
     modelSupportText: "Modelo demonstrativo de visualização topográfica em 3D.",
+    model3dViewerConfig: {
+      orientation: "-90deg 0deg 0deg",
+      cameraOrbit: "38deg 68deg auto",
+      cameraTarget: "10m 80m 174m",
+      fieldOfView: "32deg",
+      minCameraOrbit: "auto 45deg auto",
+      maxCameraOrbit: "auto 88deg auto",
+    },
     viewerHint:
       "Este case já conta com um modelo .glb publicado, com abertura refinada, rotação, zoom e fallback seguro para a visualização técnica.",
     summary: [
