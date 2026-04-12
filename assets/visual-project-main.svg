@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Preview tecnico de projeto principal">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#101913"/>
+      <stop offset="46%" stop-color="#1b2c22"/>
+      <stop offset="100%" stop-color="#48624f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" rx="40" fill="url(#bg)"/>
+  <g opacity=".18" fill="none" stroke="#f7f2e8">
+    <path d="M150 140h1300v620H150z" stroke-width="2"/>
+    <path d="M310 140v620M470 140v620M630 140v620M790 140v620M950 140v620M1110 140v620M1270 140v620" stroke-width="1"/>
+    <path d="M150 260h1300M150 380h1300M150 500h1300M150 620h1300" stroke-width="1"/>
+  </g>
+  <path d="M308 244 586 198 876 280 1038 244 1320 344 1188 640 888 716 610 662 316 688 212 442Z" fill="#d4b276" fill-opacity=".16" stroke="#d4b276" stroke-width="4"/>
+  <path d="M330 270 582 226 846 302 1012 268 1262 352" fill="none" stroke="#f7f2e8" stroke-opacity=".68" stroke-width="4"/>
+  <circle cx="876" cy="468" r="13" fill="#f7f2e8"/>
+</svg>

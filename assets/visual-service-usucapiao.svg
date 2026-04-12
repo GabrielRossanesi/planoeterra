@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Leitura de perimetro para usucapiao">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18271d"/>
+      <stop offset="50%" stop-color="#2c4335"/>
+      <stop offset="100%" stop-color="#5b6d58"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" rx="40" fill="url(#bg)"/>
+  <g opacity=".18" fill="none" stroke="#f7f2e8">
+    <path d="M0 174h1600M0 324h1600M0 474h1600M0 624h1600"/>
+    <path d="M210 0v900M410 0v900M610 0v900M810 0v900M1010 0v900M1210 0v900M1410 0v900"/>
+  </g>
+  <path d="M300 250 568 190 854 266 1082 240 1298 362 1186 626 910 716 602 654 324 678 206 458Z" fill="#d4b276" fill-opacity=".18" stroke="#d4b276" stroke-width="5"/>
+  <path d="M326 278 572 220 840 292 1064 266 1240 370" fill="none" stroke="#f7f2e8" stroke-opacity=".72" stroke-width="4"/>
+  <path d="M284 474 488 432 666 498 876 466 1038 512 1188 488" fill="none" stroke="#f7f2e8" stroke-opacity=".5" stroke-width="2"/>
+  <circle cx="876" cy="466" r="12" fill="#f7f2e8"/>
+  <circle cx="1186" cy="626" r="12" fill="#d4b276"/>
+</svg>

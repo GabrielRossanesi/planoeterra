@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Preview urbano com lotes e eixos">
+  <rect width="1600" height="900" rx="40" fill="#16222b"/>
+  <g opacity=".2" fill="none" stroke="#f7f2e8">
+    <path d="M120 120h1360v660H120z" stroke-width="2"/>
+    <path d="M250 120v660M420 120v660M590 120v660M760 120v660M930 120v660M1100 120v660M1270 120v660" stroke-width="1"/>
+    <path d="M120 256h1360M120 392h1360M120 528h1360M120 664h1360" stroke-width="1"/>
+  </g>
+  <g fill="#d4b276" fill-opacity=".16" stroke="#d4b276" stroke-opacity=".72" stroke-width="3">
+    <rect x="282" y="222" width="214" height="116" rx="16"/>
+    <rect x="538" y="222" width="154" height="116" rx="16"/>
+    <rect x="734" y="222" width="202" height="116" rx="16"/>
+    <rect x="980" y="222" width="238" height="116" rx="16"/>
+    <rect x="282" y="390" width="286" height="152" rx="16"/>
+    <rect x="604" y="390" width="176" height="152" rx="16"/>
+    <rect x="820" y="390" width="398" height="152" rx="16"/>
+    <rect x="282" y="594" width="184" height="118" rx="16"/>
+    <rect x="510" y="594" width="288" height="118" rx="16"/>
+    <rect x="842" y="594" width="376" height="118" rx="16"/>
+  </g>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Leitura territorial rural">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#16221a"/>
+      <stop offset="50%" stop-color="#23392a"/>
+      <stop offset="100%" stop-color="#53684d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" rx="40" fill="url(#bg)"/>
+  <g opacity=".26" fill="none" stroke="#d4b276" stroke-width="2">
+    <path d="M-40 172C146 126 310 144 472 196s322 70 520 14 370-64 684 20"/>
+    <path d="M-40 282C172 232 338 250 502 304s316 64 502 10 366-62 670 22"/>
+    <path d="M-40 420C188 364 362 386 540 444s326 72 514 18 354-66 640 8"/>
+    <path d="M-40 576C166 530 346 540 528 596s322 66 520 16 356-64 630 10"/>
+    <path d="M-40 704C180 664 350 674 540 724s330 62 518 18 338-58 598-8"/>
+  </g>
+  <path d="M246 252 520 210 784 264 1026 236 1328 354 1188 660 874 724 588 666 294 690 202 452Z" fill="#d4b276" fill-opacity=".12" stroke="#f7f2e8" stroke-opacity=".58" stroke-width="4"/>
+  <path d="M284 490 454 456 648 520 846 486 1026 534 1186 500" fill="none" stroke="#f7f2e8" stroke-opacity=".42" stroke-width="2"/>
+  <circle cx="846" cy="486" r="14" fill="#d4b276"/>
+</svg>

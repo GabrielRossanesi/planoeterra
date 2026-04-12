@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Tecnologia de campo com drone, RTK e malha tecnica">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f171f"/>
+      <stop offset="52%" stop-color="#162b35"/>
+      <stop offset="100%" stop-color="#264a5b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="74%" cy="20%" r="44%">
+      <stop offset="0%" stop-color="#d4b276" stop-opacity=".26"/>
+      <stop offset="100%" stop-color="#d4b276" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" rx="40" fill="url(#bg)"/>
+  <rect width="1600" height="900" rx="40" fill="url(#glow)"/>
+  <g opacity=".16" fill="none" stroke="#f7f2e8">
+    <path d="M152 138h1296v624H152z" stroke-width="2"/>
+    <path d="M312 138v624M492 138v624M672 138v624M852 138v624M1032 138v624M1212 138v624" stroke-width="1"/>
+    <path d="M152 258h1296M152 378h1296M152 498h1296M152 618h1296" stroke-width="1"/>
+  </g>
+  <g transform="translate(508 212)">
+    <circle cx="0" cy="0" r="38" fill="#d4b276" fill-opacity=".14"/>
+    <circle cx="-148" cy="94" r="24" fill="#d4b276" fill-opacity=".2"/>
+    <circle cx="148" cy="94" r="24" fill="#d4b276" fill-opacity=".2"/>
+    <circle cx="-148" cy="252" r="24" fill="#d4b276" fill-opacity=".2"/>
+    <circle cx="148" cy="252" r="24" fill="#d4b276" fill-opacity=".2"/>
+    <path d="M-148 94 0 0 148 94M-148 252 0 0 148 252M-148 94v158M148 94v158" fill="none" stroke="#f7f2e8" stroke-opacity=".56" stroke-width="4" stroke-linecap="round"/>
+    <rect x="-72" y="-36" width="144" height="72" rx="22" fill="#f7f2e8" fill-opacity=".92"/>
+    <circle cx="0" cy="0" r="18" fill="#183341"/>
+  </g>
+  <g transform="translate(902 198)">
+    <rect width="420" height="482" rx="32" fill="#091118" fill-opacity=".48" stroke="#f7f2e8" stroke-opacity=".12"/>
+    <path d="M52 70h148" stroke="#f7f2e8" stroke-opacity=".32" stroke-width="10" stroke-linecap="round"/>
+    <path d="M52 104h212" stroke="#f7f2e8" stroke-opacity=".15" stroke-width="8" stroke-linecap="round"/>
+    <rect x="52" y="158" width="314" height="178" rx="24" fill="#f7f2e8" fill-opacity=".04" stroke="#f7f2e8" stroke-opacity=".08"/>
+    <path d="M84 204 154 174l102 42 82-62" fill="none" stroke="#d4b276" stroke-width="4"/>
+    <circle cx="154" cy="174" r="9" fill="#d4b276"/>
+    <path d="M84 258h214M84 290h162" stroke="#f7f2e8" stroke-opacity=".14" stroke-width="8" stroke-linecap="round"/>
+    <rect x="52" y="372" width="314" height="70" rx="20" fill="#f7f2e8" fill-opacity=".04" stroke="#f7f2e8" stroke-opacity=".08"/>
+    <path d="M84 406h214" stroke="#f7f2e8" stroke-opacity=".18" stroke-width="8" stroke-linecap="round"/>
+  </g>
+</svg>

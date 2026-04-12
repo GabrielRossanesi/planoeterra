@@ -1372,7 +1372,7 @@ dialog.project-modal[open] .project-modal-shell {
     linear-gradient(96deg, rgba(4, 9, 7, 0.98) 0%, rgba(6, 12, 9, 0.95) 24%, rgba(8, 16, 11, 0.82) 48%, rgba(8, 16, 11, 0.44) 72%, rgba(8, 16, 11, 0.12) 100%),
     radial-gradient(circle at 76% 18%, rgba(196, 171, 120, 0.14), transparent 20%),
     radial-gradient(circle at 16% 24%, rgba(137, 169, 147, 0.12), transparent 18%),
-    url("./drone.avif");
+    url("./assets/visual-projects-hero.svg");
 }
 
 .projects-hero-grid {
@@ -1404,6 +1404,7 @@ dialog.project-modal[open] .project-modal-shell {
 .projects-hero-lead {
   max-width: 25rem;
   margin-top: 1rem;
+  color: rgba(247, 250, 248, 0.82);
   font-size: 1rem;
   line-height: 1.72;
 }
@@ -1465,11 +1466,11 @@ dialog.project-modal[open] .project-modal-shell {
   position: relative;
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(6, 12, 9, 0.08), rgba(6, 12, 9, 0.48)),
+    linear-gradient(180deg, rgba(6, 12, 9, 0.08), rgba(6, 12, 9, 0.42)),
     linear-gradient(145deg, rgba(196, 171, 120, 0.12), transparent 48%),
-    url("./drone.avif");
+    url("./assets/visual-projects-hero.svg");
   background-size: cover;
-  background-position: 62% center;
+  background-position: center center;
 }
 
 .projects-hero-media::before {
@@ -1537,6 +1538,7 @@ dialog.project-modal[open] .project-modal-shell {
 
 .projects-page .section-heading p {
   max-width: 31rem;
+  color: rgba(37, 57, 45, 0.82);
   line-height: 1.72;
 }
 
@@ -1557,6 +1559,7 @@ dialog.project-modal[open] .project-modal-shell {
 }
 
 .catalog-summary-card p {
+  color: rgba(37, 57, 45, 0.8);
   line-height: 1.65;
 }
 
@@ -1632,7 +1635,7 @@ dialog.project-modal[open] .project-modal-shell {
 }
 
 .project-card-location {
-  color: rgba(247, 250, 248, 0.72);
+  color: rgba(247, 250, 248, 0.82);
   font-size: 0.82rem;
 }
 
@@ -1655,7 +1658,7 @@ dialog.project-modal[open] .project-modal-shell {
 }
 
 .project-card-footer span {
-  color: rgba(247, 250, 248, 0.66);
+  color: rgba(247, 250, 248, 0.76);
 }
 
 .project-card-footer strong::after {
@@ -1707,6 +1710,7 @@ dialog.project-modal[open] .project-modal-shell {
 .projects-cta-wrap p {
   max-width: 42rem;
   margin: 1rem auto 0;
+  color: rgba(37, 57, 45, 0.82);
   line-height: 1.72;
 }
 

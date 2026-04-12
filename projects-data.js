@@ -377,7 +377,7 @@ const baseProjects = [
   },
 ];
 
-export const projects = baseProjects.map((project) => {
+const projects = baseProjects.map((project) => {
   const coverImage = createProjectVisual({
     index: project.id,
     title: project.title,
@@ -399,12 +399,17 @@ export const projects = baseProjects.map((project) => {
   };
 });
 
-export const projectCategories = [
+const projectCategories = [
   "Todos",
   ...new Set(projects.map((project) => project.category)),
 ];
 
-export const buildProjectWhatsappLink = (project) =>
+const buildProjectWhatsappLink = (project) =>
   `${WHATSAPP_BASE}${encodeURIComponent(
     `Olá, gostaria de falar sobre o projeto ${project.title} da Plano & Terra.`
   )}`;
+window.PlanoTerraProjectsData = {
+  buildProjectWhatsappLink,
+  projectCategories,
+  projects,
+};

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Captacao em campo com drone e malha tecnica">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e1d26"/>
+      <stop offset="52%" stop-color="#173241"/>
+      <stop offset="100%" stop-color="#325468"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="72%" cy="18%" r="42%">
+      <stop offset="0%" stop-color="#d4b276" stop-opacity=".26"/>
+      <stop offset="100%" stop-color="#d4b276" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" rx="44" fill="url(#bg)"/>
+  <rect width="1600" height="900" rx="44" fill="url(#glow)"/>
+  <g opacity=".18" fill="none" stroke="#f6f1e6">
+    <path d="M130 138h1340v624H130z" stroke-width="2"/>
+    <path d="M250 186v528M430 186v528M610 186v528M790 186v528M970 186v528M1150 186v528M1330 186v528" stroke-width="1"/>
+    <path d="M130 282h1340M130 426h1340M130 570h1340" stroke-width="1"/>
+  </g>
+  <g opacity=".4" fill="none" stroke="#d4b276" stroke-width="3">
+    <path d="M252 620 412 510 610 568 796 412 988 478 1210 318"/>
+    <path d="M248 654 420 542 614 596 812 438 990 502 1214 342" stroke-opacity=".4"/>
+  </g>
+  <g transform="translate(636 214)">
+    <rect x="-198" y="84" width="396" height="220" rx="28" fill="#091218" fill-opacity=".34" stroke="#f6f1e6" stroke-opacity=".12"/>
+    <circle cx="0" cy="0" r="36" fill="#d4b276" fill-opacity=".12"/>
+    <circle cx="-138" cy="92" r="22" fill="#d4b276" fill-opacity=".2"/>
+    <circle cx="138" cy="92" r="22" fill="#d4b276" fill-opacity=".2"/>
+    <circle cx="-138" cy="230" r="22" fill="#d4b276" fill-opacity=".2"/>
+    <circle cx="138" cy="230" r="22" fill="#d4b276" fill-opacity=".2"/>
+    <path d="M-138 92 0 0 138 92M-138 230 0 0 138 230M-138 92v138M138 92v138" stroke="#f6f1e6" stroke-opacity=".55" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <rect x="-62" y="-32" width="124" height="64" rx="20" fill="#f6f1e6" fill-opacity=".9"/>
+    <circle cx="0" cy="0" r="18" fill="#183241"/>
+  </g>
+  <g transform="translate(1086 186)">
+    <rect width="288" height="160" rx="26" fill="#081117" fill-opacity=".52" stroke="#f6f1e6" stroke-opacity=".14"/>
+    <path d="M46 54h128" stroke="#f6f1e6" stroke-opacity=".34" stroke-width="10" stroke-linecap="round"/>
+    <path d="M46 84h176" stroke="#f6f1e6" stroke-opacity=".16" stroke-width="8" stroke-linecap="round"/>
+    <path d="M46 118h94" stroke="#d4b276" stroke-opacity=".72" stroke-width="8" stroke-linecap="round"/>
+  </g>
+</svg>

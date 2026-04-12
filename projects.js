@@ -1,10 +1,9 @@
-import {
-  buildProjectWhatsappLink,
-  projectCategories,
-  projects,
-} from "./projects-data.js";
-
-window.__projectsCatalogReady = true;
+const projectsData = window.PlanoTerraProjectsData || {};
+const buildProjectWhatsappLink =
+  projectsData.buildProjectWhatsappLink ||
+  (() => "https://wa.me/5511985222291");
+const projectCategories = projectsData.projectCategories || ["Todos"];
+const projects = projectsData.projects || [];
 
 const MODEL_VIEWER_SRC =
   "https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js";

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Preview rural com contornos topograficos">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#142017"/>
+      <stop offset="46%" stop-color="#213428"/>
+      <stop offset="100%" stop-color="#4f6650"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" rx="40" fill="url(#bg)"/>
+  <g opacity=".28" fill="none" stroke="#d4b276" stroke-width="2">
+    <path d="M-40 196C156 132 322 144 498 204s308 72 506 14 370-66 662 18"/>
+    <path d="M-40 302C176 244 336 258 510 310s312 66 500 14 360-62 650 16"/>
+    <path d="M-40 424C194 366 356 386 540 448s324 76 510 20 358-64 636 12"/>
+    <path d="M-40 578C188 524 352 544 540 598s330 72 520 16 356-64 628 6"/>
+    <path d="M-40 720C190 674 366 680 558 732s326 64 518 16 350-54 600-6"/>
+  </g>
+  <path d="M258 266 548 214 822 280 1064 242 1330 354 1180 670 882 724 584 674 282 698 194 448Z" fill="#d4b276" fill-opacity=".12" stroke="#f7f2e8" stroke-opacity=".56" stroke-width="4"/>
+  <circle cx="882" cy="468" r="12" fill="#d4b276"/>
+</svg>
