@@ -5,6 +5,7 @@ const nav = document.querySelector(".site-nav");
 const navLinks = document.querySelectorAll(".site-nav a");
 const revealItems = document.querySelectorAll(".reveal");
 const homeHero = document.querySelector(".home-hero");
+const heroFootnoteItems = Array.from(document.querySelectorAll(".home-hero-footnotes li"));
 const homeDetailTriggers = document.querySelectorAll("[data-home-detail]");
 const faqItems = Array.from(document.querySelectorAll(".faq-item"));
 
@@ -334,6 +335,34 @@ homeDetailTriggers.forEach((trigger) => {
     openHomeDetailModal(trigger.dataset.homeDetail, trigger);
   });
 });
+
+if (heroFootnoteItems.length) {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let heroFootnoteIndex = heroFootnoteItems.findIndex((item) => item.classList.contains("is-active"));
+
+  if (heroFootnoteIndex < 0) {
+    heroFootnoteIndex = 0;
+  }
+
+  const syncHeroFootnotes = () => {
+    heroFootnoteItems.forEach((item, index) => {
+      item.classList.toggle("is-active", index === heroFootnoteIndex);
+    });
+  };
+
+  syncHeroFootnotes();
+
+  if (heroFootnoteItems.length > 1 && !prefersReducedMotion.matches) {
+    window.setInterval(() => {
+      if (document.visibilityState === "hidden") {
+        return;
+      }
+
+      heroFootnoteIndex = (heroFootnoteIndex + 1) % heroFootnoteItems.length;
+      syncHeroFootnotes();
+    }, 3000);
+  }
+}
 
 if (faqItems.length) {
   const setFaqState = (item, isOpen) => {
