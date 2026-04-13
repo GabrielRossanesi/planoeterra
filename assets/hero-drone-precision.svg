@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="Drone em operação sobre área urbana e rural com leitura técnica">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1510"/>
+      <stop offset="42%" stop-color="#183126"/>
+      <stop offset="100%" stop-color="#2d4a39"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="74%" cy="22%" r="34%">
+      <stop offset="0%" stop-color="#d8ba84" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#d8ba84" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="terrain" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3a5b48"/>
+      <stop offset="100%" stop-color="#1d3328"/>
+    </linearGradient>
+    <linearGradient id="urban" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#87998d"/>
+      <stop offset="100%" stop-color="#4f645a"/>
+    </linearGradient>
+    <linearGradient id="scan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f3e0b8" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#d1b074" stop-opacity="0.18"/>
+    </linearGradient>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+  <rect width="1600" height="1200" fill="url(#glow)"/>
+
+  <g opacity="0.12" stroke="#e5eee8" fill="none">
+    <path d="M-20 176h1640"/>
+    <path d="M-20 332h1640"/>
+    <path d="M-20 488h1640"/>
+    <path d="M-20 644h1640"/>
+    <path d="M-20 800h1640"/>
+    <path d="M-20 956h1640"/>
+    <path d="M210 -20v1240"/>
+    <path d="M430 -20v1240"/>
+    <path d="M650 -20v1240"/>
+    <path d="M870 -20v1240"/>
+    <path d="M1090 -20v1240"/>
+    <path d="M1310 -20v1240"/>
+  </g>
+
+  <g opacity="0.24" stroke="#d9e6dd" fill="none">
+    <path d="M-80 834C156 724 322 700 492 742c170 42 324 96 532 70 208-26 380-106 732-48"/>
+    <path d="M-80 930c248-112 398-128 586-86 188 42 320 90 516 72 196-18 362-88 730-52"/>
+    <path d="M-80 1026c248-110 420-106 614-52 194 54 328 88 512 60 184-28 338-88 706-52"/>
+  </g>
+
+  <path d="M0 710 286 600l266 82 220-126 306 124 238-66 284 190v396H0Z" fill="url(#terrain)"/>
+
+  <g opacity="0.66">
+    <path d="M92 836 316 730l154 58-18 230H88Z" fill="#476a56"/>
+    <path d="M454 786 708 654l188 76-48 320H438Z" fill="#2c4939"/>
+    <path d="M902 734 1178 628l192 76-30 340H890Z" fill="#3d5d4a"/>
+  </g>
+
+  <g opacity="0.84">
+    <rect x="1012" y="430" width="368" height="204" rx="26" fill="url(#urban)"/>
+    <rect x="1048" y="464" width="82" height="58" rx="10" fill="#20382d"/>
+    <rect x="1146" y="464" width="66" height="58" rx="10" fill="#20382d"/>
+    <rect x="1230" y="464" width="104" height="58" rx="10" fill="#20382d"/>
+    <rect x="1048" y="542" width="132" height="54" rx="10" fill="#20382d"/>
+    <rect x="1196" y="542" width="138" height="54" rx="10" fill="#20382d"/>
+  </g>
+
+  <path d="M0 860c234-34 434-102 612-206 116-68 204-102 280-102 74 0 182 34 324 104 124 60 252 102 384 122v94c-170-28-322-72-456-134-110-52-206-80-286-80-84 0-168 28-250 84C408 862 216 938 0 972Z" fill="#d8ba84" fill-opacity="0.16"/>
+  <path d="M0 898c238-32 432-98 586-200 122-80 238-120 346-120 110 0 234 40 372 120 114 66 212 108 296 126v40c-132-22-258-66-378-136-130-74-234-110-312-110-76 0-168 34-276 102C448 836 236 908 0 944Z" fill="#f0dcc0" fill-opacity="0.16"/>
+
+  <g opacity="0.42" stroke="#e9f2ec" fill="none">
+    <path d="M1018 714h238"/>
+    <path d="M988 756h326"/>
+    <path d="M936 808h420"/>
+    <path d="M878 870h534"/>
+  </g>
+
+  <g transform="translate(986 226)">
+    <ellipse cx="0" cy="0" rx="186" ry="92" fill="url(#scan)" filter="url(#softGlow)"/>
+    <ellipse cx="0" cy="0" rx="142" ry="66" fill="none" stroke="#eed9af" stroke-opacity="0.5"/>
+    <ellipse cx="0" cy="0" rx="214" ry="104" fill="none" stroke="#eed9af" stroke-opacity="0.18"/>
+  </g>
+
+  <g transform="translate(1032 198)">
+    <circle cx="0" cy="0" r="26" fill="#f3ead8"/>
+    <rect x="-58" y="-9" width="116" height="18" rx="9" fill="#f3ead8"/>
+    <rect x="-9" y="-60" width="18" height="120" rx="9" fill="#f3ead8"/>
+    <rect x="-104" y="-54" width="48" height="12" rx="6" fill="#f3ead8"/>
+    <rect x="56" y="-54" width="48" height="12" rx="6" fill="#f3ead8"/>
+    <rect x="-104" y="42" width="48" height="12" rx="6" fill="#f3ead8"/>
+    <rect x="56" y="42" width="48" height="12" rx="6" fill="#f3ead8"/>
+    <path d="M-50 12-106 46m50-66-56-34M50 12l56 34m-50-66 56-34" stroke="#f3ead8" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(120 118)">
+    <text x="0" y="0" fill="#d8ba84" font-size="24" font-family="Manrope, Arial, sans-serif" font-weight="800" letter-spacing="7">DRONE + LEITURA TERRITORIAL</text>
+    <text x="0" y="72" fill="#f7f3ea" font-size="76" font-family="Georgia, serif" font-weight="700">Captação com precisão</text>
+    <text x="0" y="118" fill="#d7e1db" font-size="28" font-family="Manrope, Arial, sans-serif">Área urbana e rural com apoio técnico, visual e georreferenciado.</text>
+  </g>
+
+  <g transform="translate(118 930)">
+    <rect width="316" height="118" rx="24" fill="#0e1913" fill-opacity="0.54" stroke="#eff5f0" stroke-opacity="0.12"/>
+    <text x="28" y="42" fill="#d8ba84" font-size="18" font-family="Manrope, Arial, sans-serif" font-weight="800" letter-spacing="4">CONTEXTO TÉCNICO</text>
+    <text x="28" y="76" fill="#f3f6f4" font-size="22" font-family="Manrope, Arial, sans-serif" font-weight="700">Sobrevoo, leitura e validação</text>
+    <text x="28" y="102" fill="#d2dcd6" font-size="18" font-family="Manrope, Arial, sans-serif">Mapeamento aéreo aplicado ao terreno.</text>
+  </g>
+</svg>

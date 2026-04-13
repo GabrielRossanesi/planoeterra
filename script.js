@@ -6,6 +6,7 @@ const navLinks = document.querySelectorAll(".site-nav a");
 const revealItems = document.querySelectorAll(".reveal");
 const homeHero = document.querySelector(".home-hero");
 const homeDetailTriggers = document.querySelectorAll("[data-home-detail]");
+const faqItems = Array.from(document.querySelectorAll(".faq-item"));
 
 const homeDetailContent = {
   "method-diagnostico": {
@@ -333,6 +334,37 @@ homeDetailTriggers.forEach((trigger) => {
     openHomeDetailModal(trigger.dataset.homeDetail, trigger);
   });
 });
+
+if (faqItems.length) {
+  const setFaqState = (item, isOpen) => {
+    const button = item.querySelector(".faq-question");
+    if (!button) {
+      return;
+    }
+
+    item.classList.toggle("is-open", isOpen);
+    button.setAttribute("aria-expanded", String(isOpen));
+  };
+
+  faqItems.forEach((item) => {
+    const button = item.querySelector(".faq-question");
+    if (!button) {
+      return;
+    }
+
+    const isInitiallyOpen = item.classList.contains("is-open");
+    button.setAttribute("aria-expanded", String(isInitiallyOpen));
+
+    button.addEventListener("click", () => {
+      const shouldOpen = !item.classList.contains("is-open");
+
+      faqItems.forEach((faqItem) => setFaqState(faqItem, false));
+      if (shouldOpen) {
+        setFaqState(item, true);
+      }
+    });
+  });
+}
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
