@@ -10,117 +10,117 @@ const homeDetailTriggers = document.querySelectorAll("[data-home-detail]");
 const homeDetailContent = {
   "method-diagnostico": {
     code: "01",
-    kicker: "Metodo aplicado",
+    kicker: "Método aplicado",
     category: "Etapa inicial",
-    title: "Diagnostico",
-    visualTitle: "Leitura inicial da area",
+    title: "Diagnóstico",
+    visualTitle: "Leitura inicial da área",
     description:
-      "Leitura inicial da area, entendimento do cenario e definicao do escopo tecnico mais adequado para a demanda. Nesta etapa, sao avaliados os objetivos do cliente, as caracteristicas do terreno e o tipo de material necessario para orientar o trabalho com seguranca.",
+      "Leitura inicial da área, entendimento do cenário e definição do escopo técnico mais adequado para a demanda. Nesta etapa, são avaliados os objetivos do cliente, as características do terreno e o tipo de material necessário para orientar o trabalho com segurança.",
     highlights: [
-      "leitura da area",
-      "definicao do escopo",
-      "alinhamento tecnico inicial",
+      "leitura da área",
+      "definição do escopo",
+      "alinhamento técnico inicial",
     ],
     visual: "a",
     primaryText: "Solicitar atendimento",
     primaryHref:
-      "https://wa.me/5511985222291?text=Ola,%20gostaria%20de%20solicitar%20um%20atendimento%20para%20diagnostico%20tecnico%20da%20Plano%20%26%20Terra",
+      "https://wa.me/5511985222291?text=Ol%C3%A1,%20gostaria%20de%20solicitar%20um%20atendimento%20para%20diagn%C3%B3stico%20t%C3%A9cnico%20da%20Plano%20%26%20Terra",
     secondaryText: "Ver projetos",
     secondaryHref: "./projetos.html",
   },
   "method-captacao": {
     code: "02",
-    kicker: "Metodo aplicado",
+    kicker: "Método aplicado",
     category: "Etapa de campo",
-    title: "Levantamento / Captacao",
+    title: "Levantamento / Captação",
     visualTitle: "Tecnologia aplicada em campo",
     description:
-      "Execucao em campo com uso de tecnologia compativel com a exigencia do projeto, como drone, RTK e metodos de medicao complementares. O foco e obter dados confiaveis para delimitacao, leitura territorial e desenvolvimento do material tecnico.",
-    highlights: ["drone", "RTK", "medicao em campo"],
+      "Execução em campo, com uso de tecnologia compatível com a exigência do projeto, como drone, RTK e métodos de medição complementares. O foco é obter dados confiáveis para delimitação, leitura territorial e desenvolvimento do material técnico.",
+    highlights: ["drone", "RTK", "medição em campo"],
     visual: "b",
     primaryText: "Solicitar atendimento",
     primaryHref:
-      "https://wa.me/5511985222291?text=Ola,%20gostaria%20de%20solicitar%20um%20atendimento%20para%20captacao%20em%20campo%20da%20Plano%20%26%20Terra",
+      "https://wa.me/5511985222291?text=Ol%C3%A1,%20gostaria%20de%20solicitar%20um%20atendimento%20para%20capta%C3%A7%C3%A3o%20em%20campo%20da%20Plano%20%26%20Terra",
     secondaryText: "Ver projetos",
     secondaryHref: "./projetos.html",
   },
   "method-entrega": {
     code: "03",
-    kicker: "Metodo aplicado",
+    kicker: "Método aplicado",
     category: "Etapa final",
     title: "Entrega",
-    visualTitle: "Pecas tecnicas organizadas",
+    visualTitle: "Peças técnicas organizadas",
     description:
-      "Organizacao das informacoes levantadas e preparacao das pecas tecnicas com clareza, consistencia e finalidade pratica. O material final e estruturado para apoiar regularizacao, analise territorial e tomada de decisao com mais seguranca.",
+      "Organização das informações levantadas e preparação das peças técnicas com clareza, consistência e finalidade prática. O material final é estruturado para apoiar regularização, análise territorial e tomada de decisão com mais segurança.",
     highlights: [
-      "pecas tecnicas",
-      "documentacao organizada",
-      "apoio a decisao",
+      "peças técnicas",
+      "documentação organizada",
+      "apoio à decisão",
     ],
     visual: "c",
     primaryText: "Solicitar atendimento",
     primaryHref:
-      "https://wa.me/5511985222291?text=Ola,%20gostaria%20de%20solicitar%20um%20atendimento%20para%20entrega%20tecnica%20da%20Plano%20%26%20Terra",
+      "https://wa.me/5511985222291?text=Ol%C3%A1,%20gostaria%20de%20solicitar%20um%20atendimento%20para%20entrega%20t%C3%A9cnica%20da%20Plano%20%26%20Terra",
     secondaryText: "Ver projetos",
     secondaryHref: "./projetos.html",
   },
   "service-usucapiao": {
     code: "01",
-    kicker: "Atuacao principal",
-    category: "Servico",
-    title: "Levantamento para Usucapiao",
-    visualTitle: "Perimetro e base tecnica clara",
+    kicker: "Atuação principal",
+    category: "Serviço",
+    title: "Levantamento para Usucapião",
+    visualTitle: "Perímetro e base técnica clara",
     description:
-      "Leitura de perimetro, confrontacoes e apoio tecnico para processos de usucapiao que exigem clareza territorial e seguranca documental. O objetivo e reunir base tecnica confiavel para instrucao do processo e conferencia da area.",
+      "Leitura de perímetro, confrontações e apoio técnico para processos de usucapião que exigem clareza territorial e segurança documental. O objetivo é reunir base técnica confiável para instrução do processo e conferência da área.",
     highlights: [
-      "perimetro e confrontacoes",
+      "perímetro e confrontações",
       "apoio documental",
-      "base tecnica clara",
+      "base técnica clara",
     ],
     visual: "a",
     primaryText: "Solicitar atendimento",
     primaryHref:
-      "https://wa.me/5511985222291?text=Ola,%20gostaria%20de%20solicitar%20um%20atendimento%20para%20levantamento%20de%20usucapiao%20da%20Plano%20%26%20Terra",
+      "https://wa.me/5511985222291?text=Ol%C3%A1,%20gostaria%20de%20solicitar%20um%20atendimento%20para%20levantamento%20de%20usucapi%C3%A3o%20da%20Plano%20%26%20Terra",
     secondaryText: "Ver projetos",
     secondaryHref: "./projetos.html",
   },
   "service-geo-urbano": {
     code: "02",
-    kicker: "Atuacao principal",
-    category: "Servico",
+    kicker: "Atuação principal",
+    category: "Serviço",
     title: "Georreferenciamento Urbano",
     visualTitle: "Leitura espacial urbana",
     description:
-      "Atuacao em areas urbanas com foco em atualizacao cadastral, conferencia de limites, leitura espacial e organizacao tecnica do imovel. Indicado para situacoes que exigem maior precisao territorial e documentacao confiavel.",
+      "Atuação em áreas urbanas, com foco em atualização cadastral, conferência de limites, leitura espacial e organização técnica do imóvel. Indicado para situações que exigem maior precisão territorial e documentação confiável.",
     highlights: [
-      "atualizacao cadastral",
-      "conferencia de limites",
+      "atualização cadastral",
+      "conferência de limites",
       "leitura espacial",
     ],
     visual: "b",
     primaryText: "Solicitar atendimento",
     primaryHref:
-      "https://wa.me/5511985222291?text=Ola,%20gostaria%20de%20solicitar%20um%20atendimento%20para%20georreferenciamento%20urbano%20da%20Plano%20%26%20Terra",
+      "https://wa.me/5511985222291?text=Ol%C3%A1,%20gostaria%20de%20solicitar%20um%20atendimento%20para%20georreferenciamento%20urbano%20da%20Plano%20%26%20Terra",
     secondaryText: "Ver projetos",
     secondaryHref: "./projetos.html",
   },
   "service-geo-rural": {
     code: "03",
-    kicker: "Atuacao principal",
-    category: "Servico",
+    kicker: "Atuação principal",
+    category: "Serviço",
     title: "Georreferenciamento Rural",
-    visualTitle: "Organizacao territorial rural",
+    visualTitle: "Organização territorial rural",
     description:
-      "Mapeamento e leitura tecnica de areas rurais com foco em gestao territorial, regularizacao e organizacao precisa das informacoes do terreno. O trabalho busca gerar material consistente e confiavel para uso tecnico e documental.",
+      "Mapeamento e leitura técnica de áreas rurais, com foco em gestão territorial, regularização e organização precisa das informações do terreno. O trabalho busca gerar material consistente e confiável para uso técnico e documental.",
     highlights: [
       "mapeamento rural",
-      "regularizacao",
-      "organizacao territorial",
+      "regularização",
+      "organização territorial",
     ],
     visual: "c",
     primaryText: "Solicitar atendimento",
     primaryHref:
-      "https://wa.me/5511985222291?text=Ola,%20gostaria%20de%20solicitar%20um%20atendimento%20para%20georreferenciamento%20rural%20da%20Plano%20%26%20Terra",
+      "https://wa.me/5511985222291?text=Ol%C3%A1,%20gostaria%20de%20solicitar%20um%20atendimento%20para%20georreferenciamento%20rural%20da%20Plano%20%26%20Terra",
     secondaryText: "Ver projetos",
     secondaryHref: "./projetos.html",
   },
@@ -201,7 +201,7 @@ const createHomeDetailModal = () => {
             <a
               class="button button-primary"
               id="home-detail-primary-action"
-              href="https://wa.me/5511985222291?text=Ola,%20gostaria%20de%20solicitar%20um%20atendimento%20da%20Plano%20%26%20Terra"
+              href="https://wa.me/5511985222291?text=Ol%C3%A1,%20gostaria%20de%20solicitar%20um%20atendimento%20da%20Plano%20%26%20Terra"
               target="_blank"
               rel="noreferrer"
             >

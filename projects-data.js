@@ -134,7 +134,7 @@ const baseProjects = [
     shortDescription:
       "Levantamento técnico e consolidação documental para instrução de regularização possessória em área mista.",
     fullDescription:
-      "Projeto estruturado para apoiar o processo de usucapião com leitura topográfica do perímetro, organização das informações territoriais e preparação técnica da documentação necessária para instrução jurídica com mais clareza.",
+      "Projeto estruturado para apoiar o processo de usucapião, com leitura topográfica do perímetro, organização das informações territoriais e preparação técnica da documentação necessária para instrução jurídica com mais clareza.",
     status: "Concluído",
     year: "2026",
     areaLabel: "18,4 ha",
@@ -156,7 +156,7 @@ const baseProjects = [
       { label: "Entrega", value: "Material técnico preparado para instrução do processo" },
     ],
     deliverables: [
-      "Levantamento do perímetro com conferência de confrontações",
+      "Levantamento do perímetro, com conferência de confrontações",
       "Peças técnicas para instrução da regularização possessória",
       "Memorial descritivo com leitura territorial consolidada",
       "Apoio técnico para alinhamento documental do processo",
@@ -172,9 +172,9 @@ const baseProjects = [
     category: "Georreferenciamento urbano",
     serviceType: "Georreferenciamento urbano",
     shortDescription:
-      "Atualização cadastral e georreferenciamento em loteamento urbano com foco em precisão posicional e compatibilização cartorial.",
+      "Atualização cadastral e georreferenciamento em loteamento urbano, com foco em precisão posicional e compatibilização cartorial.",
     fullDescription:
-      "Projeto voltado à atualização cadastral de um conjunto urbano com conferência de limites, leitura territorial precisa e padronização das entregas técnicas para apoiar regularização, cadastro e tomada de decisão com segurança.",
+      "Projeto voltado à atualização cadastral de um conjunto urbano, com conferência de limites, leitura territorial precisa e padronização das entregas técnicas para apoiar regularização, cadastro e tomada de decisão com segurança.",
     status: "Entregue",
     year: "2025",
     areaLabel: "42 lotes",
@@ -236,7 +236,7 @@ const baseProjects = [
       { label: "Mídia", value: "Compatível com apresentação 3D e fallback estático" },
     ],
     deliverables: [
-      "Perímetro técnico consolidado com referências espaciais claras",
+      "Perímetro técnico consolidado, com referências espaciais claras",
       "Painel visual com leitura de áreas e confrontações",
       "Documentação resumida para comunicação com segurança",
       "Estrutura pronta para anexar mídia tridimensional do terreno",
@@ -252,7 +252,7 @@ const baseProjects = [
     category: "Levantamento topográfico",
     serviceType: "Levantamento topográfico planialtimétrico",
     shortDescription:
-      "Levantamento planialtimétrico para apoio a implantação, compatibilização técnica e leitura refinada do terreno.",
+      "Levantamento planialtimétrico para apoio à implantação, compatibilização técnica e leitura refinada do terreno.",
     fullDescription:
       "Projeto conduzido para organizar as informações topográficas de um condomínio em expansão, permitindo leitura clara da área, planejamento técnico e visão consolidada das condições do terreno para as próximas etapas de implantação.",
     status: "Em portfólio",
@@ -343,7 +343,7 @@ const baseProjects = [
     category: "Georreferenciamento urbano",
     serviceType: "Atualização cadastral e georreferenciamento urbano",
     shortDescription:
-      "Revisão de malha urbana e consolidação de informações para atualização cadastral com apresentação técnica contemporânea.",
+      "Revisão de malha urbana e consolidação de informações para atualização cadastral, com apresentação técnica contemporânea.",
     fullDescription:
       "Projeto urbano estruturado para revisar a malha cadastral de um bairro em expansão, com foco em leitura precisa dos limites, organização espacial e apresentação visual que facilite análise técnica e comercial.",
     status: "Entregue",
@@ -353,7 +353,7 @@ const baseProjects = [
     has3dModel: true,
     model3dUrl: "",
     viewerHint:
-      "O modal está pronto para receber um modelo tridimensional do bairro mantendo lazy load, loading state elegante e fallback estático.",
+      "O modal está pronto para receber um modelo tridimensional do bairro, mantendo lazy load, loading state elegante e fallback estático.",
     summary: [
       { label: "Serviço", value: "Georreferenciamento urbano" },
       { label: "Escala", value: "58 frentes" },
@@ -370,7 +370,7 @@ const baseProjects = [
       "Malha urbana revisada com leitura clara do conjunto",
       "Resumo técnico para apresentação comercial do case",
       "Galeria com cenas da evolução visual do projeto",
-      "Estrutura pronta para demonstração 3D quando houver arquivo compatível",
+      "Estrutura pronta para demonstração 3D, quando houver arquivo compatível",
     ],
     galleryMetrics: ["58 frentes analisadas", "Atualização cadastral"],
     palette: ["#07141b", "#112836", "#31556c", "#d0ae73", "#9bc0d7"],
@@ -408,6 +408,7 @@ const buildProjectWhatsappLink = (project) =>
   `${WHATSAPP_BASE}${encodeURIComponent(
     `Olá, gostaria de falar sobre o projeto ${project.title} da Plano & Terra.`
   )}`;
+
 window.PlanoTerraProjectsData = {
   buildProjectWhatsappLink,
   projectCategories,
