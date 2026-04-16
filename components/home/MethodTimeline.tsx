@@ -129,14 +129,14 @@ export function MethodTimeline() {
     >
       <motion.div
         aria-hidden="true"
-        className="absolute bottom-8 left-[1.55rem] top-4 w-px origin-top bg-gradient-to-b from-transparent via-forest-700/26 to-transparent lg:left-1/2"
+        className="absolute bottom-6 left-5 top-2 w-px origin-top bg-gradient-to-b from-transparent via-ink-950/14 to-transparent lg:left-1/2"
         initial={reduceMotion ? false : { scaleY: 0, opacity: 0 }}
         whileInView={{ scaleY: 1, opacity: 1 }}
         viewport={revealViewport}
         transition={{ duration: 1.1, ease: premiumEase }}
       />
 
-      <div className="grid gap-10 lg:gap-5">
+      <div className="grid gap-12 lg:gap-7">
         {methodSteps.map((step, index) => {
           const detail = timelineDetails[index];
           const active = activeStep === index;
@@ -153,31 +153,53 @@ export function MethodTimeline() {
                 visible: { opacity: 1, y: 0, filter: "blur(0px)" },
               }}
               transition={{ duration: motionDurations.reveal, ease: premiumEase }}
-              className="relative grid min-h-[11.5rem] gap-4 pl-16 lg:grid-cols-[minmax(0,1fr)_7rem_minmax(0,1fr)] lg:items-center lg:gap-0 lg:pl-0"
+              className="relative grid min-h-[10.5rem] gap-4 pl-14 lg:grid-cols-[minmax(0,1fr)_5rem_minmax(0,1fr)] lg:items-center lg:gap-0 lg:pl-0"
             >
               <motion.div
-                className="absolute left-0 top-2 z-10 flex h-12 w-12 items-center justify-center lg:static lg:col-start-2 lg:row-start-1 lg:mx-auto lg:h-20 lg:w-20"
-                whileHover={reduceMotion ? undefined : { scale: 1.04 }}
+                aria-hidden="true"
+                className={`absolute top-1/2 hidden h-px w-10 bg-gradient-to-r from-transparent via-ink-950/18 to-transparent lg:block ${
+                  detail.side === "left"
+                    ? "right-[calc(50%+1.35rem)] origin-right"
+                    : "left-[calc(50%+1.35rem)] origin-left"
+                }`}
+                initial={reduceMotion ? false : { scaleX: 0, opacity: 0 }}
+                whileInView={{ scaleX: 1, opacity: 1 }}
+                viewport={revealViewport}
+                transition={{
+                  duration: motionDurations.reveal,
+                  ease: premiumEase,
+                  delay: index * 0.08 + 0.12,
+                }}
+              />
+
+              <motion.div
+                className="absolute left-0 top-1 z-10 flex h-10 w-10 items-center justify-center lg:static lg:col-start-2 lg:row-start-1 lg:mx-auto lg:h-11 lg:w-11"
+                whileHover={reduceMotion ? undefined : { scale: 1.03 }}
                 transition={{ duration: motionDurations.short, ease: premiumEase }}
               >
                 <div
-                  className={`grid h-full w-full place-items-center rounded-full border shadow-soft backdrop-blur ${
+                  className={`relative grid h-full w-full place-items-center rounded-full border backdrop-blur ${
                     active
-                      ? "border-forest-700/25 bg-forest-800 text-mineral-50"
-                      : "border-ink-950/10 bg-mineral-50/90 text-forest-800"
+                      ? "border-forest-700/28 bg-white text-forest-800 shadow-[0_12px_34px_rgba(8,10,9,.10)]"
+                      : "border-ink-950/10 bg-mineral-50/88 text-ink-600 shadow-[0_10px_28px_rgba(8,10,9,.06)]"
                   }`}
                 >
                   <motion.span
-                    animate={active && !reduceMotion ? { scale: [1, 1.06, 1] } : {}}
+                    animate={active && !reduceMotion ? { scale: [1, 1.035, 1] } : {}}
                     transition={{
                       duration: 1.8,
                       repeat: active && !reduceMotion ? Infinity : 0,
                       ease: premiumEase,
                     }}
-                    className="font-display text-xl font-semibold lg:text-3xl"
+                    className="text-[11px] font-semibold tracking-[0.12em]"
                   >
                     {step.number}
                   </motion.span>
+                  <span
+                    className={`absolute bottom-1.5 h-1 w-1 rounded-full ${
+                      active ? "bg-forest-700" : "bg-ink-950/22"
+                    }`}
+                  />
                 </div>
               </motion.div>
 
@@ -196,28 +218,28 @@ export function MethodTimeline() {
                 }
                 whileTap={reduceMotion ? undefined : { scale: 0.99 }}
                 transition={{ duration: motionDurations.short, ease: premiumEase }}
-                className={`group relative w-full overflow-hidden rounded-[1.45rem] border p-5 text-left outline-none transition focus-visible:ring-2 focus-visible:ring-forest-700 md:p-6 ${cardColumn} ${
+                className={`group relative w-full overflow-hidden rounded-[1.35rem] border p-4 text-left outline-none transition focus-visible:ring-2 focus-visible:ring-forest-700 md:p-5 ${cardColumn} ${
                   active
-                    ? "border-forest-700/22 bg-white shadow-[0_22px_70px_rgba(8,10,9,.12)]"
-                    : "border-ink-950/10 bg-white/68 shadow-[0_16px_50px_rgba(8,10,9,.06)] hover:border-forest-700/20 hover:bg-white"
+                    ? "border-forest-700/18 bg-white shadow-[0_18px_58px_rgba(8,10,9,.10)]"
+                    : "border-ink-950/[0.075] bg-white/64 shadow-[0_14px_42px_rgba(8,10,9,.045)] hover:border-forest-700/18 hover:bg-white"
                 }`}
               >
-                <div className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-mineral-300/80 to-transparent" />
+                <div className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-mineral-300/60 to-transparent" />
                 <div className="flex items-center justify-between gap-4">
-                  <span className="grid h-10 w-10 place-items-center rounded-full border border-forest-700/12 bg-forest-700/[0.04] text-forest-800 transition group-hover:bg-forest-800 group-hover:text-mineral-50">
+                  <span className="grid h-9 w-9 place-items-center rounded-full border border-forest-700/10 bg-forest-700/[0.035] text-forest-800 transition group-hover:bg-forest-800 group-hover:text-mineral-50">
                     <StepIcon type={detail.icon} />
                   </span>
                   <span className="text-xs font-semibold uppercase tracking-[0.18em] text-forest-700">
                     {step.eyebrow}
                   </span>
                 </div>
-                <h3 className="mt-7 text-2xl font-semibold leading-tight text-ink-950">
+                <h3 className="mt-5 text-xl font-semibold leading-tight text-ink-950 md:text-2xl">
                   {detail.title}
                 </h3>
                 <p className="mt-3 text-sm leading-7 text-ink-500">
                   {detail.shortDescription}
                 </p>
-                <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-forest-700">
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-forest-700">
                   {active ? "ocultar etapa" : "ver etapa"}
                   <motion.span
                     aria-hidden="true"
