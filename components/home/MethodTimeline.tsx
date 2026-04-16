@@ -129,14 +129,14 @@ export function MethodTimeline() {
     >
       <motion.div
         aria-hidden="true"
-        className="absolute bottom-6 left-5 top-2 w-px origin-top bg-gradient-to-b from-transparent via-ink-950/14 to-transparent lg:left-1/2"
+        className="pointer-events-none absolute bottom-2 left-5 top-1 z-0 w-px origin-top bg-[linear-gradient(to_bottom,transparent,rgba(31,68,49,.28)_12%,rgba(31,68,49,.34)_50%,rgba(31,68,49,.28)_88%,transparent)] lg:left-1/2 lg:-translate-x-1/2"
         initial={reduceMotion ? false : { scaleY: 0, opacity: 0 }}
         whileInView={{ scaleY: 1, opacity: 1 }}
         viewport={revealViewport}
         transition={{ duration: 1.1, ease: premiumEase }}
       />
 
-      <div className="grid gap-12 lg:gap-7">
+      <div className="relative z-10 grid gap-12 lg:gap-7">
         {methodSteps.map((step, index) => {
           const detail = timelineDetails[index];
           const active = activeStep === index;
@@ -157,7 +157,20 @@ export function MethodTimeline() {
             >
               <motion.div
                 aria-hidden="true"
-                className={`absolute top-1/2 hidden h-px w-10 bg-gradient-to-r from-transparent via-ink-950/18 to-transparent lg:block ${
+                className="absolute left-5 top-6 h-px w-8 origin-left bg-gradient-to-r from-forest-800/30 to-transparent lg:hidden"
+                initial={reduceMotion ? false : { scaleX: 0, opacity: 0 }}
+                whileInView={{ scaleX: 1, opacity: 1 }}
+                viewport={revealViewport}
+                transition={{
+                  duration: motionDurations.reveal,
+                  ease: premiumEase,
+                  delay: index * 0.08 + 0.08,
+                }}
+              />
+
+              <motion.div
+                aria-hidden="true"
+                className={`absolute top-1/2 hidden h-px w-12 bg-gradient-to-r from-transparent via-forest-800/28 to-transparent lg:block ${
                   detail.side === "left"
                     ? "right-[calc(50%+1.35rem)] origin-right"
                     : "left-[calc(50%+1.35rem)] origin-left"
@@ -173,7 +186,7 @@ export function MethodTimeline() {
               />
 
               <motion.div
-                className="absolute left-0 top-1 z-10 flex h-10 w-10 items-center justify-center lg:static lg:col-start-2 lg:row-start-1 lg:mx-auto lg:h-11 lg:w-11"
+                className="absolute left-0 top-1 z-20 flex h-10 w-10 items-center justify-center lg:static lg:col-start-2 lg:row-start-1 lg:mx-auto lg:h-11 lg:w-11"
                 whileHover={reduceMotion ? undefined : { scale: 1.03 }}
                 transition={{ duration: motionDurations.short, ease: premiumEase }}
               >

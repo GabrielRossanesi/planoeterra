@@ -1,6 +1,7 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
 import { primaryWhatsappLink, withBasePath } from "@/lib/site";
+import { HeroExpertiseStrip } from "@/components/home/HeroExpertiseStrip";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 export function Hero() {
@@ -49,20 +50,7 @@ export function Hero() {
           </ScrollReveal>
         </div>
 
-        <ScrollReveal
-          initialVisible
-          delay={180}
-          className="mt-14 grid gap-3 text-sm text-mineral-100/75 sm:grid-cols-3 lg:max-w-3xl"
-        >
-          {["Usucapião", "Georreferenciamento", "Drone + RTK"].map((item) => (
-            <div
-              key={item}
-              className="border-t border-mineral-100/25 pt-4 font-medium"
-            >
-              {item}
-            </div>
-          ))}
-        </ScrollReveal>
+        <HeroExpertiseStrip />
       </div>
     </section>
   );
