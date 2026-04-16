@@ -33,6 +33,7 @@ export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hoveredHref, setHoveredHref] = useState<string | null>(null);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -63,18 +64,20 @@ export function Header() {
     >
       <motion.div
         animate={{
+          y: headerActive ? -2 : 0,
+          height: headerActive ? "4.25rem" : "4.5rem",
           backgroundColor: headerActive
-            ? "rgba(8, 10, 9, 0.78)"
-            : "rgba(8, 10, 9, 0.22)",
+            ? "rgba(6, 14, 10, 0.82)"
+            : "rgba(6, 14, 10, 0.18)",
           borderColor: headerActive
-            ? "rgba(247, 244, 237, 0.16)"
-            : "rgba(247, 244, 237, 0.10)",
+            ? "rgba(247, 244, 237, 0.18)"
+            : "rgba(247, 244, 237, 0.09)",
           boxShadow: headerActive
-            ? "0 18px 54px rgba(0, 0, 0, 0.22)"
-            : "0 10px 34px rgba(0, 0, 0, 0.06)",
+            ? "0 18px 60px rgba(0, 0, 0, 0.26), inset 0 1px 0 rgba(255,255,255,.07)"
+            : "0 10px 34px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255,255,255,.05)",
         }}
         transition={{ duration: motionDurations.short, ease: premiumEase }}
-        className="mx-auto flex h-[4.5rem] w-full max-w-7xl items-center justify-between gap-3 rounded-full border px-3 text-mineral-50 backdrop-blur-2xl md:px-4"
+        className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 rounded-full border px-3 text-mineral-50 backdrop-blur-2xl md:px-4"
       >
         <Link
           href="/"
@@ -106,14 +109,21 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.055] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,.08)] lg:flex">
+        <nav
+          className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.045] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,.08)] lg:flex"
+          onMouseLeave={() => setHoveredHref(null)}
+        >
           {navigation.map((item) => {
             const normalizedHref = item.href.replace(/\/$/, "") || "/";
             const active = normalizedPath === normalizedHref;
+            const hovered = hoveredHref === item.href;
             return (
               <Link
                 key={item.href}
                 href={item.href}
+                onMouseEnter={() => setHoveredHref(item.href)}
+                onFocus={() => setHoveredHref(item.href)}
+                onBlur={() => setHoveredHref(null)}
                 className="relative rounded-full px-4 py-2 text-sm font-medium text-mineral-50/76 outline-none transition hover:text-white focus-visible:ring-2 focus-visible:ring-mineral-300"
               >
                 {active ? (
@@ -128,6 +138,16 @@ export function Header() {
                     }}
                   />
                 ) : null}
+                {hovered && !active ? (
+                  <motion.span
+                    layoutId="site-nav-hover"
+                    className="absolute inset-0 rounded-full bg-white/[0.075]"
+                    transition={{
+                      duration: motionDurations.short,
+                      ease: premiumEase,
+                    }}
+                  />
+                ) : null}
                 <span
                   className={`relative z-10 transition ${
                     active ? "text-ink-950" : ""
@@ -135,6 +155,21 @@ export function Header() {
                 >
                   {item.label}
                 </span>
+                <motion.span
+                  aria-hidden="true"
+                  className={`absolute bottom-1.5 left-4 right-4 h-px origin-left rounded-full ${
+                    active ? "bg-ink-950/40" : "bg-mineral-200/70"
+                  }`}
+                  initial={false}
+                  animate={{
+                    scaleX: active || hovered ? 1 : 0,
+                    opacity: active || hovered ? 1 : 0,
+                  }}
+                  transition={{
+                    duration: motionDurations.short,
+                    ease: premiumEase,
+                  }}
+                />
               </Link>
             );
           })}
@@ -203,7 +238,7 @@ export function Header() {
             <motion.button
               type="button"
               aria-label="Fechar menu"
-              className="fixed inset-0 z-30 bg-ink-950/20 lg:hidden"
+              className="fixed inset-0 z-30 bg-ink-950/38 backdrop-blur-[2px] lg:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -217,8 +252,9 @@ export function Header() {
               animate="visible"
               exit="exit"
               transition={{ duration: motionDurations.overlay, ease: premiumEase }}
-              className="fixed inset-x-3 top-24 z-40 overflow-hidden rounded-[1.75rem] border border-white/12 bg-ink-950/92 shadow-premium backdrop-blur-2xl lg:hidden"
+              className="fixed inset-x-3 top-24 z-40 overflow-hidden rounded-[1.75rem] border border-white/12 bg-ink-950/94 shadow-premium backdrop-blur-2xl lg:hidden"
             >
+              <div className="pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-mineral-300/55 to-transparent" />
               <motion.nav
                 className="p-3"
                 initial="hidden"
@@ -234,30 +270,41 @@ export function Header() {
                 }}
                 aria-label="Navegação mobile"
               >
-                {navigation.map((item) => (
-                  <motion.div
-                    key={item.href}
-                    variants={{
-                      hidden: { opacity: 0, y: 10 },
-                      visible: { opacity: 1, y: 0 },
-                    }}
-                    transition={{ duration: 0.32, ease: premiumEase }}
-                  >
-                    <Link
-                      href={item.href}
-                      className="group flex items-center justify-between rounded-2xl px-5 py-4 text-lg font-medium text-mineral-50 transition hover:bg-white/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mineral-300"
-                      onClick={() => setOpen(false)}
+                {navigation.map((item) => {
+                  const normalizedHref = item.href.replace(/\/$/, "") || "/";
+                  const active = normalizedPath === normalizedHref;
+
+                  return (
+                    <motion.div
+                      key={item.href}
+                      variants={{
+                        hidden: { opacity: 0, y: 10 },
+                        visible: { opacity: 1, y: 0 },
+                      }}
+                      transition={{ duration: 0.32, ease: premiumEase }}
                     >
-                      {item.label}
-                      <span
-                        aria-hidden="true"
-                        className="text-mineral-300 transition group-hover:translate-x-1"
+                      <Link
+                        href={item.href}
+                        className={`group flex items-center justify-between rounded-2xl px-5 py-4 text-lg font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mineral-300 ${
+                          active
+                            ? "bg-mineral-50 text-ink-950"
+                            : "text-mineral-50 hover:bg-white/8"
+                        }`}
+                        onClick={() => setOpen(false)}
                       >
-                        →
-                      </span>
-                    </Link>
-                  </motion.div>
-                ))}
+                        {item.label}
+                        <span
+                          aria-hidden="true"
+                          className={`transition group-hover:translate-x-1 ${
+                            active ? "text-forest-800" : "text-mineral-300"
+                          }`}
+                        >
+                          →
+                        </span>
+                      </Link>
+                    </motion.div>
+                  );
+                })}
                 <motion.div
                   variants={{
                     hidden: { opacity: 0, y: 10 },
