@@ -4,6 +4,7 @@ import { CTASection } from "@/components/CTASection";
 import { InteriorHero } from "@/components/InteriorHero";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionHeading } from "@/components/SectionHeading";
+import { absoluteUrl, withBasePath } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Sobre",
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     title: "Plano & Terra | Sobre",
     description:
       "Precisão técnica, leitura territorial e documentação clara para imóveis urbanos e rurais.",
-    images: ["/assets/og-plano-terra.svg"],
+    images: [absoluteUrl("/assets/og-plano-terra.svg")],
   },
 };
 
@@ -50,7 +51,7 @@ export default function SobrePage() {
         <div className="rounded-[2rem] border border-white/10 bg-white/[0.06] p-4 shadow-premium backdrop-blur">
           <div className="relative aspect-[4/3] overflow-hidden rounded-[1.55rem] bg-ink-900">
             <Image
-              src="/assets/logo-plano-terra.svg"
+              src={withBasePath("/assets/logo-plano-terra.svg")}
               alt="Plano & Terra"
               fill
               sizes="40vw"
@@ -94,7 +95,7 @@ export default function SobrePage() {
             <ScrollReveal>
               <div className="relative overflow-hidden rounded-[2rem] bg-ink-950 shadow-premium">
                 <Image
-                  src="/drone.avif"
+                  src={withBasePath("/drone.avif")}
                   alt="Vista aérea usada como referência de leitura territorial"
                   width={1200}
                   height={800}

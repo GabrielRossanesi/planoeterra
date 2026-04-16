@@ -1,12 +1,12 @@
 ﻿import Image from "next/image";
-import { primaryWhatsappLink } from "@/lib/site";
+import { primaryWhatsappLink, withBasePath } from "@/lib/site";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 export function ProjectsHero() {
   return (
     <section className="relative isolate overflow-hidden bg-ink-950 pt-32 text-mineral-50">
       <Image
-        src="/drone.avif"
+        src={withBasePath("/drone.avif")}
         alt=""
         fill
         sizes="100vw"
@@ -47,7 +47,7 @@ export function ProjectsHero() {
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.06] p-4 shadow-premium backdrop-blur">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[1.55rem] bg-ink-900">
               <Image
-                src="/assets/hero-drone-photo.png"
+                src={withBasePath("/assets/hero-drone-photo.png")}
                 alt="Drone utilizado em projeto de topografia"
                 fill
                 sizes="40vw"

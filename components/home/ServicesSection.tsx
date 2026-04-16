@@ -1,7 +1,9 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import { services } from "@/data/content";
+import { MotionSurface } from "@/components/MotionSurface";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionHeading } from "@/components/SectionHeading";
+import { withBasePath } from "@/lib/site";
 
 export function ServicesSection() {
   return (
@@ -27,55 +29,57 @@ export function ServicesSection() {
         <div className="mt-14 grid gap-5 lg:grid-cols-3">
           {services.map((service, index) => (
             <ScrollReveal key={service.id} delay={index * 90}>
-              <a
-                href={service.href}
-                target="_blank"
-                rel="noreferrer"
-                className={`group block h-full overflow-hidden rounded-[1.7rem] border border-ink-950/10 bg-mineral-50 shadow-[0_18px_55px_rgba(8,10,9,.08)] outline-none transition duration-300 hover:-translate-y-1 hover:border-forest-700/25 focus-visible:ring-2 focus-visible:ring-forest-700 ${
-                  index === 0 ? "lg:mt-10" : index === 2 ? "lg:mt-20" : ""
-                }`}
+              <MotionSurface
+                className={index === 0 ? "lg:mt-10" : index === 2 ? "lg:mt-20" : ""}
               >
-                <div className="relative aspect-[4/3] overflow-hidden bg-forest-900">
-                  <Image
-                    src={service.image}
-                    alt=""
-                    fill
-                    sizes="(min-width: 1024px) 33vw, 100vw"
-                    className="object-cover opacity-92 transition duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-transparent to-transparent" />
-                  <span className="absolute bottom-5 left-5 rounded-full bg-mineral-50/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-forest-800">
-                    {service.kicker}
-                  </span>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-2xl font-semibold text-ink-950">
-                    {service.title}
-                  </h3>
-                  <p className="mt-4 text-sm leading-7 text-ink-500">
-                    {service.description}
-                  </p>
-                  <div className="mt-7 flex flex-wrap gap-2">
-                    {service.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-ink-950/10 px-3 py-1 text-xs font-medium text-ink-700"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-forest-700">
-                    Conversar sobre o serviço
-                    <span
-                      aria-hidden="true"
-                      className="transition group-hover:translate-x-1"
-                    >
-                      →
+                <a
+                  href={service.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group block h-full overflow-hidden rounded-[1.7rem] border border-ink-950/10 bg-mineral-50 shadow-[0_18px_55px_rgba(8,10,9,.08)] outline-none transition-colors duration-300 hover:border-forest-700/25 focus-visible:ring-2 focus-visible:ring-forest-700"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden bg-forest-900">
+                    <Image
+                      src={withBasePath(service.image)}
+                      alt=""
+                      fill
+                      sizes="(min-width: 1024px) 33vw, 100vw"
+                      className="object-cover opacity-92 transition duration-700 ease-premium group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-transparent to-transparent" />
+                    <span className="absolute bottom-5 left-5 rounded-full bg-mineral-50/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-forest-800">
+                      {service.kicker}
                     </span>
-                  </span>
-                </div>
-              </a>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-2xl font-semibold text-ink-950">
+                      {service.title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-7 text-ink-500">
+                      {service.description}
+                    </p>
+                    <div className="mt-7 flex flex-wrap gap-2">
+                      {service.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-full border border-ink-950/10 px-3 py-1 text-xs font-medium text-ink-700"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-forest-700">
+                      Conversar sobre o serviço
+                      <span
+                        aria-hidden="true"
+                        className="transition group-hover:translate-x-1"
+                      >
+                        →
+                      </span>
+                    </span>
+                  </div>
+                </a>
+              </MotionSurface>
             </ScrollReveal>
           ))}
         </div>
@@ -83,5 +87,3 @@ export function ServicesSection() {
     </section>
   );
 }
-
-

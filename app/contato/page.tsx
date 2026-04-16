@@ -3,7 +3,7 @@ import { CTASection } from "@/components/CTASection";
 import { InteriorHero } from "@/components/InteriorHero";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import { primaryWhatsappLink, site, whatsappLink } from "@/lib/site";
+import { absoluteUrl, primaryWhatsappLink, site, whatsappLink } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contato",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: "Plano & Terra | Contato",
     description:
       "Atendimento direto para topografia, georreferenciamento, usucapião e regularização de imóveis.",
-    images: ["/assets/og-plano-terra.svg"],
+    images: [absoluteUrl("/assets/og-plano-terra.svg")],
   },
 };
 

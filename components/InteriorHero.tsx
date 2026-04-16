@@ -1,6 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ReactNode } from "react";
-import { primaryWhatsappLink } from "@/lib/site";
+import { primaryWhatsappLink, withBasePath } from "@/lib/site";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 type InteriorHeroProps = {
@@ -24,10 +25,12 @@ export function InteriorHero({
   secondaryHref,
   secondaryLabel,
 }: InteriorHeroProps) {
+  const internalSecondaryLink = secondaryHref?.startsWith("/");
+
   return (
     <section className="relative isolate overflow-hidden bg-ink-950 pt-32 text-mineral-50">
       <Image
-        src={image}
+        src={withBasePath(image)}
         alt=""
         fill
         sizes="100vw"
@@ -61,9 +64,21 @@ export function InteriorHero({
               Solicitar atendimento
             </a>
             {secondaryHref && secondaryLabel ? (
-              <a className="btn btn-dark-secondary justify-center" href={secondaryHref}>
-                {secondaryLabel}
-              </a>
+              internalSecondaryLink ? (
+                <Link
+                  className="btn btn-dark-secondary justify-center"
+                  href={secondaryHref}
+                >
+                  {secondaryLabel}
+                </Link>
+              ) : (
+                <a
+                  className="btn btn-dark-secondary justify-center"
+                  href={secondaryHref}
+                >
+                  {secondaryLabel}
+                </a>
+              )
             ) : null}
           </div>
         </ScrollReveal>

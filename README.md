@@ -27,5 +27,16 @@ npm run dev
 npm run build
 ```
 
+Com `basePath: "/planoeterra"`, o ambiente local fica em
+`http://localhost:3000/planoeterra/`.
+
 O build gera uma versão estática em `out/`, pronta para hospedagem simples.
+
+## Deploy da demo
+
+A demo do GitHub Pages está preparada para:
+
+`https://gabrielrossanesi.github.io/planoeterra/`
+
+Veja o passo a passo em [DEPLOY_GITHUB_PAGES.md](DEPLOY_GITHUB_PAGES.md).
 

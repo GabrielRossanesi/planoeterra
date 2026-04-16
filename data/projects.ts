@@ -1,5 +1,7 @@
 ﻿import { whatsappLink } from "@/lib/site";
 
+import { withBasePath } from "@/lib/site";
+
 export type ProjectCategory =
   | "Usucapião"
   | "Georreferenciamento urbano"
@@ -308,7 +310,7 @@ const baseProjects: BaseProject[] = [
     areaLabel: "11,7 ha",
     modelReadyLabel: "Modelo 3D publicado",
     has3dModel: true,
-    model3dUrl: "/ex3d.glb",
+    model3dUrl: withBasePath("/ex3d.glb"),
     modelBadgeLabel: "Topografia 3D",
     modelCtaLabel: "Ver topografia 3D",
     modelSupportText: "Modelo demonstrativo de visualização topográfica em 3D.",

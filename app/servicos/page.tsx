@@ -5,6 +5,7 @@ import { InteriorHero } from "@/components/InteriorHero";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { methodSteps, services } from "@/data/content";
+import { absoluteUrl, withBasePath } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Serviços",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     title: "Plano & Terra | Serviços",
     description:
       "Levantamentos, georreferenciamento e regularização com precisão técnica para áreas urbanas e rurais.",
-    images: ["/assets/og-plano-terra.svg"],
+    images: [absoluteUrl("/assets/og-plano-terra.svg")],
   },
 };
 
@@ -50,7 +51,7 @@ export default function ServicosPage() {
         <div className="rounded-[2rem] border border-white/10 bg-white/[0.06] p-4 shadow-premium backdrop-blur">
           <div className="relative aspect-[4/3] overflow-hidden rounded-[1.55rem]">
             <Image
-              src="/assets/hero-drone-photo.png"
+              src={withBasePath("/assets/hero-drone-photo.png")}
               alt="Drone aplicado em levantamento de campo"
               fill
               sizes="40vw"
@@ -87,7 +88,7 @@ export default function ServicosPage() {
                   <article className="grid overflow-hidden rounded-[1.8rem] border border-ink-950/10 bg-white/70 shadow-soft lg:grid-cols-[0.9fr_1.1fr]">
                     <div className="relative min-h-72 bg-ink-950">
                       <Image
-                        src={service.image}
+                        src={withBasePath(service.image)}
                         alt=""
                         fill
                         sizes="(min-width: 1024px) 40vw, 100vw"

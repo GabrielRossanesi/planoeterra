@@ -1,12 +1,15 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { faqs } from "@/data/content";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionHeading } from "@/components/SectionHeading";
+import { motionDurations, premiumEase } from "@/lib/motion";
 
 export function FAQ() {
   const [open, setOpen] = useState(0);
+  const reduceMotion = useReducedMotion();
 
   return (
     <section id="faq" className="section-padding bg-mineral-50">
@@ -24,9 +27,11 @@ export function FAQ() {
             {faqs.map((item, index) => {
               const active = open === index;
               return (
-                <article key={item.question}>
-                  <button
+                <motion.article layout key={item.question}>
+                  <motion.button
                     type="button"
+                    whileHover={reduceMotion ? undefined : { x: 2 }}
+                    transition={{ duration: motionDurations.micro, ease: premiumEase }}
                     className="group flex w-full items-center justify-between gap-6 py-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-700"
                     aria-expanded={active}
                     aria-controls={`faq-${index}`}
@@ -36,12 +41,15 @@ export function FAQ() {
                       {item.question}
                     </span>
                     <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink-950/10 text-forest-700 transition group-hover:border-forest-700/40 group-hover:bg-white">
-                      <svg
+                      <motion.svg
                         viewBox="0 0 24 24"
                         aria-hidden="true"
-                        className={`h-4 w-4 transition duration-200 ${
-                          active ? "rotate-45" : ""
-                        }`}
+                        animate={{ rotate: active ? 45 : 0 }}
+                        transition={{
+                          duration: motionDurations.short,
+                          ease: premiumEase,
+                        }}
+                        className="h-4 w-4"
                       >
                         <path
                           d="M12 5v14M5 12h14"
@@ -50,22 +58,30 @@ export function FAQ() {
                           strokeLinecap="round"
                           strokeWidth="1.8"
                         />
-                      </svg>
+                      </motion.svg>
                     </span>
-                  </button>
-                  <div
-                    id={`faq-${index}`}
-                    className={`grid transition-all duration-300 ease-premium ${
-                      active ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                    }`}
-                  >
-                    <div className="overflow-hidden">
-                      <p className="pb-6 pr-10 text-sm leading-7 text-ink-500 md:text-base">
-                        {item.answer}
-                      </p>
-                    </div>
-                  </div>
-                </article>
+                  </motion.button>
+
+                  <AnimatePresence initial={false}>
+                    {active ? (
+                      <motion.div
+                        id={`faq-${index}`}
+                        initial={reduceMotion ? false : { height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{
+                          duration: motionDurations.overlay,
+                          ease: premiumEase,
+                        }}
+                        className="overflow-hidden"
+                      >
+                        <p className="pb-6 pr-10 text-sm leading-7 text-ink-500 md:text-base">
+                          {item.answer}
+                        </p>
+                      </motion.div>
+                    ) : null}
+                  </AnimatePresence>
+                </motion.article>
               );
             })}
           </div>
@@ -74,5 +90,3 @@ export function FAQ() {
     </section>
   );
 }
-
-

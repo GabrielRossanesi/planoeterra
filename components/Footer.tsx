@@ -1,6 +1,6 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
-import { navigation, primaryWhatsappLink, site } from "@/lib/site";
+import { navigation, primaryWhatsappLink, site, withBasePath } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -14,7 +14,7 @@ export function Footer() {
             >
               <span className="relative h-14 w-14 overflow-hidden rounded-full bg-mineral-50 p-2">
                 <Image
-                  src="/assets/logo-plano-terra.svg"
+                  src={withBasePath("/assets/logo-plano-terra.svg")}
                   alt=""
                   fill
                   sizes="56px"

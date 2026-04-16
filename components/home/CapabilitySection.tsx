@@ -1,6 +1,7 @@
 ﻿import Image from "next/image";
 import { capabilities, differentials } from "@/data/content";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { withBasePath } from "@/lib/site";
 
 export function CapabilitySection() {
   return (
@@ -10,7 +11,7 @@ export function CapabilitySection() {
           <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-3 shadow-premium">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[1.55rem]">
               <Image
-                src="/assets/hero-drone-photo.png"
+                src={withBasePath("/assets/hero-drone-photo.png")}
                 alt="Drone utilizado em captação técnica de campo"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"

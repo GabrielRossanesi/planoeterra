@@ -2,6 +2,7 @@
 import { CTASection } from "@/components/CTASection";
 import { ProjectsCatalog } from "@/components/projects/ProjectsCatalog";
 import { ProjectsHero } from "@/components/projects/ProjectsHero";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Projetos",
@@ -11,13 +12,13 @@ export const metadata: Metadata = {
     title: "Plano & Terra | Projetos",
     description:
       "Uma vitrine técnica e sofisticada dos projetos conduzidos pela Plano & Terra.",
-    images: ["/assets/og-plano-terra.svg"],
+    images: [absoluteUrl("/assets/og-plano-terra.svg")],
   },
   twitter: {
     title: "Plano & Terra | Projetos",
     description:
       "Projetos executados com precisão técnica, leitura territorial e visual premium.",
-    images: ["/assets/og-plano-terra.svg"],
+    images: [absoluteUrl("/assets/og-plano-terra.svg")],
   },
 };
 

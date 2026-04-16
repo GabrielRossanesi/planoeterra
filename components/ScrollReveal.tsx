@@ -1,6 +1,8 @@
-﻿"use client";
+"use client";
 
-import { CSSProperties, ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { premiumEase, revealVariants, revealViewport } from "@/lib/motion";
 
 type ScrollRevealProps = {
   children: ReactNode;
@@ -15,50 +17,26 @@ export function ScrollReveal({
   delay = 0,
   initialVisible = false,
 }: ScrollRevealProps) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = useState(initialVisible);
-
-  useEffect(() => {
-    if (initialVisible) {
-      return;
-    }
-
-    const element = ref.current;
-    if (!element) {
-      return;
-    }
-
-    if (!("IntersectionObserver" in window)) {
-      setVisible(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.16, rootMargin: "0px 0px -48px 0px" }
-    );
-
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, [initialVisible]);
-
-  const style = {
-    "--reveal-delay": `${delay}ms`,
-  } as CSSProperties;
+  const reduceMotion = useReducedMotion();
+  const transition = reduceMotion
+    ? { duration: 0 }
+    : {
+        duration: initialVisible ? 0.78 : 0.62,
+        ease: premiumEase,
+        delay: delay / 1000,
+      };
 
   return (
-    <div
-      ref={ref}
-      style={style}
-      className={`reveal ${visible ? "is-visible" : ""} ${className}`}
+    <motion.div
+      initial={reduceMotion ? false : "hidden"}
+      animate={initialVisible || reduceMotion ? "visible" : undefined}
+      whileInView={initialVisible || reduceMotion ? undefined : "visible"}
+      viewport={revealViewport}
+      variants={revealVariants}
+      transition={transition}
+      className={className}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
-

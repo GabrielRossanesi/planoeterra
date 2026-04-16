@@ -1,15 +1,17 @@
 ﻿"use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import {
   buildProjectWhatsappLink,
   hasPublished3D,
   Project,
 } from "@/data/projects";
 import { ModelViewer3D } from "@/components/projects/ModelViewer3D";
+import { modalVariants, motionDurations, premiumEase } from "@/lib/motion";
 
 type ProjectModalProps = {
-  project: Project | null;
+  project: Project;
   initialVisual: "image" | "3d";
   onClose: () => void;
 };
@@ -18,27 +20,24 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
   const closeRef = useRef<HTMLButtonElement | null>(null);
   const [activeVisual, setActiveVisual] = useState<"image" | "3d">("image");
   const [activeImage, setActiveImage] = useState(0);
+  const reduceMotion = useReducedMotion();
 
-  const published3D = project ? hasPublished3D(project) : false;
+  const published3D = hasPublished3D(project);
 
   useEffect(() => {
-    if (!project) {
-      return;
-    }
-
     setActiveImage(0);
     setActiveVisual(initialVisual === "3d" && hasPublished3D(project) ? "3d" : "image");
     window.setTimeout(() => closeRef.current?.focus(), 80);
   }, [project, initialVisual]);
 
   useEffect(() => {
-    document.body.classList.toggle("overflow-hidden", Boolean(project));
+    document.body.classList.add("overflow-hidden");
     return () => document.body.classList.remove("overflow-hidden");
-  }, [project]);
+  }, []);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && project) {
+      if (event.key === "Escape") {
         onClose();
       }
     };
@@ -48,18 +47,15 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
   }, [onClose, project]);
 
   const stageImage = useMemo(() => {
-    if (!project) {
-      return "";
-    }
     return project.gallery[activeImage] || project.coverImage;
   }, [activeImage, project]);
 
-  if (!project) {
-    return null;
-  }
-
   return (
-    <div
+    <motion.div
+      initial={reduceMotion ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: motionDurations.overlay, ease: premiumEase }}
       className="fixed inset-0 z-[70] overflow-y-auto bg-ink-950/70 px-3 py-5 backdrop-blur-xl md:px-6 md:py-8"
       role="dialog"
       aria-modal="true"
@@ -70,11 +66,20 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
         }
       }}
     >
-      <div className="modal-enter relative mx-auto min-h-full w-full max-w-7xl overflow-hidden rounded-[2rem] bg-mineral-50 text-ink-950 shadow-premium">
-        <button
+      <motion.div
+        variants={modalVariants}
+        initial={reduceMotion ? false : "hidden"}
+        animate="visible"
+        exit="exit"
+        transition={{ duration: motionDurations.overlay, ease: premiumEase }}
+        className="relative mx-auto min-h-full w-full max-w-7xl overflow-hidden rounded-[2rem] bg-mineral-50 text-ink-950 shadow-premium"
+      >
+        <motion.button
           ref={closeRef}
           type="button"
           onClick={onClose}
+          whileHover={reduceMotion ? undefined : { scale: 1.04 }}
+          whileTap={reduceMotion ? undefined : { scale: 0.95 }}
           className="absolute right-4 top-4 z-20 grid h-11 w-11 place-items-center rounded-full border border-ink-950/10 bg-mineral-50/85 text-ink-950 backdrop-blur transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-700"
           aria-label="Fechar detalhes do projeto"
         >
@@ -87,25 +92,33 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
               strokeWidth="1.8"
             />
           </svg>
-        </button>
+        </motion.button>
 
         <div className="grid lg:grid-cols-[1.08fr_.92fr]">
           <section className="bg-ink-950 p-3 text-mineral-50 md:p-5">
             <div className="relative min-h-[420px] overflow-hidden rounded-[1.55rem] border border-white/10 bg-ink-900">
-              {activeVisual === "3d" && published3D && project.model3dUrl ? (
-                <ModelViewer3D
-                  src={project.model3dUrl}
-                  poster={project.coverImage}
-                  alt={`Modelo 3D do projeto ${project.title}`}
-                  config={project.model3dViewerConfig}
-                />
-              ) : (
-                <img
-                  src={stageImage}
-                  alt={`${project.title} - visual técnico`}
-                  className="h-full min-h-[420px] w-full object-cover"
-                />
-              )}
+              <motion.div
+                key={`${activeVisual}-${activeImage}`}
+                initial={reduceMotion ? false : { opacity: 0, scale: 1.01 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.32, ease: premiumEase }}
+                className="h-full min-h-[420px]"
+              >
+                {activeVisual === "3d" && published3D && project.model3dUrl ? (
+                  <ModelViewer3D
+                    src={project.model3dUrl}
+                    poster={project.coverImage}
+                    alt={`Modelo 3D do projeto ${project.title}`}
+                    config={project.model3dViewerConfig}
+                  />
+                ) : (
+                  <img
+                    src={stageImage}
+                    alt={`${project.title} - visual técnico`}
+                    className="h-full min-h-[420px] w-full object-cover"
+                  />
+                )}
+              </motion.div>
 
               <div className="absolute inset-x-5 bottom-5 rounded-2xl border border-white/15 bg-ink-950/60 p-4 backdrop-blur">
                 <span className="text-xs font-semibold uppercase tracking-[0.18em] text-mineral-300">
@@ -127,31 +140,33 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
             <div className="mt-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div className="flex gap-2">
                 {published3D ? (
-                  <button
+                  <motion.button
                     type="button"
                     onClick={() => setActiveVisual("3d")}
                     aria-pressed={activeVisual === "3d"}
+                    whileTap={reduceMotion ? undefined : { scale: 0.97 }}
                     className={`project-tab ${
                       activeVisual === "3d" ? "is-active" : ""
                     }`}
                   >
                     Modelo 3D
-                  </button>
+                  </motion.button>
                 ) : null}
-                <button
+                <motion.button
                   type="button"
                   onClick={() => setActiveVisual("image")}
                   aria-pressed={activeVisual === "image"}
+                  whileTap={reduceMotion ? undefined : { scale: 0.97 }}
                   className={`project-tab ${
                     activeVisual === "image" ? "is-active" : ""
                   }`}
                 >
                   Imagens
-                </button>
+                </motion.button>
               </div>
               <div className="flex gap-2 overflow-x-auto pb-1">
                 {project.gallery.map((image, index) => (
-                  <button
+                  <motion.button
                     key={image}
                     type="button"
                     onClick={() => {
@@ -165,6 +180,8 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
                         ? "border-mineral-200"
                         : "border-white/10 opacity-70 hover:opacity-100"
                     }`}
+                    whileHover={reduceMotion ? undefined : { y: -2 }}
+                    whileTap={reduceMotion ? undefined : { scale: 0.97 }}
                   >
                     <img
                       src={image}
@@ -172,7 +189,7 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
                       loading="lazy"
                       className="h-full w-full object-cover"
                     />
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             </div>
@@ -261,8 +278,8 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
             </a>
           </aside>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 

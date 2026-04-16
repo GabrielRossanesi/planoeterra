@@ -5,11 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "build:pages": "next build",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@google/model-viewer": "^4.1.0",
+    "motion": "^12.38.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"

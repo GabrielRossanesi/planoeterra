@@ -1,12 +1,14 @@
 ﻿"use client";
 
 import { useMemo, useState } from "react";
+import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import { projectCategories, projects, Project } from "@/data/projects";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { ProjectFilters } from "@/components/projects/ProjectFilters";
 import { ProjectModal } from "@/components/projects/ProjectModal";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionHeading } from "@/components/SectionHeading";
+import { premiumEase } from "@/lib/motion";
 
 export function ProjectsCatalog() {
   const [activeCategory, setActiveCategory] = useState("Todos");
@@ -27,7 +29,7 @@ export function ProjectsCatalog() {
   };
 
   return (
-    <section id="projetos" className="section-padding bg-mineral-50">
+    <section id="projetos" className="bg-mineral-50 pb-20 pt-14 md:pb-28 md:pt-16">
       <div className="mx-auto w-full max-w-7xl px-5 md:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
           <ScrollReveal>
@@ -74,20 +76,40 @@ export function ProjectsCatalog() {
           </ScrollReveal>
         </div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {filteredProjects.map((project, index) => (
-            <ScrollReveal key={project.id} delay={Math.min(index * 70, 260)}>
-              <ProjectCard project={project} onSelect={openProject} />
-            </ScrollReveal>
-          ))}
-        </div>
+        <LayoutGroup>
+          <motion.div layout className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, index) => (
+                <motion.div
+                  layout
+                  key={project.id}
+                  initial={{ opacity: 0, y: 18, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: 10, filter: "blur(8px)" }}
+                  transition={{
+                    duration: 0.38,
+                    ease: premiumEase,
+                    delay: Math.min(index * 0.035, 0.16),
+                  }}
+                >
+                  <ProjectCard project={project} onSelect={openProject} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        </LayoutGroup>
       </div>
 
-      <ProjectModal
-        project={selectedProject}
-        initialVisual={initialVisual}
-        onClose={() => setSelectedProject(null)}
-      />
+      <AnimatePresence>
+        {selectedProject ? (
+          <ProjectModal
+            key={selectedProject.id}
+            project={selectedProject}
+            initialVisual={initialVisual}
+            onClose={() => setSelectedProject(null)}
+          />
+        ) : null}
+      </AnimatePresence>
     </section>
   );
 }
