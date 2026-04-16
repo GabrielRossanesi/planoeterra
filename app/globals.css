@@ -1,0 +1,194 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --background: #f7f4ed;
+  --foreground: #080a09;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--background);
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: clip;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(214, 182, 122, 0.13), transparent 28rem),
+    var(--background);
+  color: var(--foreground);
+  font-family:
+    Inter,
+    Manrope,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  letter-spacing: 0;
+  text-rendering: geometricPrecision;
+}
+
+body::selection {
+  background: #d6b67a;
+  color: #06100b;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img,
+svg {
+  display: block;
+}
+
+@layer components {
+  .section-padding {
+    @apply py-20 md:py-28;
+  }
+
+  .eyebrow {
+    @apply text-xs font-extrabold uppercase tracking-[0.24em];
+  }
+
+  .btn {
+    @apply inline-flex min-h-12 items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition duration-200 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mineral-300;
+  }
+
+  .btn-primary {
+    @apply bg-mineral-200 text-ink-950 shadow-[0_14px_34px_rgba(214,182,122,.22)] hover:-translate-y-0.5 hover:bg-mineral-100;
+  }
+
+  .btn-secondary {
+    @apply border border-ink-950/10 bg-white/70 text-ink-950 hover:-translate-y-0.5 hover:border-forest-700/25 hover:bg-white;
+  }
+
+  .btn-dark-secondary {
+    @apply border border-white/15 bg-white/[0.07] text-mineral-50 backdrop-blur hover:-translate-y-0.5 hover:bg-white/10;
+  }
+
+  .footer-link {
+    @apply transition hover:text-mineral-50;
+  }
+
+  .project-tab {
+    @apply rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-sm font-semibold text-mineral-100/75 transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mineral-300;
+  }
+
+  .project-tab.is-active {
+    @apply border-mineral-200 bg-mineral-200 text-ink-950;
+  }
+}
+
+.precision-grid {
+  background-image:
+    linear-gradient(rgba(247, 244, 237, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247, 244, 237, 0.12) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(90deg, transparent, black 18%, black 78%, transparent);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 640ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 640ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.modal-enter {
+  animation: modal-enter 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes modal-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.project-stage-loading {
+  display: grid;
+  min-height: 420px;
+  place-items: center;
+  gap: 18px;
+  padding: 32px;
+  text-align: center;
+  color: #f7f4ed;
+}
+
+.project-stage-loading p {
+  margin-top: 6px;
+  color: rgba(247, 244, 237, 0.68);
+  font-size: 0.875rem;
+}
+
+.project-stage-fallback {
+  position: relative;
+  min-height: 420px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.loader-ring {
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(247, 244, 237, 0.22);
+  border-top-color: #d6b67a;
+  border-radius: 999px;
+  animation: spin 880ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+

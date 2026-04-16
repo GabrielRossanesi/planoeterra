@@ -1,12 +1,64 @@
-const WHATSAPP_BASE = "https://wa.me/5511985222291?text=";
+﻿import { whatsappLink } from "@/lib/site";
 
-const escapeXml = (value) =>
-  String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&apos;");
+export type ProjectCategory =
+  | "Usucapião"
+  | "Georreferenciamento urbano"
+  | "Georreferenciamento rural"
+  | "Levantamento topográfico"
+  | "Regularização de área";
+
+export type ProjectSummaryItem = {
+  label: string;
+  value: string;
+};
+
+export type ModelViewerConfig = {
+  orientation?: string;
+  cameraOrbit?: string;
+  cameraTarget?: string;
+  fieldOfView?: string;
+  minCameraOrbit?: string;
+  maxCameraOrbit?: string;
+};
+
+export type Project = {
+  id: string;
+  slug: string;
+  title: string;
+  location: string;
+  category: ProjectCategory;
+  serviceType: string;
+  shortDescription: string;
+  fullDescription: string;
+  status: string;
+  year: string;
+  areaLabel: string;
+  modelReadyLabel: string;
+  has3dModel: boolean;
+  model3dUrl?: string;
+  modelBadgeLabel?: string;
+  modelCtaLabel?: string;
+  modelSupportText?: string;
+  model3dViewerConfig?: ModelViewerConfig;
+  viewerHint: string;
+  summary: ProjectSummaryItem[];
+  technicalInfo: ProjectSummaryItem[];
+  deliverables: string[];
+  galleryMetrics: [string, string];
+  palette: [string, string, string, string, string];
+  coverImage: string;
+  gallery: string[];
+};
+
+type BaseProject = Omit<Project, "coverImage" | "gallery">;
+
+const escapeXml = (value: string) =>
+  value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
 
 const createProjectVisual = ({
   index,
@@ -16,6 +68,14 @@ const createProjectVisual = ({
   palette,
   phase,
   metric,
+}: {
+  index: string;
+  title: string;
+  location: string;
+  category: string;
+  palette: Project["palette"];
+  phase: string;
+  metric: string;
 }) => {
   const [deep, dark, mid, accent, glow] = palette;
   const svg = `
@@ -25,74 +85,65 @@ const createProjectVisual = ({
       <defs>
         <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="${deep}" />
-          <stop offset="45%" stop-color="${dark}" />
+          <stop offset="46%" stop-color="${dark}" />
           <stop offset="100%" stop-color="${mid}" />
         </linearGradient>
         <linearGradient id="line" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="${accent}" stop-opacity="0.1" />
-          <stop offset="50%" stop-color="${accent}" stop-opacity="0.78" />
+          <stop offset="0%" stop-color="${accent}" stop-opacity="0.08" />
+          <stop offset="50%" stop-color="${accent}" stop-opacity="0.84" />
           <stop offset="100%" stop-color="${accent}" stop-opacity="0.12" />
         </linearGradient>
         <radialGradient id="glow" cx="72%" cy="18%" r="48%">
-          <stop offset="0%" stop-color="${glow}" stop-opacity="0.38" />
+          <stop offset="0%" stop-color="${glow}" stop-opacity="0.4" />
           <stop offset="100%" stop-color="${glow}" stop-opacity="0" />
         </radialGradient>
-        <filter id="soft">
-          <feGaussianBlur stdDeviation="18" />
-        </filter>
+        <filter id="soft"><feGaussianBlur stdDeviation="22" /></filter>
       </defs>
-
-      <rect width="1600" height="900" rx="40" fill="url(#bg)" />
-      <rect width="1600" height="900" rx="40" fill="url(#glow)" />
-
-      <g opacity="0.28">
+      <rect width="1600" height="900" rx="42" fill="url(#bg)" />
+      <rect width="1600" height="900" rx="42" fill="url(#glow)" />
+      <g opacity="0.26">
         <path d="M-80 184C130 110 280 122 430 166C580 210 714 252 922 224C1130 196 1318 90 1680 146" fill="none" stroke="${accent}" stroke-width="2"/>
         <path d="M-40 282C162 208 336 228 486 274C636 320 766 354 962 336C1158 318 1324 242 1670 268" fill="none" stroke="${accent}" stroke-width="2"/>
         <path d="M-90 388C142 312 304 334 468 390C632 446 790 486 1000 462C1210 438 1362 366 1700 410" fill="none" stroke="${accent}" stroke-width="2"/>
         <path d="M-60 516C186 454 334 476 510 534C686 592 850 626 1050 610C1250 594 1390 542 1710 596" fill="none" stroke="${accent}" stroke-width="2"/>
         <path d="M-60 654C170 602 332 626 502 684C672 742 856 778 1080 754C1304 730 1436 688 1700 732" fill="none" stroke="${accent}" stroke-width="2"/>
       </g>
-
-      <g opacity="0.12">
+      <g opacity="0.11">
         <path d="M110 118h1380v664H110z" fill="none" stroke="#ffffff" stroke-width="2"/>
         <path d="M230 182v518M410 182v518M590 182v518M770 182v518M950 182v518M1130 182v518M1310 182v518" fill="none" stroke="#ffffff" stroke-width="1"/>
         <path d="M110 278h1380M110 438h1380M110 598h1380" fill="none" stroke="#ffffff" stroke-width="1"/>
       </g>
-
-      <g opacity="0.85">
+      <g opacity="0.9">
         <path d="M316 242L590 214L864 278L1008 250L1258 330L1126 608L864 674L620 614L360 642L250 452Z" fill="${accent}" fill-opacity="0.12" stroke="${accent}" stroke-width="4"/>
         <path d="M330 256L562 236L830 294L982 270L1214 338" fill="none" stroke="${accent}" stroke-width="5"/>
         <path d="M302 444L482 422L650 478L864 446L1030 494L1182 470" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.62"/>
         <circle cx="864" cy="446" r="12" fill="${accent}" />
         <circle cx="1126" cy="608" r="10" fill="#ffffff" fill-opacity="0.72" />
       </g>
-
       <g transform="translate(124,118)">
-        <text x="0" y="0" fill="${accent}" font-size="28" font-family="Manrope, Arial, sans-serif" font-weight="800" letter-spacing="8">${escapeXml(
+        <text x="0" y="0" fill="${accent}" font-size="28" font-family="Inter, Arial, sans-serif" font-weight="800" letter-spacing="8">${escapeXml(
           category.toUpperCase()
         )}</text>
-        <text x="0" y="86" fill="#f5f3ef" font-size="78" font-family="Georgia, serif" font-weight="700">${escapeXml(
+        <text x="0" y="86" fill="#f8f3e8" font-size="74" font-family="Georgia, serif" font-weight="700">${escapeXml(
           title
         )}</text>
-        <text x="0" y="138" fill="#d7dfd9" font-size="28" font-family="Manrope, Arial, sans-serif">${escapeXml(
+        <text x="0" y="138" fill="#d7dfd9" font-size="28" font-family="Inter, Arial, sans-serif">${escapeXml(
           location
         )}</text>
       </g>
-
       <g transform="translate(1166,120)">
-        <rect width="274" height="180" rx="28" fill="#0d1712" fill-opacity="0.56" stroke="#ffffff" stroke-opacity="0.18"/>
-        <text x="28" y="46" fill="#f3ebd6" font-size="18" font-family="Manrope, Arial, sans-serif" font-weight="800" letter-spacing="4">PROJETO ${escapeXml(
+        <rect width="274" height="180" rx="28" fill="#0d1712" fill-opacity="0.58" stroke="#ffffff" stroke-opacity="0.18"/>
+        <text x="28" y="46" fill="#f3ebd6" font-size="18" font-family="Inter, Arial, sans-serif" font-weight="800" letter-spacing="4">PROJETO ${escapeXml(
           index
         )}</text>
-        <text x="28" y="92" fill="#ffffff" font-size="18" font-family="Manrope, Arial, sans-serif">Fase</text>
-        <text x="28" y="124" fill="${accent}" font-size="34" font-family="Manrope, Arial, sans-serif" font-weight="800">${escapeXml(
+        <text x="28" y="92" fill="#ffffff" font-size="18" font-family="Inter, Arial, sans-serif">Fase</text>
+        <text x="28" y="124" fill="${accent}" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="800">${escapeXml(
           phase
         )}</text>
-        <text x="28" y="160" fill="#d7dfd9" font-size="18" font-family="Manrope, Arial, sans-serif">${escapeXml(
+        <text x="28" y="160" fill="#d7dfd9" font-size="18" font-family="Inter, Arial, sans-serif">${escapeXml(
           metric
         )}</text>
       </g>
-
       <rect x="124" y="724" width="1320" height="1" fill="url(#line)" />
       <circle cx="1306" cy="222" r="88" fill="${accent}" fill-opacity="0.18" filter="url(#soft)" />
     </svg>
@@ -101,7 +152,7 @@ const createProjectVisual = ({
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 };
 
-const createGallery = (project) => [
+const createGallery = (project: Project) => [
   project.coverImage,
   createProjectVisual({
     index: project.id,
@@ -123,7 +174,7 @@ const createGallery = (project) => [
   }),
 ];
 
-const baseProjects = [
+const baseProjects: BaseProject[] = [
   {
     id: "PT-001",
     slug: "sitio-santa-rita-usucapiao",
@@ -132,17 +183,16 @@ const baseProjects = [
     category: "Usucapião",
     serviceType: "Levantamento para usucapião",
     shortDescription:
-      "Levantamento técnico e consolidação documental para instrução de regularização possessória em área mista.",
+      "Levantamento técnico e consolidação documental para regularização possessória em área mista.",
     fullDescription:
       "Projeto estruturado para apoiar o processo de usucapião, com leitura topográfica do perímetro, organização das informações territoriais e preparação técnica da documentação necessária para instrução jurídica com mais clareza.",
     status: "Concluído",
     year: "2026",
     areaLabel: "18,4 ha",
-    modelReadyLabel: "Pronto para mídia 3D",
+    modelReadyLabel: "Preparado para mídia 3D",
     has3dModel: false,
-    model3dUrl: "",
     viewerHint:
-      "Este projeto está configurado para exibir imagens técnicas. Basta informar um arquivo .glb ou .gltf no campo model3dUrl para ativar o visualizador 3D.",
+      "Este projeto exibe imagens técnicas. Um arquivo .glb pode ser incorporado futuramente sem alterar a experiência do catálogo.",
     summary: [
       { label: "Serviço", value: "Usucapião" },
       { label: "Área", value: "18,4 ha" },
@@ -172,7 +222,7 @@ const baseProjects = [
     category: "Georreferenciamento urbano",
     serviceType: "Georreferenciamento urbano",
     shortDescription:
-      "Atualização cadastral e georreferenciamento em loteamento urbano, com foco em precisão posicional e compatibilização cartorial.",
+      "Atualização cadastral e georreferenciamento em loteamento urbano, com foco em precisão posicional.",
     fullDescription:
       "Projeto voltado à atualização cadastral de um conjunto urbano, com conferência de limites, leitura territorial precisa e padronização das entregas técnicas para apoiar regularização, cadastro e tomada de decisão com segurança.",
     status: "Entregue",
@@ -180,9 +230,8 @@ const baseProjects = [
     areaLabel: "42 lotes",
     modelReadyLabel: "Pipeline 3D preparado",
     has3dModel: true,
-    model3dUrl: "",
     viewerHint:
-      "A área de visualização aceita modelos .glb ou .gltf. Nesta demonstração, exibimos o fallback estático premium para manter a experiência consistente.",
+      "A área de visualização aceita modelos .glb ou .gltf. Nesta seleção, a galeria técnica mantém a experiência estável.",
     summary: [
       { label: "Serviço", value: "Georreferenciamento urbano" },
       { label: "Escala", value: "42 lotes" },
@@ -192,7 +241,7 @@ const baseProjects = [
     technicalInfo: [
       { label: "Escopo", value: "Atualização cadastral e consolidação de base urbana" },
       { label: "Precisão", value: "Referenciamento posicional para conferência de limites" },
-      { label: "Compatibilização", value: "Ajuste de informações para leitura técnica e documental" },
+      { label: "Compatibilização", value: "Ajuste de informações para leitura documental" },
       { label: "Visualização", value: "Pronto para incorporar modelo 3D do conjunto" },
     ],
     deliverables: [
@@ -212,7 +261,7 @@ const baseProjects = [
     category: "Georreferenciamento rural",
     serviceType: "Georreferenciamento rural",
     shortDescription:
-      "Leitura territorial e organização técnica do imóvel rural para delimitação precisa e estruturação das informações georreferenciadas.",
+      "Leitura territorial e organização técnica do imóvel rural para delimitação precisa.",
     fullDescription:
       "Desenvolvido para consolidar uma base territorial confiável em área rural, este projeto reuniu levantamento, organização das referências espaciais e padronização dos dados para fortalecer o controle técnico do imóvel.",
     status: "Concluído",
@@ -220,7 +269,6 @@ const baseProjects = [
     areaLabel: "126 ha",
     modelReadyLabel: "Pronto para modelo 3D",
     has3dModel: true,
-    model3dUrl: "",
     viewerHint:
       "Quando o arquivo 3D estiver disponível, este espaço passa a exibir rotação, zoom e enquadramento do modelo sem alterar o restante da interface.",
     summary: [
@@ -252,7 +300,7 @@ const baseProjects = [
     category: "Levantamento topográfico",
     serviceType: "Levantamento topográfico planialtimétrico",
     shortDescription:
-      "Levantamento planialtimétrico para apoio à implantação, compatibilização técnica e leitura refinada do terreno.",
+      "Levantamento planialtimétrico para implantação, compatibilização técnica e leitura refinada do terreno.",
     fullDescription:
       "Projeto conduzido para organizar as informações topográficas de um condomínio em expansão, permitindo leitura clara da área, planejamento técnico e visão consolidada das condições do terreno para as próximas etapas de implantação.",
     status: "Em portfólio",
@@ -260,7 +308,7 @@ const baseProjects = [
     areaLabel: "11,7 ha",
     modelReadyLabel: "Modelo 3D publicado",
     has3dModel: true,
-    model3dUrl: "./ex3d.glb",
+    model3dUrl: "/ex3d.glb",
     modelBadgeLabel: "Topografia 3D",
     modelCtaLabel: "Ver topografia 3D",
     modelSupportText: "Modelo demonstrativo de visualização topográfica em 3D.",
@@ -273,7 +321,7 @@ const baseProjects = [
       maxCameraOrbit: "auto 88deg auto",
     },
     viewerHint:
-      "Este case já conta com um modelo .glb publicado, com abertura refinada, rotação, zoom e fallback seguro para a visualização técnica.",
+      "Este case já conta com um modelo .glb publicado, com rotação, zoom e fallback seguro para visualização técnica.",
     summary: [
       { label: "Serviço", value: "Levantamento topográfico" },
       { label: "Área", value: "11,7 ha" },
@@ -303,7 +351,7 @@ const baseProjects = [
     category: "Regularização de área",
     serviceType: "Regularização de área",
     shortDescription:
-      "Estruturação técnica de informações territoriais e documentais para regularização de uma gleba com múltiplos recortes.",
+      "Estruturação técnica de informações territoriais e documentais para regularização de uma gleba.",
     fullDescription:
       "Neste projeto, a Plano & Terra organizou a leitura territorial de uma gleba com recortes distintos, consolidando informações técnicas, visualização clara das áreas e suporte para comunicação documental de forma objetiva.",
     status: "Concluído",
@@ -311,7 +359,6 @@ const baseProjects = [
     areaLabel: "32,8 ha",
     modelReadyLabel: "Pronto para mídia complementar",
     has3dModel: false,
-    model3dUrl: "",
     viewerHint:
       "O componente já suporta mídia 3D e permanece estável com imagens estáticas quando o modelo não for necessário.",
     summary: [
@@ -343,7 +390,7 @@ const baseProjects = [
     category: "Georreferenciamento urbano",
     serviceType: "Atualização cadastral e georreferenciamento urbano",
     shortDescription:
-      "Revisão de malha urbana e consolidação de informações para atualização cadastral, com apresentação técnica contemporânea.",
+      "Revisão de malha urbana e consolidação de informações para atualização cadastral.",
     fullDescription:
       "Projeto urbano estruturado para revisar a malha cadastral de um bairro em expansão, com foco em leitura precisa dos limites, organização espacial e apresentação visual que facilite análise técnica e comercial.",
     status: "Entregue",
@@ -351,7 +398,6 @@ const baseProjects = [
     areaLabel: "58 frentes",
     modelReadyLabel: "Pipeline 3D preparado",
     has3dModel: true,
-    model3dUrl: "",
     viewerHint:
       "O modal está pronto para receber um modelo tridimensional do bairro, mantendo lazy load, loading state elegante e fallback estático.",
     summary: [
@@ -377,7 +423,7 @@ const baseProjects = [
   },
 ];
 
-const projects = baseProjects.map((project) => {
+export const projects: Project[] = baseProjects.map((project) => {
   const coverImage = createProjectVisual({
     index: project.id,
     title: project.title,
@@ -388,29 +434,27 @@ const projects = baseProjects.map((project) => {
     metric: project.areaLabel,
   });
 
-  const projectWithMedia = {
+  const projectWithCover = {
     ...project,
     coverImage,
-  };
+  } as Project;
 
   return {
-    ...projectWithMedia,
-    gallery: createGallery(projectWithMedia),
+    ...projectWithCover,
+    gallery: createGallery(projectWithCover),
   };
 });
 
-const projectCategories = [
+export const projectCategories = [
   "Todos",
-  ...new Set(projects.map((project) => project.category)),
+  ...Array.from(new Set(projects.map((project) => project.category))),
 ];
 
-const buildProjectWhatsappLink = (project) =>
-  `${WHATSAPP_BASE}${encodeURIComponent(
-    `Olá, gostaria de falar sobre o projeto ${project.title} da Plano & Terra.`
-  )}`;
+export const featuredProjects = projects.slice(0, 4);
 
-window.PlanoTerraProjectsData = {
-  buildProjectWhatsappLink,
-  projectCategories,
-  projects,
-};
+export const hasPublished3D = (project: Project) =>
+  Boolean(project.has3dModel && project.model3dUrl);
+
+export const buildProjectWhatsappLink = (project: Project) =>
+  whatsappLink(`Olá, gostaria de falar sobre o projeto ${project.title} da Plano & Terra.`);
+
