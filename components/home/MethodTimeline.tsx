@@ -1,7 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { useRef, useState } from "react";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "motion/react";
 import { methodSteps } from "@/data/content";
 import { motionDurations, premiumEase, revealViewport } from "@/lib/motion";
 
@@ -109,11 +117,40 @@ function StepIcon({ type }: { type: TimelineIcon }) {
 }
 
 export function MethodTimeline() {
-  const [activeStep, setActiveStep] = useState<number | null>(null);
+  const timelineRef = useRef<HTMLDivElement | null>(null);
+  const [selectedStep, setSelectedStep] = useState<number | null>(null);
+  const [scrollStep, setScrollStep] = useState(0);
   const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 68%", "end 42%"],
+  });
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 28,
+    mass: 0.42,
+  });
+  const progressDotY = useTransform(smoothProgress, [0, 1], ["2%", "98%"]);
+
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    if (reduceMotion) {
+      return;
+    }
+
+    if (value < 0.34) {
+      setScrollStep(0);
+    } else if (value < 0.68) {
+      setScrollStep(1);
+    } else {
+      setScrollStep(2);
+    }
+  });
+
+  const visualActiveStep = selectedStep ?? scrollStep;
 
   return (
     <motion.div
+      ref={timelineRef}
       className="relative mt-16 lg:mt-20"
       initial={reduceMotion ? false : "hidden"}
       whileInView="visible"
@@ -127,19 +164,28 @@ export function MethodTimeline() {
         },
       }}
     >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-2 left-5 top-1 z-0 w-px bg-[linear-gradient(to_bottom,transparent,rgba(31,68,49,.18)_9%,rgba(31,68,49,.2)_50%,rgba(31,68,49,.18)_91%,transparent)] lg:left-1/2 lg:-translate-x-1/2"
+      />
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-2 left-5 top-1 z-0 w-px origin-top bg-[linear-gradient(to_bottom,transparent,rgba(31,68,49,.28)_12%,rgba(31,68,49,.34)_50%,rgba(31,68,49,.28)_88%,transparent)] lg:left-1/2 lg:-translate-x-1/2"
-        initial={reduceMotion ? false : { scaleY: 0, opacity: 0 }}
-        whileInView={{ scaleY: 1, opacity: 1 }}
-        viewport={revealViewport}
-        transition={{ duration: 1.1, ease: premiumEase }}
+        style={{ scaleY: reduceMotion ? 1 : smoothProgress }}
+        className="pointer-events-none absolute bottom-2 left-5 top-1 z-[1] w-px origin-top bg-[linear-gradient(to_bottom,rgba(214,182,122,0),rgba(31,68,49,.68)_12%,rgba(214,182,122,.62)_58%,rgba(31,68,49,.52))] shadow-[0_0_18px_rgba(31,68,49,.12)] lg:left-1/2 lg:-translate-x-1/2"
       />
+      {!reduceMotion ? (
+        <motion.span
+          aria-hidden="true"
+          style={{ top: progressDotY }}
+          className="pointer-events-none absolute left-5 z-[2] h-2 w-2 -translate-x-[3.5px] rounded-full border border-mineral-200/40 bg-mineral-200/70 shadow-[0_0_18px_rgba(214,182,122,.28)] lg:left-1/2 lg:-translate-x-1/2"
+        />
+      ) : null}
 
       <div className="relative z-10 grid gap-12 lg:gap-7">
         {methodSteps.map((step, index) => {
           const detail = timelineDetails[index];
-          const active = activeStep === index;
+          const active = visualActiveStep === index;
+          const selected = selectedStep === index;
           const cardColumn =
             detail.side === "left" ? "lg:col-start-1" : "lg:col-start-3";
           const panelColumn =
@@ -157,7 +203,9 @@ export function MethodTimeline() {
             >
               <motion.div
                 aria-hidden="true"
-                className="absolute left-5 top-6 h-px w-8 origin-left bg-gradient-to-r from-forest-800/30 to-transparent lg:hidden"
+                className={`absolute left-5 top-6 h-px w-8 origin-left bg-gradient-to-r to-transparent lg:hidden ${
+                  active ? "from-forest-800/42" : "from-forest-800/24"
+                }`}
                 initial={reduceMotion ? false : { scaleX: 0, opacity: 0 }}
                 whileInView={{ scaleX: 1, opacity: 1 }}
                 viewport={revealViewport}
@@ -170,7 +218,9 @@ export function MethodTimeline() {
 
               <motion.div
                 aria-hidden="true"
-                className={`absolute top-1/2 hidden h-px w-12 bg-gradient-to-r from-transparent via-forest-800/28 to-transparent lg:block ${
+                className={`absolute top-1/2 hidden h-px w-12 bg-gradient-to-r from-transparent to-transparent lg:block ${
+                  active ? "via-forest-800/42" : "via-forest-800/24"
+                } ${
                   detail.side === "left"
                     ? "right-[calc(50%+1.35rem)] origin-right"
                     : "left-[calc(50%+1.35rem)] origin-left"
@@ -187,13 +237,20 @@ export function MethodTimeline() {
 
               <motion.div
                 className="absolute left-0 top-1 z-20 flex h-10 w-10 items-center justify-center lg:static lg:col-start-2 lg:row-start-1 lg:mx-auto lg:h-11 lg:w-11"
-                whileHover={reduceMotion ? undefined : { scale: 1.03 }}
+                animate={
+                  reduceMotion
+                    ? undefined
+                    : {
+                        scale: active ? 1.06 : 1,
+                      }
+                }
+                whileHover={reduceMotion ? undefined : { scale: 1.08 }}
                 transition={{ duration: motionDurations.short, ease: premiumEase }}
               >
                 <div
                   className={`relative grid h-full w-full place-items-center rounded-full border backdrop-blur ${
                     active
-                      ? "border-forest-700/28 bg-white text-forest-800 shadow-[0_12px_34px_rgba(8,10,9,.10)]"
+                      ? "border-forest-700/32 bg-white text-forest-800 shadow-[0_14px_38px_rgba(31,68,49,.16)]"
                       : "border-ink-950/10 bg-mineral-50/88 text-ink-600 shadow-[0_10px_28px_rgba(8,10,9,.06)]"
                   }`}
                 >
@@ -218,9 +275,17 @@ export function MethodTimeline() {
 
               <motion.button
                 type="button"
-                aria-expanded={active}
+                aria-expanded={selected}
                 aria-controls={`method-popover-${step.number}`}
-                onClick={() => setActiveStep(active ? null : index)}
+                onClick={() => setSelectedStep(selected ? null : index)}
+                animate={
+                  reduceMotion
+                    ? undefined
+                    : {
+                        opacity: active ? 1 : 0.68,
+                        y: active ? -2 : 0,
+                      }
+                }
                 whileHover={
                   reduceMotion
                     ? undefined
@@ -253,10 +318,10 @@ export function MethodTimeline() {
                   {detail.shortDescription}
                 </p>
                 <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-forest-700">
-                  {active ? "ocultar etapa" : "ver etapa"}
+                  {selected ? "ocultar etapa" : "ver etapa"}
                   <motion.span
                     aria-hidden="true"
-                    animate={active ? { rotate: 45 } : { rotate: 0 }}
+                    animate={selected ? { rotate: 45 } : { rotate: 0 }}
                     transition={{
                       duration: motionDurations.short,
                       ease: premiumEase,
@@ -268,7 +333,7 @@ export function MethodTimeline() {
               </motion.button>
 
               <AnimatePresence>
-                {active ? (
+                {selected ? (
                   <motion.aside
                     id={`method-popover-${step.number}`}
                     initial={
@@ -307,7 +372,7 @@ export function MethodTimeline() {
                       <button
                         type="button"
                         aria-label="Fechar detalhe da etapa"
-                        onClick={() => setActiveStep(null)}
+                        onClick={() => setSelectedStep(null)}
                         className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-mineral-100 transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mineral-300"
                       >
                         <span aria-hidden="true">×</span>
