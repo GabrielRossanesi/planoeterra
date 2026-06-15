@@ -1,4 +1,4 @@
-﻿import { primaryWhatsappLink, whatsappLink } from "@/lib/site";
+import { primaryWhatsappLink, whatsappLink } from "@/lib/site";
 
 export const methodSteps = [
   {
@@ -78,9 +78,9 @@ export const capabilities = [
       "Posicionamento confiável para delimitação, conferências em campo e bases georreferenciadas.",
   },
   {
-    title: "Material técnico final",
+    title: "Documentação final",
     description:
-      "Peças gráficas, memoriais e documentação organizados para reduzir ruído na análise.",
+      "Plantas, memoriais descritivos e laudos técnicos organizados de acordo com as normas para aprovação ágil.",
   },
 ];
 

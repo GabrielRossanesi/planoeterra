@@ -1,8 +1,8 @@
-﻿"use client";
+"use client";
 
 import { useMemo, useState } from "react";
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
-import { projectCategories, projects, Project } from "@/data/projects";
+import { projects, Project } from "@/data/projects";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { ProjectFilters } from "@/components/projects/ProjectFilters";
 import { ProjectModal } from "@/components/projects/ProjectModal";
@@ -10,17 +10,40 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { premiumEase } from "@/lib/motion";
 
+const filterCategories = [
+  "Todos",
+  "Usucapião",
+  "Georreferenciamento",
+  "Levantamento topográfico",
+  "Drone/RTK",
+  "Projetos com 3D",
+];
+
 export function ProjectsCatalog() {
   const [activeCategory, setActiveCategory] = useState("Todos");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [initialVisual, setInitialVisual] = useState<"image" | "3d">("image");
 
   const filteredProjects = useMemo(() => {
-    if (activeCategory === "Todos") {
-      return projects;
+    if (activeCategory === "Todos") return projects;
+    if (activeCategory === "Usucapião") {
+      return projects.filter((p) => p.category === "Usucapião");
     }
-
-    return projects.filter((project) => project.category === activeCategory);
+    if (activeCategory === "Georreferenciamento") {
+      return projects.filter((p) =>
+        p.category.toLowerCase().includes("georreferenciamento")
+      );
+    }
+    if (activeCategory === "Levantamento topográfico") {
+      return projects.filter((p) => p.category === "Levantamento topográfico");
+    }
+    if (activeCategory === "Drone/RTK") {
+      return projects.filter((p) => p.usesDroneRTK);
+    }
+    if (activeCategory === "Projetos com 3D") {
+      return projects.filter((p) => p.has3dModel);
+    }
+    return projects;
   }, [activeCategory]);
 
   const openProject = (project: Project, visual: "image" | "3d" = "image") => {
@@ -68,7 +91,7 @@ export function ProjectsCatalog() {
                 </div>
               </div>
               <ProjectFilters
-                categories={projectCategories}
+                categories={filterCategories}
                 activeCategory={activeCategory}
                 onChange={setActiveCategory}
               />

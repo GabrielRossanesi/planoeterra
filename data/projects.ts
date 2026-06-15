@@ -1,4 +1,4 @@
-﻿import { whatsappLink } from "@/lib/site";
+import { whatsappLink } from "@/lib/site";
 
 import { withBasePath } from "@/lib/site";
 
@@ -37,6 +37,7 @@ export type Project = {
   areaLabel: string;
   modelReadyLabel: string;
   has3dModel: boolean;
+  usesDroneRTK: boolean;
   model3dUrl?: string;
   modelBadgeLabel?: string;
   modelCtaLabel?: string;
@@ -122,29 +123,12 @@ const createProjectVisual = ({
         <circle cx="864" cy="446" r="12" fill="${accent}" />
         <circle cx="1126" cy="608" r="10" fill="#ffffff" fill-opacity="0.72" />
       </g>
-      <g transform="translate(124,118)">
-        <text x="0" y="0" fill="${accent}" font-size="28" font-family="Inter, Arial, sans-serif" font-weight="800" letter-spacing="8">${escapeXml(
-          category.toUpperCase()
-        )}</text>
-        <text x="0" y="86" fill="#f8f3e8" font-size="74" font-family="Georgia, serif" font-weight="700">${escapeXml(
-          title
-        )}</text>
-        <text x="0" y="138" fill="#d7dfd9" font-size="28" font-family="Inter, Arial, sans-serif">${escapeXml(
-          location
-        )}</text>
-      </g>
-      <g transform="translate(1166,120)">
-        <rect width="274" height="180" rx="28" fill="#0d1712" fill-opacity="0.58" stroke="#ffffff" stroke-opacity="0.18"/>
-        <text x="28" y="46" fill="#f3ebd6" font-size="18" font-family="Inter, Arial, sans-serif" font-weight="800" letter-spacing="4">PROJETO ${escapeXml(
-          index
-        )}</text>
-        <text x="28" y="92" fill="#ffffff" font-size="18" font-family="Inter, Arial, sans-serif">Fase</text>
-        <text x="28" y="124" fill="${accent}" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="800">${escapeXml(
-          phase
-        )}</text>
-        <text x="28" y="160" fill="#d7dfd9" font-size="18" font-family="Inter, Arial, sans-serif">${escapeXml(
-          metric
-        )}</text>
+      <!-- Coordenadas e marcações técnicas (CAD/GIS) -->
+      <g opacity="0.35" font-family="monospace" font-size="12" fill="#ffffff">
+        <text x="120" y="148">SISTEMA: UTM / SIRGAS 2000</text>
+        <text x="120" y="172">REF: N 7.420.000m / E 324.500m</text>
+        <text x="120" y="196">FUSO: 23S / ESCALA: 1:1.250</text>
+        <text x="1480" y="148" text-anchor="end">CONFORMIDADE TÉCNICA E LEGAL</text>
       </g>
       <rect x="124" y="724" width="1320" height="1" fill="url(#line)" />
       <circle cx="1306" cy="222" r="88" fill="${accent}" fill-opacity="0.18" filter="url(#soft)" />
@@ -185,14 +169,15 @@ const baseProjects: BaseProject[] = [
     category: "Usucapião",
     serviceType: "Levantamento para usucapião",
     shortDescription:
-      "Levantamento técnico e consolidação documental para regularização possessória em área mista.",
+      "Levantamento de limites e consolidação de documentos técnicos para regularização de usucapião.",
     fullDescription:
-      "Projeto estruturado para apoiar o processo de usucapião, com leitura topográfica do perímetro, organização das informações territoriais e preparação técnica da documentação necessária para instrução jurídica com mais clareza.",
+      "Desenvolvimento de peças técnicas completas para instrução de processo de usucapião. Realizamos a medição precisa do perímetro, identificação de confrontantes e elaboração de plantas e memorial descritivo exigidos legalmente para garantir a regularização da propriedade.",
     status: "Concluído",
     year: "2026",
     areaLabel: "18,4 ha",
     modelReadyLabel: "Preparado para mídia 3D",
     has3dModel: false,
+    usesDroneRTK: true,
     viewerHint:
       "Este projeto exibe imagens técnicas. Um arquivo .glb pode ser incorporado futuramente sem alterar a experiência do catálogo.",
     summary: [
@@ -202,10 +187,10 @@ const baseProjects: BaseProject[] = [
       { label: "Status", value: "Concluído" },
     ],
     technicalInfo: [
-      { label: "Escopo", value: "Perímetro, confrontações e peças técnicas de apoio" },
-      { label: "Base", value: "Levantamento planialtimétrico com organização territorial" },
-      { label: "Documentação", value: "Memorial descritivo e peças gráficas de suporte" },
-      { label: "Entrega", value: "Material técnico preparado para instrução do processo" },
+      { label: "Escopo", value: "Demarcação de perímetro, identificação de confrontantes e memorial" },
+      { label: "Base", value: "Levantamento planialtimétrico de alta precisão" },
+      { label: "Documentação", value: "Memorial descritivo e plantas técnicas oficiais (exigência cartorial)" },
+      { label: "Entrega", value: "Dossiê técnico completo para o processo judicial ou extrajudicial" },
     ],
     deliverables: [
       "Levantamento do perímetro, com conferência de confrontações",
@@ -224,14 +209,15 @@ const baseProjects: BaseProject[] = [
     category: "Georreferenciamento urbano",
     serviceType: "Georreferenciamento urbano",
     shortDescription:
-      "Atualização cadastral e georreferenciamento em loteamento urbano, com foco em precisão posicional.",
+      "Georreferenciamento e demarcação de divisas para loteamento urbano com alta precisão.",
     fullDescription:
-      "Projeto voltado à atualização cadastral de um conjunto urbano, com conferência de limites, leitura territorial precisa e padronização das entregas técnicas para apoiar regularização, cadastro e tomada de decisão com segurança.",
+      "Serviço de georreferenciamento aplicado a loteamento urbano para atualização de cadastro imobiliário. Realizamos a determinação precisa de coordenadas geográficas de cada divisa, garantindo a conformidade legal do empreendimento frente às exigências municipais e cartoriais.",
     status: "Entregue",
     year: "2025",
     areaLabel: "42 lotes",
     modelReadyLabel: "Pipeline 3D preparado",
     has3dModel: true,
+    usesDroneRTK: true,
     viewerHint:
       "A área de visualização aceita modelos .glb ou .gltf. Nesta seleção, a galeria técnica mantém a experiência estável.",
     summary: [
@@ -241,8 +227,8 @@ const baseProjects: BaseProject[] = [
       { label: "Status", value: "Entregue" },
     ],
     technicalInfo: [
-      { label: "Escopo", value: "Atualização cadastral e consolidação de base urbana" },
-      { label: "Precisão", value: "Referenciamento posicional para conferência de limites" },
+      { label: "Escopo", value: "Georreferenciamento de lotes e atualização cadastral" },
+      { label: "Precisão", value: "Coordenadas certificadas para segurança jurídica e cadastral" },
       { label: "Compatibilização", value: "Ajuste de informações para leitura documental" },
       { label: "Visualização", value: "Pronto para incorporar modelo 3D do conjunto" },
     ],
@@ -263,14 +249,15 @@ const baseProjects: BaseProject[] = [
     category: "Georreferenciamento rural",
     serviceType: "Georreferenciamento rural",
     shortDescription:
-      "Leitura territorial e organização técnica do imóvel rural para delimitação precisa.",
+      "Georreferenciamento rural completo e certificação de limites territoriais.",
     fullDescription:
-      "Desenvolvido para consolidar uma base territorial confiável em área rural, este projeto reuniu levantamento, organização das referências espaciais e padronização dos dados para fortalecer o controle técnico do imóvel.",
+      "Medição técnica de imóvel rural para certificação de limites junto ao INCRA (SIGEF). Realizamos a determinação precisa do perímetro rural e confrontações utilizando tecnologia GNSS/RTK para garantir a regularização cadastral e segurança jurídica da propriedade.",
     status: "Concluído",
     year: "2026",
     areaLabel: "126 ha",
     modelReadyLabel: "Pronto para modelo 3D",
     has3dModel: true,
+    usesDroneRTK: true,
     viewerHint:
       "Quando o arquivo 3D estiver disponível, este espaço passa a exibir rotação, zoom e enquadramento do modelo sem alterar o restante da interface.",
     summary: [
@@ -280,8 +267,8 @@ const baseProjects: BaseProject[] = [
       { label: "Status", value: "Concluído" },
     ],
     technicalInfo: [
-      { label: "Escopo", value: "Perímetro rural com leitura territorial consolidada" },
-      { label: "Organização", value: "Base georreferenciada para gestão técnica do imóvel" },
+      { label: "Escopo", value: "Demarcação de divisas rurais e marcos georreferenciados" },
+      { label: "Organização", value: "Integração com o SIGEF/INCRA para certificação de área" },
       { label: "Entregas", value: "Peças visuais e síntese documental do projeto" },
       { label: "Mídia", value: "Compatível com apresentação 3D e fallback estático" },
     ],
@@ -302,14 +289,15 @@ const baseProjects: BaseProject[] = [
     category: "Levantamento topográfico",
     serviceType: "Levantamento topográfico planialtimétrico",
     shortDescription:
-      "Levantamento planialtimétrico para implantação, compatibilização técnica e leitura refinada do terreno.",
+      "Levantamento planialtimétrico para projetos e obras de implantação de condomínio.",
     fullDescription:
-      "Projeto conduzido para organizar as informações topográficas de um condomínio em expansão, permitindo leitura clara da área, planejamento técnico e visão consolidada das condições do terreno para as próximas etapas de implantação.",
+      "Mapeamento topográfico planialtimétrico detalhado para subsidiar projetos de engenharia, terraplenagem e implantação de infraestrutura. A precisão do levantamento assegura o cálculo correto de volumes de corte/aterro e previne erros dispendiosos na execução da obra.",
     status: "Em portfólio",
     year: "2025",
     areaLabel: "11,7 ha",
     modelReadyLabel: "Modelo 3D publicado",
     has3dModel: true,
+    usesDroneRTK: true,
     model3dUrl: withBasePath("/ex3d.glb"),
     modelBadgeLabel: "Topografia 3D",
     modelCtaLabel: "Ver topografia 3D",
@@ -331,9 +319,9 @@ const baseProjects: BaseProject[] = [
       { label: "Status", value: "Em portfólio" },
     ],
     technicalInfo: [
-      { label: "Escopo", value: "Planialtimetria para suporte de implantação" },
-      { label: "Leitura", value: "Camadas técnicas organizadas para interpretação rápida" },
-      { label: "Uso", value: "Apoio ao planejamento e compatibilização de projeto" },
+      { label: "Escopo", value: "Levantamento planialtimétrico detalhado com curvas de nível" },
+      { label: "Leitura", value: "Perfil do relevo e mapeamento de árvores/elementos existentes" },
+      { label: "Uso", value: "Cálculo de terraplenagem, projetos de drenagem e arruamento" },
       { label: "Mídia", value: "Galeria premium com viewer 3D publicado" },
     ],
     deliverables: [
@@ -353,14 +341,15 @@ const baseProjects: BaseProject[] = [
     category: "Regularização de área",
     serviceType: "Regularização de área",
     shortDescription:
-      "Estruturação técnica de informações territoriais e documentais para regularização de uma gleba.",
+      "Estudo topográfico e divisão amigável de gleba de terra para regularização.",
     fullDescription:
-      "Neste projeto, a Plano & Terra organizou a leitura territorial de uma gleba com recortes distintos, consolidando informações técnicas, visualização clara das áreas e suporte para comunicação documental de forma objetiva.",
+      "Elaboração de estudo topográfico e peças técnicas para desmembramento e regularização de gleba de terra. O projeto mapeou as divisões internas e gerou relatórios técnicos que amparam a aprovação legal nos órgãos públicos e cartórios competentes.",
     status: "Concluído",
     year: "2026",
     areaLabel: "32,8 ha",
     modelReadyLabel: "Pronto para mídia complementar",
     has3dModel: false,
+    usesDroneRTK: false,
     viewerHint:
       "O componente já suporta mídia 3D e permanece estável com imagens estáticas quando o modelo não for necessário.",
     summary: [
@@ -370,8 +359,8 @@ const baseProjects: BaseProject[] = [
       { label: "Status", value: "Concluído" },
     ],
     technicalInfo: [
-      { label: "Escopo", value: "Regularização com leitura de recortes e limites" },
-      { label: "Apoio", value: "Síntese técnica para alinhamento documental" },
+      { label: "Escopo", value: "Mapeamento de divisas internas e áreas de preservação" },
+      { label: "Apoio", value: "Laudo técnico para desmembramento e retificação de área" },
       { label: "Organização", value: "Estrutura visual para comunicar cenários de área" },
       { label: "Entrega", value: "Material técnico com linguagem clara e rastreável" },
     ],
@@ -379,7 +368,7 @@ const baseProjects: BaseProject[] = [
       "Painel visual das porções analisadas na área",
       "Resumo técnico para comunicação com clareza",
       "Suporte à organização das informações fundiárias",
-      "Estrutura preparada para apresentações futuras do projeto",
+      "Estrutura preparada para apresentações futures do projeto",
     ],
     galleryMetrics: ["Recortes consolidados", "Síntese documental"],
     palette: ["#0f0d08", "#201a12", "#5d4930", "#d5bc86", "#d7b788"],
@@ -392,14 +381,15 @@ const baseProjects: BaseProject[] = [
     category: "Georreferenciamento urbano",
     serviceType: "Atualização cadastral e georreferenciamento urbano",
     shortDescription:
-      "Revisão de malha urbana e consolidação de informações para atualização cadastral.",
+      "Levantamento cadastral urbano para regularização fundiária (REURB).",
     fullDescription:
-      "Projeto urbano estruturado para revisar a malha cadastral de um bairro em expansão, com foco em leitura precisa dos limites, organização espacial e apresentação visual que facilite análise técnica e comercial.",
+      "Mapeamento de quadras, lotes e frentes urbanas para subsidiar processos de Regularização Fundiária Urbana (REURB). Levantamento preciso dos limites consolidados para garantia da titulação dos proprietários e atualização do cadastro da Prefeitura.",
     status: "Entregue",
     year: "2024",
     areaLabel: "58 frentes",
     modelReadyLabel: "Pipeline 3D preparado",
     has3dModel: true,
+    usesDroneRTK: true,
     viewerHint:
       "O modal está pronto para receber um modelo tridimensional do bairro, mantendo lazy load, loading state elegante e fallback estático.",
     summary: [
@@ -409,8 +399,8 @@ const baseProjects: BaseProject[] = [
       { label: "Status", value: "Entregue" },
     ],
     technicalInfo: [
-      { label: "Escopo", value: "Atualização de base urbana com foco cadastral" },
-      { label: "Leitura", value: "Delimitação visual de frentes e áreas de apoio" },
+      { label: "Escopo", value: "Cadastro físico-territorial para REURB" },
+      { label: "Leitura", value: "Identificação precisa de confrontações e arruamento" },
       { label: "Apresentação", value: "Detalhamento premium para comunicação técnica" },
       { label: "Mídia", value: "Preparado para incorporar arquivo 3D do conjunto" },
     ],
@@ -420,7 +410,7 @@ const baseProjects: BaseProject[] = [
       "Galeria com cenas da evolução visual do projeto",
       "Estrutura pronta para demonstração 3D, quando houver arquivo compatível",
     ],
-    galleryMetrics: ["58 frentes analisadas", "Atualização cadastral"],
+    galleryMetrics: ["58 frentes cadastrais", "Atualização cadastral"],
     palette: ["#07141b", "#112836", "#31556c", "#d0ae73", "#9bc0d7"],
   },
 ];

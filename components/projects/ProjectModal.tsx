@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
@@ -30,21 +30,44 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
     window.setTimeout(() => closeRef.current?.focus(), 80);
   }, [project, initialVisual]);
 
+  // Lock scroll when modal is open
   useEffect(() => {
     document.body.classList.add("overflow-hidden");
     return () => document.body.classList.remove("overflow-hidden");
   }, []);
 
+  // Accessibility Focus Trap and Escape Key Handler
   useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
         onClose();
+        return;
+      }
+      if (e.key === "Tab") {
+        const modalEl = document.querySelector('[role="dialog"]');
+        if (!modalEl) return;
+        const focusables = modalEl.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex="0"]'
+        );
+        if (focusables.length === 0) return;
+        const first = focusables[0] as HTMLElement;
+        const last = focusables[focusables.length - 1] as HTMLElement;
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            last.focus();
+            e.preventDefault();
+          }
+        } else {
+          if (document.activeElement === last) {
+            first.focus();
+            e.preventDefault();
+          }
+        }
       }
     };
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [onClose, project]);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
 
   const stageImage = useMemo(() => {
     return project.gallery[activeImage] || project.coverImage;
@@ -72,37 +95,41 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
         animate="visible"
         exit="exit"
         transition={{ duration: motionDurations.overlay, ease: premiumEase }}
-        className="relative mx-auto min-h-full w-full max-w-7xl overflow-hidden rounded-[2rem] bg-mineral-50 text-ink-950 shadow-premium"
+        className="relative mx-auto min-h-full w-full max-w-7xl overflow-hidden rounded-[2rem] bg-mineral-50 text-ink-950 shadow-premium flex flex-col"
       >
-        <motion.button
-          ref={closeRef}
-          type="button"
-          onClick={onClose}
-          whileHover={reduceMotion ? undefined : { scale: 1.04 }}
-          whileTap={reduceMotion ? undefined : { scale: 0.95 }}
-          className="absolute right-4 top-4 z-20 grid h-11 w-11 place-items-center rounded-full border border-ink-950/10 bg-mineral-50/85 text-ink-950 backdrop-blur transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-700"
-          aria-label="Fechar detalhes do projeto"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
-            <path
-              d="M6 6l12 12M18 6 6 18"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeWidth="1.8"
-            />
-          </svg>
-        </motion.button>
+        {/* Sticky Close Button (Always visible on scroll, aligned to card margins) */}
+        <div className="sticky top-0 z-30 h-0 w-full flex justify-end">
+          <motion.button
+            ref={closeRef}
+            type="button"
+            onClick={onClose}
+            whileHover={reduceMotion ? undefined : { scale: 1.04 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.95 }}
+            className="mr-4 mt-4 grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-ink-950/80 text-mineral-50 backdrop-blur shadow-premium transition hover:bg-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-700 md:mr-6 md:mt-6"
+            aria-label="Fechar detalhes do projeto"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
+              <path
+                d="M6 6l12 12M18 6 6 18"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeWidth="1.8"
+              />
+            </svg>
+          </motion.button>
+        </div>
 
-        <div className="grid lg:grid-cols-[1.08fr_.92fr]">
-          <section className="bg-ink-950 p-3 text-mineral-50 md:p-5">
-            <div className="relative min-h-[420px] overflow-hidden rounded-[1.55rem] border border-white/10 bg-ink-900">
+        <div className="grid lg:grid-cols-[1.08fr_.92fr] flex-1">
+          {/* Visual Column (Dynamic vertical stretching) */}
+          <section className="bg-ink-950 p-3 text-mineral-50 md:p-5 flex flex-col justify-between h-full min-h-[500px] lg:min-h-[600px]">
+            <div className="relative flex-1 min-h-[420px] overflow-hidden rounded-[1.55rem] border border-white/10 bg-ink-900 flex flex-col">
               <motion.div
                 key={`${activeVisual}-${activeImage}`}
                 initial={reduceMotion ? false : { opacity: 0, scale: 1.01 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.32, ease: premiumEase }}
-                className="h-full min-h-[420px]"
+                className="relative flex-1 w-full h-full min-h-[420px] flex flex-col"
               >
                 {activeVisual === "3d" && published3D && project.model3dUrl ? (
                   <ModelViewer3D
@@ -115,12 +142,13 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
                   <img
                     src={stageImage}
                     alt={`${project.title} - visual técnico`}
-                    className="h-full min-h-[420px] w-full object-cover"
+                    className="absolute inset-0 h-full w-full object-cover"
                   />
                 )}
               </motion.div>
 
-              <div className="absolute inset-x-5 bottom-5 rounded-2xl border border-white/15 bg-ink-950/60 p-4 backdrop-blur">
+              {/* Technical overlay info */}
+              <div className="absolute inset-x-5 bottom-5 z-20 rounded-2xl border border-white/15 bg-ink-950/70 p-4 backdrop-blur shadow-premium">
                 <span className="text-xs font-semibold uppercase tracking-[0.18em] text-mineral-300">
                   {activeVisual === "3d" && published3D
                     ? project.modelBadgeLabel || "Visualização 3D"
@@ -128,7 +156,7 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
                       ? project.modelReadyLabel
                       : "Galeria técnica"}
                 </span>
-                <p className="mt-2 text-sm leading-6 text-mineral-100/80">
+                <p className="mt-2 text-xs leading-5 text-mineral-100/80">
                   {activeVisual === "3d" && published3D
                     ? project.modelSupportText ||
                       "Use mouse ou toque para orbitar, aproximar e afastar."
@@ -137,7 +165,8 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
               </div>
             </div>
 
-            <div className="mt-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            {/* Media Selector Hub (Tactile tabs and gallery list) */}
+            <div className="mt-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between shrink-0">
               <div className="flex gap-2">
                 {published3D ? (
                   <motion.button
@@ -145,10 +174,17 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
                     onClick={() => setActiveVisual("3d")}
                     aria-pressed={activeVisual === "3d"}
                     whileTap={reduceMotion ? undefined : { scale: 0.97 }}
-                    className={`project-tab ${
-                      activeVisual === "3d" ? "is-active" : ""
+                    className={`flex items-center gap-2 rounded-full border px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mineral-300 ${
+                      activeVisual === "3d"
+                        ? "border-mineral-200 bg-mineral-200 text-ink-950"
+                        : "border-white/10 bg-white/[0.06] text-mineral-100/75 hover:bg-white/10"
                     }`}
                   >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
+                      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                      <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                      <line x1="12" y1="22.08" x2="12" y2="12" />
+                    </svg>
                     Modelo 3D
                   </motion.button>
                 ) : null}
@@ -157,14 +193,23 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
                   onClick={() => setActiveVisual("image")}
                   aria-pressed={activeVisual === "image"}
                   whileTap={reduceMotion ? undefined : { scale: 0.97 }}
-                  className={`project-tab ${
-                    activeVisual === "image" ? "is-active" : ""
+                  className={`flex items-center gap-2 rounded-full border px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mineral-300 ${
+                    activeVisual === "image"
+                      ? "border-mineral-200 bg-mineral-200 text-ink-950"
+                      : "border-white/10 bg-white/[0.06] text-mineral-100/75 hover:bg-white/10"
                   }`}
                 >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <polyline points="21 15 16 10 5 21" />
+                  </svg>
                   Imagens
                 </motion.button>
               </div>
-              <div className="flex gap-2 overflow-x-auto pb-1">
+
+              {/* Gallery Thumbnails */}
+              <div className="flex gap-2 overflow-x-auto pb-1 max-w-full md:max-w-[320px] lg:max-w-[400px]">
                 {project.gallery.map((image, index) => (
                   <motion.button
                     key={image}
@@ -175,13 +220,13 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
                     }}
                     aria-label={`Ver imagem ${index + 1} do projeto`}
                     aria-pressed={activeVisual === "image" && activeImage === index}
-                    className={`h-16 w-24 shrink-0 overflow-hidden rounded-xl border transition ${
+                    className={`h-14 w-20 shrink-0 overflow-hidden rounded-xl border transition ${
                       activeVisual === "image" && activeImage === index
-                        ? "border-mineral-200"
-                        : "border-white/10 opacity-70 hover:opacity-100"
+                        ? "border-mineral-200 scale-95"
+                        : "border-white/10 opacity-60 hover:opacity-100"
                     }`}
                     whileHover={reduceMotion ? undefined : { y: -2 }}
-                    whileTap={reduceMotion ? undefined : { scale: 0.97 }}
+                    whileTap={reduceMotion ? undefined : { scale: 0.95 }}
                   >
                     <img
                       src={image}
@@ -195,81 +240,87 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
             </div>
           </section>
 
-          <aside className="p-6 md:p-9 lg:p-10">
-            <div className="flex flex-wrap gap-2">
-              <span className="rounded-full bg-forest-800 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-mineral-50">
-                {project.category}
-              </span>
-              <span className="rounded-full border border-ink-950/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-ink-500">
-                {project.status}
-              </span>
-            </div>
-            <p className="mt-8 text-sm font-semibold uppercase tracking-[0.2em] text-forest-700">
-              {project.id} · {project.location}
-            </p>
-            <h2
-              id="project-modal-title"
-              className="mt-3 font-display text-4xl font-semibold leading-tight md:text-5xl"
-            >
-              {project.title}
-            </h2>
-            <p className="mt-5 text-base leading-8 text-ink-500">
-              {project.fullDescription}
-            </p>
+          {/* Details Column */}
+          <aside className="p-6 md:p-9 lg:p-10 flex flex-col justify-between">
+            <div>
+              <div className="flex flex-wrap gap-2">
+                <span className="rounded-full bg-forest-800 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-mineral-50">
+                  {project.category}
+                </span>
+                <span className="rounded-full border border-ink-950/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-500">
+                  {project.status}
+                </span>
+              </div>
+              <p className="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-forest-700">
+                {project.id} · {project.location}
+              </p>
+              <h2
+                id="project-modal-title"
+                className="mt-3 font-display text-4xl font-semibold leading-tight md:text-5xl"
+              >
+                {project.title}
+              </h2>
+              <p className="mt-5 text-sm leading-7 text-ink-500">
+                {project.fullDescription}
+              </p>
 
-            <div className="mt-8 grid grid-cols-2 gap-3">
-              {project.summary.map((item) => (
-                <article
-                  key={item.label}
-                  className="rounded-2xl border border-ink-950/10 bg-white/65 p-4"
-                >
-                  <span className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-500">
-                    {item.label}
-                  </span>
-                  <strong className="mt-2 block text-lg text-ink-950">
-                    {item.value}
-                  </strong>
-                </article>
-              ))}
-            </div>
-
-            <div className="mt-8">
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-forest-700">
-                Informações técnicas
-              </span>
-              <div className="mt-4 grid gap-3">
-                {project.technicalInfo.map((item) => (
+              {/* Project Summary Cards */}
+              <div className="mt-8 grid grid-cols-2 gap-3">
+                {project.summary.map((item) => (
                   <article
                     key={item.label}
-                    className="rounded-2xl border border-ink-950/10 bg-white/55 p-4"
+                    className="rounded-2xl border border-ink-950/10 bg-white/65 p-4"
                   >
-                    <span className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-500">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-500">
                       {item.label}
                     </span>
-                    <strong className="mt-2 block text-sm leading-6 text-ink-950">
+                    <strong className="mt-2 block text-base text-ink-950">
                       {item.value}
                     </strong>
                   </article>
                 ))}
               </div>
-            </div>
 
-            <div className="mt-8">
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-forest-700">
-                Entregáveis
-              </span>
-              <ul className="mt-4 grid gap-3 text-sm leading-6 text-ink-600">
-                {project.deliverables.map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-forest-700" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              {/* Technical parameters */}
+              <div className="mt-8">
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-forest-700">
+                  Informações técnicas
+                </span>
+                <div className="mt-4 grid gap-3">
+                  {project.technicalInfo.map((item) => (
+                    <article
+                      key={item.label}
+                      className="rounded-2xl border border-ink-950/10 bg-white/55 p-4"
+                    >
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-500">
+                        {item.label}
+                      </span>
+                      <strong className="mt-2 block text-xs leading-5 text-ink-950">
+                        {item.value}
+                      </strong>
+                    </article>
+                  ))}
+                </div>
+              </div>
+
+              {/* Deliverables */}
+              <div className="mt-8">
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-forest-700">
+                  Entregáveis
+                </span>
+                <ul className="mt-4 grid gap-3 text-xs leading-5 text-ink-600">
+                  {project.deliverables.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-forest-700" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             <a
-              className="btn btn-primary mt-9 w-full justify-center"
+              className="btn btn-primary mt-9 w-full justify-center min-h-[48px]"
               href={buildProjectWhatsappLink(project)}
               target="_blank"
               rel="noreferrer"
@@ -282,5 +333,3 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
     </motion.div>
   );
 }
-
-
