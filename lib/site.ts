@@ -1,16 +1,19 @@
-﻿export const site = {
+const isVercel = process.env.VERCEL === "1" || process.env.NEXT_PUBLIC_VERCEL === "1";
+const vercelUrl = process.env.NEXT_PUBLIC_VERCEL_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` : "";
+
+export const site = {
   name: "Plano & Terra",
   tagline: "Topografia e Agrimensura",
   description:
     "Topografia, agrimensura, regularização de terrenos e georreferenciamento urbano e rural com precisão técnica.",
-  url: "https://gabrielrossanesi.github.io/planoeterra",
+  url: isVercel && vercelUrl ? vercelUrl : "https://gabrielrossanesi.github.io/planoeterra",
   phone: "+5511985222291",
   phoneLabel: "(11) 98522-2291",
   instagram: "https://www.instagram.com/planoeterra/",
   creditUrl: "https://moralessolucoes.com.br/tecnologia",
 };
 
-export const siteBasePath = "/planoeterra";
+export const siteBasePath = isVercel ? "" : "/planoeterra";
 
 export function withBasePath(path: string) {
   if (
