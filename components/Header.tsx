@@ -4,12 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import {
-  menuPanelVariants,
-  motionDurations,
-  premiumEase,
-} from "@/lib/motion";
+import { motion, useReducedMotion } from "motion/react";
+import { motionDurations, premiumEase } from "@/lib/motion";
 import {
   navigation,
   primaryWhatsappLink,
@@ -31,7 +27,6 @@ function InstagramIcon() {
 
 export function Header() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hoveredHref, setHoveredHref] = useState<string | null>(null);
   const reduceMotion = useReducedMotion();
@@ -43,16 +38,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", sync);
   }, []);
 
-  useEffect(() => {
-    document.body.classList.toggle("overflow-hidden", open);
-    return () => document.body.classList.remove("overflow-hidden");
-  }, [open]);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
-  const headerActive = scrolled || open;
+  const headerActive = scrolled;
   const normalizedPath = stripBasePath(pathname).replace(/\/$/, "") || "/";
 
   return (
@@ -81,9 +67,8 @@ export function Header() {
       >
         <Link
           href="/"
-          className="group flex min-w-0 max-w-[calc(100%-4.5rem)] items-center gap-3 rounded-full px-1 outline-none focus-visible:ring-2 focus-visible:ring-mineral-300 lg:max-w-none"
+          className="group flex min-w-0 items-center gap-3 rounded-full px-1 outline-none focus-visible:ring-2 focus-visible:ring-mineral-300"
           aria-label="Plano & Terra - Início"
-          onClick={() => setOpen(false)}
         >
           <motion.span
             whileHover={reduceMotion ? undefined : { scale: 1.03 }}
@@ -199,140 +184,22 @@ export function Header() {
           </motion.a>
         </div>
 
-        <motion.button
-          type="button"
-          whileTap={reduceMotion ? undefined : { scale: 0.94 }}
-          className="relative z-50 ml-auto grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/15 bg-white/[0.07] text-mineral-50 shadow-soft backdrop-blur-xl transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mineral-300 lg:hidden"
-          aria-label={open ? "Fechar menu" : "Abrir menu"}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          onClick={() => setOpen((value) => !value)}
+        <a
+          href={`tel:${site.phone}`}
+          aria-label={`Ligar para ${site.phoneLabel}`}
+          className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/15 bg-white/[0.07] text-mineral-50 shadow-soft backdrop-blur-xl transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mineral-300 lg:hidden"
         >
-          <span className="sr-only">{open ? "Fechar menu" : "Abrir menu"}</span>
-          <span className="relative block h-4 w-5">
-            <motion.span
-              animate={
-                open
-                  ? { y: 5, rotate: 45 }
-                  : { y: 0, rotate: 0 }
-              }
-              transition={{ duration: motionDurations.short, ease: premiumEase }}
-              className="absolute left-0 top-1 h-px w-5 bg-current"
+          <svg viewBox="0 0 24 24" aria-hidden="true" className="h-[18px] w-[18px]">
+            <path
+              d="M7.1 4.2c.5-.5 1.3-.5 1.8 0l1.9 1.9c.5.5.5 1.3 0 1.8l-1 1c-.2.2-.3.6-.1.9a12.4 12.4 0 0 0 4.5 4.5c.3.2.7.1.9-.1l1-1c.5-.5 1.3-.5 1.8 0l1.9 1.9c.5.5.5 1.3 0 1.8l-1.2 1.2c-.7.7-1.7 1-2.6.7-2.5-.8-4.9-2.3-6.9-4.3s-3.5-4.4-4.3-6.9c-.3-.9 0-1.9.7-2.6l1.2-1.2Z"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinejoin="round"
             />
-            <motion.span
-              animate={
-                open
-                  ? { y: -5, rotate: -45 }
-                  : { y: 0, rotate: 0 }
-              }
-              transition={{ duration: motionDurations.short, ease: premiumEase }}
-              className="absolute bottom-1 left-0 h-px w-5 bg-current"
-            />
-          </span>
-        </motion.button>
+          </svg>
+        </a>
       </motion.div>
-
-      <AnimatePresence>
-        {open ? (
-          <>
-            <motion.button
-              type="button"
-              aria-label="Fechar menu"
-              className="fixed inset-0 z-30 bg-ink-950/38 backdrop-blur-[2px] lg:hidden"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: motionDurations.short, ease: premiumEase }}
-              onClick={() => setOpen(false)}
-            />
-            <motion.div
-              id="mobile-menu"
-              variants={menuPanelVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              transition={{ duration: motionDurations.overlay, ease: premiumEase }}
-              className="fixed inset-x-3 top-[4.75rem] z-40 overflow-hidden rounded-[1.75rem] border border-white/12 bg-ink-950/94 shadow-premium backdrop-blur-2xl lg:hidden"
-            >
-              <div className="pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-mineral-300/55 to-transparent" />
-              <motion.nav
-                className="p-3"
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  hidden: {},
-                  visible: {
-                    transition: {
-                      staggerChildren: 0.055,
-                      delayChildren: 0.08,
-                    },
-                  },
-                }}
-                aria-label="Navegação mobile"
-              >
-                {navigation.map((item) => {
-                  const normalizedHref = item.href.replace(/\/$/, "") || "/";
-                  const active = normalizedPath === normalizedHref;
-
-                  return (
-                    <motion.div
-                      key={item.href}
-                      variants={{
-                        hidden: { opacity: 0, y: 10 },
-                        visible: { opacity: 1, y: 0 },
-                      }}
-                      transition={{ duration: 0.32, ease: premiumEase }}
-                    >
-                      <Link
-                        href={item.href}
-                        className={`group flex items-center justify-between rounded-2xl px-5 py-4 text-lg font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mineral-300 ${
-                          active
-                            ? "bg-mineral-50 text-ink-950"
-                            : "text-mineral-50 hover:bg-white/8"
-                        }`}
-                        onClick={() => setOpen(false)}
-                      >
-                        {item.label}
-                        <span
-                          aria-hidden="true"
-                          className={`transition group-hover:translate-x-1 ${
-                            active ? "text-forest-800" : "text-mineral-300"
-                          }`}
-                        >
-                          →
-                        </span>
-                      </Link>
-                    </motion.div>
-                  );
-                })}
-                <motion.div
-                  variants={{
-                    hidden: { opacity: 0, y: 10 },
-                    visible: { opacity: 1, y: 0 },
-                  }}
-                  transition={{ duration: 0.32, ease: premiumEase }}
-                  className="mt-3 grid gap-3 border-t border-white/10 p-3"
-                >
-                  <a
-                    href={primaryWhatsappLink}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn btn-primary justify-center"
-                  >
-                    Solicitar atendimento
-                  </a>
-                  <a
-                    href={`tel:${site.phone}`}
-                    className="btn btn-dark-secondary justify-center"
-                  >
-                    Ligar {site.phoneLabel}
-                  </a>
-                </motion.div>
-              </motion.nav>
-            </motion.div>
-          </>
-        ) : null}
-      </AnimatePresence>
     </motion.header>
   );
 }
