@@ -17,10 +17,7 @@ export function ProjectFilters({
   const reduceMotion = useReducedMotion();
 
   return (
-    <div
-      className="flex flex-wrap gap-2"
-      aria-label="Filtrar projetos por categoria"
-    >
+    <div className="chip-row" aria-label="Filtrar projetos por categoria">
       {categories.map((category) => {
         const active = activeCategory === category;
         return (
@@ -32,7 +29,7 @@ export function ProjectFilters({
             whileHover={reduceMotion ? undefined : { y: -1 }}
             whileTap={reduceMotion ? undefined : { scale: 0.97 }}
             transition={{ duration: motionDurations.micro, ease: premiumEase }}
-            className={`relative overflow-hidden rounded-full border px-4 py-2 text-sm font-semibold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-700 ${
+            className={`relative min-h-11 shrink-0 overflow-hidden whitespace-nowrap rounded-full border px-4 py-2 text-sm font-semibold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-700 ${
               active
                 ? "border-forest-800 bg-forest-800 text-mineral-50 shadow-soft"
                 : "border-ink-950/10 bg-white/70 text-ink-700 hover:border-forest-700/25 hover:bg-white"

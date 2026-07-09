@@ -151,7 +151,7 @@ export function MethodTimeline() {
   return (
     <motion.div
       ref={timelineRef}
-      className="relative mt-16 lg:mt-20"
+      className="relative mt-10 md:mt-16 lg:mt-20"
       initial={reduceMotion ? false : "hidden"}
       whileInView="visible"
       viewport={revealViewport}
@@ -181,7 +181,7 @@ export function MethodTimeline() {
         />
       ) : null}
 
-      <div className="relative z-10 grid gap-12 lg:gap-7">
+      <div className="relative z-10 grid gap-8 md:gap-12 lg:gap-7">
         {methodSteps.map((step, index) => {
           const detail = timelineDetails[index];
           const active = visualActiveStep === index;
@@ -199,7 +199,7 @@ export function MethodTimeline() {
                 visible: { opacity: 1, y: 0, filter: "blur(0px)" },
               }}
               transition={{ duration: motionDurations.reveal, ease: premiumEase }}
-              className="relative grid min-h-[10.5rem] gap-4 pl-14 lg:grid-cols-[minmax(0,1fr)_5rem_minmax(0,1fr)] lg:items-center lg:gap-0 lg:pl-0"
+              className="relative grid gap-4 pl-12 md:min-h-[10.5rem] md:pl-14 lg:grid-cols-[minmax(0,1fr)_5rem_minmax(0,1fr)] lg:items-center lg:gap-0 lg:pl-0"
             >
               <motion.div
                 aria-hidden="true"

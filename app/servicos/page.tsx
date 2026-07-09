@@ -80,7 +80,7 @@ export default function ServicosPage() {
             />
           </ScrollReveal>
 
-          <div className="mt-14 grid gap-6">
+          <div className="mt-8 grid gap-5 md:mt-14 md:gap-6">
             {services.map((service, index) => {
               const detail = serviceDetails.find((item) => item.id === service.id);
               return (
@@ -96,17 +96,17 @@ export default function ServicosPage() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-ink-950/60 via-transparent to-transparent" />
                     </div>
-                    <div className="p-6 md:p-9">
+                    <div className="p-5 md:p-9">
                       <span className="text-xs font-semibold uppercase tracking-[0.2em] text-forest-700">
                         {service.kicker}
                       </span>
-                      <h2 className="mt-4 text-balance font-display text-4xl font-semibold leading-tight text-ink-950">
+                      <h2 className="mt-3 text-balance font-display text-2xl font-semibold leading-tight text-ink-950 md:mt-4 md:text-4xl">
                         {service.title}
                       </h2>
-                      <p className="mt-5 text-base leading-8 text-ink-500">
+                      <p className="mt-4 text-[15px] leading-7 text-ink-500 md:mt-5 md:text-base md:leading-8">
                         {detail?.scope || service.description}
                       </p>
-                      <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                      <div className="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-3 md:mt-8 md:gap-3">
                         {(detail?.deliverables || service.tags).map((item) => (
                           <span
                             key={item}
@@ -117,7 +117,7 @@ export default function ServicosPage() {
                         ))}
                       </div>
                       <a
-                        className="btn btn-secondary mt-8"
+                        className="btn btn-secondary mt-6 w-full justify-center sm:w-auto md:mt-8"
                         href={service.href}
                         target="_blank"
                         rel="noreferrer"
@@ -143,15 +143,15 @@ export default function ServicosPage() {
               tone="dark"
             />
           </ScrollReveal>
-          <div className="mt-14 grid gap-5 md:grid-cols-3">
+          <div className="mt-8 grid gap-8 md:mt-14 md:grid-cols-3 md:gap-5">
             {methodSteps.map((step, index) => (
               <ScrollReveal key={step.number} delay={index * 90}>
-                <article className="h-full border-l border-mineral-300/35 pl-6">
-                  <span className="font-display text-5xl text-mineral-300/45">
+                <article className="h-full border-l border-mineral-300/35 pl-5 md:pl-6">
+                  <span className="font-display text-4xl text-mineral-300/45 md:text-5xl">
                     {step.number}
                   </span>
-                  <h3 className="mt-5 text-2xl font-semibold">{step.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-mineral-100/70">
+                  <h3 className="mt-4 text-xl font-semibold md:mt-5 md:text-2xl">{step.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-mineral-100/70 md:mt-4">
                     {step.description}
                   </p>
                 </article>

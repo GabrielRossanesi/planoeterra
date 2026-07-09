@@ -126,7 +126,7 @@ export function ModelViewer3D({ src, poster, alt, config }: ModelViewer3DProps) 
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full min-h-[420px] overflow-hidden rounded-[1.55rem] flex flex-col justify-center items-center select-none"
+      className="relative w-full h-full min-h-[52svh] md:min-h-[420px] overflow-hidden rounded-[1.35rem] md:rounded-[1.55rem] flex flex-col justify-center items-center select-none"
       style={{
         background: "radial-gradient(circle, #0e2015 0%, #080a09 100%)",
       }}
@@ -211,7 +211,7 @@ export function ModelViewer3D({ src, poster, alt, config }: ModelViewer3DProps) 
             {
               width: "100%",
               height: "100%",
-              minHeight: "420px",
+              minHeight: "min(52svh, 420px)",
               background: "transparent",
               "--poster-color": "transparent",
               "--progress-bar-color": "transparent",
@@ -231,11 +231,11 @@ export function ModelViewer3D({ src, poster, alt, config }: ModelViewer3DProps) 
       {/* 4. Floating HUD controls */}
       {ready && !modelLoading && !modelError && (
         <>
-          <div className="absolute top-4 right-4 z-20 flex gap-2">
+          <div className="absolute top-3 right-3 md:top-4 md:right-4 z-20 flex gap-2">
             <button
               type="button"
               onClick={handleResetCamera}
-              className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-ink-950/70 text-mineral-50 backdrop-blur shadow-premium transition hover:bg-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-700"
+              className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-ink-950/70 text-mineral-50 backdrop-blur shadow-premium transition hover:bg-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-700"
               title="Resetar câmera"
               aria-label="Resetar enquadramento do 3D"
             >
@@ -249,7 +249,7 @@ export function ModelViewer3D({ src, poster, alt, config }: ModelViewer3DProps) 
             <button
               type="button"
               onClick={toggleFullscreen}
-              className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-ink-950/70 text-mineral-50 backdrop-blur shadow-premium transition hover:bg-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-700"
+              className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-ink-950/70 text-mineral-50 backdrop-blur shadow-premium transition hover:bg-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-700"
               title={isFullscreen ? "Sair de tela cheia" : "Tela cheia"}
               aria-label={isFullscreen ? "Sair de tela cheia" : "Abrir em tela cheia"}
             >
@@ -271,8 +271,8 @@ export function ModelViewer3D({ src, poster, alt, config }: ModelViewer3DProps) 
             </button>
           </div>
 
-          <div className="pointer-events-none absolute bottom-4 left-1/2 z-20 -translate-x-1/2 rounded-full border border-white/10 bg-ink-950/60 px-4 py-1.5 text-xs text-mineral-100/90 backdrop-blur shadow-premium">
-            Arraste para girar • Role para aproximar
+          <div className="pointer-events-none absolute bottom-16 left-1/2 z-20 w-max -translate-x-1/2 rounded-full border border-white/10 bg-ink-950/60 px-4 py-1.5 text-[11px] md:text-xs text-mineral-100/90 backdrop-blur shadow-premium md:bottom-4">
+            Arraste para girar • Pinça ou role para aproximar
           </div>
         </>
       )}

@@ -52,9 +52,9 @@ export function ProjectsCatalog() {
   };
 
   return (
-    <section id="projetos" className="bg-mineral-50 pb-20 pt-14 md:pb-28 md:pt-16">
+    <section id="projetos" className="bg-mineral-50 pb-16 pt-10 md:pb-28 md:pt-16">
       <div className="mx-auto w-full max-w-7xl px-5 md:px-8">
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+        <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-end lg:gap-10">
           <ScrollReveal>
             <SectionHeading
               eyebrow="Projetos em evidência"
@@ -63,8 +63,8 @@ export function ProjectsCatalog() {
             />
           </ScrollReveal>
           <ScrollReveal delay={120}>
-            <div className="grid gap-4 rounded-[1.7rem] border border-ink-950/10 bg-white/65 p-5 shadow-soft">
-              <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid gap-4 md:rounded-[1.7rem] md:border md:border-ink-950/10 md:bg-white/65 md:p-5 md:shadow-soft">
+              <div className="hidden gap-3 sm:grid-cols-3 md:grid">
                 <div>
                   <span className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-500">
                     Resultados
@@ -100,7 +100,7 @@ export function ProjectsCatalog() {
         </div>
 
         <LayoutGroup>
-          <motion.div layout className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <motion.div layout className="mt-8 grid gap-4 md:mt-12 md:grid-cols-2 md:gap-5 xl:grid-cols-3">
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project, index) => (
                 <motion.div

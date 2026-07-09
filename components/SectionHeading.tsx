@@ -27,7 +27,7 @@ export function SectionHeading({
         {eyebrow}
       </span>
       <h2
-        className={`mt-4 text-balance font-display text-4xl font-semibold leading-tight tracking-normal md:text-5xl ${
+        className={`mt-3 text-balance font-display text-3xl font-semibold leading-tight tracking-normal md:mt-4 md:text-5xl ${
           tone === "dark" ? "text-mineral-50" : "text-ink-950"
         }`}
       >
@@ -35,7 +35,7 @@ export function SectionHeading({
       </h2>
       {description ? (
         <p
-          className={`mt-5 max-w-2xl text-base leading-7 md:text-lg ${
+          className={`mt-4 max-w-2xl text-[15px] leading-7 md:mt-5 md:text-lg ${
             align === "center" ? "mx-auto" : ""
           } ${tone === "dark" ? "text-mineral-100/80" : "text-ink-500"}`}
         >

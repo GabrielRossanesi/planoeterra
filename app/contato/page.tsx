@@ -93,7 +93,7 @@ export default function ContatoPage() {
             />
           </ScrollReveal>
 
-          <div className="mt-14 grid gap-5 md:grid-cols-3">
+          <div className="mt-8 grid gap-4 md:mt-14 md:grid-cols-3 md:gap-5">
             {channels.map((channel, index) => (
               <ScrollReveal key={channel.label} delay={index * 90}>
                 <a
@@ -105,13 +105,13 @@ export default function ContatoPage() {
                   <span className="text-xs font-semibold uppercase tracking-[0.2em] text-forest-700">
                     {channel.label}
                   </span>
-                  <h2 className="mt-5 text-2xl font-semibold text-ink-950">
+                  <h2 className="mt-4 text-xl font-semibold text-ink-950 md:mt-5 md:text-2xl">
                     {channel.title}
                   </h2>
                   <p className="mt-4 text-sm leading-7 text-ink-500">
                     {channel.description}
                   </p>
-                  <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-forest-700">
+                  <span className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-forest-700 md:mt-8">
                     {channel.action}
                     <span aria-hidden="true" className="transition group-hover:translate-x-1">
                       →
@@ -137,11 +137,11 @@ export default function ContatoPage() {
           <div className="grid gap-4">
             {preparation.map((item, index) => (
               <ScrollReveal key={item} delay={index * 80}>
-                <div className="flex items-center gap-4 border-t border-white/10 py-5">
-                  <span className="font-display text-4xl text-mineral-300/45">
+                <div className="flex items-center gap-4 border-t border-white/10 py-4 md:py-5">
+                  <span className="font-display text-3xl text-mineral-300/45 md:text-4xl">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-lg font-semibold">{item}</span>
+                  <span className="text-base font-semibold md:text-lg">{item}</span>
                 </div>
               </ScrollReveal>
             ))}

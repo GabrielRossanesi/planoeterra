@@ -63,7 +63,7 @@ export default function SobrePage() {
       </InteriorHero>
 
       <section className="section-padding bg-mineral-50">
-        <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="mx-auto grid w-full max-w-7xl gap-8 px-5 md:gap-12 md:px-8 lg:grid-cols-[0.85fr_1.15fr]">
           <ScrollReveal>
             <SectionHeading
               eyebrow="Posicionamento"
@@ -75,11 +75,11 @@ export default function SobrePage() {
           <div className="grid gap-5">
             {principles.map((item, index) => (
               <ScrollReveal key={item.title} delay={index * 90}>
-                <article className="border-t border-ink-950/10 pt-6">
-                  <h2 className="text-2xl font-semibold text-ink-950">
+                <article className="border-t border-ink-950/10 pt-5 md:pt-6">
+                  <h2 className="text-xl font-semibold text-ink-950 md:text-2xl">
                     {item.title}
                   </h2>
-                  <p className="mt-3 text-base leading-8 text-ink-500">
+                  <p className="mt-2.5 text-[15px] leading-7 text-ink-500 md:mt-3 md:text-base md:leading-8">
                     {item.description}
                   </p>
                 </article>
@@ -106,7 +106,7 @@ export default function SobrePage() {
             </ScrollReveal>
             <ScrollReveal delay={120}>
               <span className="eyebrow text-forest-700">Como trabalhamos</span>
-              <h2 className="mt-4 font-display text-4xl font-semibold leading-tight text-ink-950 md:text-5xl">
+              <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-ink-950 md:mt-4 md:text-5xl">
                 Menos ruído visual, mais leitura técnica.
               </h2>
               <p className="mt-6 text-base leading-8 text-ink-500">

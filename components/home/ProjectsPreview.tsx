@@ -8,7 +8,7 @@ export function ProjectsPreview() {
   return (
     <section className="section-padding bg-mineral-50">
       <div className="mx-auto w-full max-w-7xl px-5 md:px-8">
-        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-8">
           <ScrollReveal>
             <SectionHeading
               eyebrow="Prova de capacidade"
@@ -16,19 +16,21 @@ export function ProjectsPreview() {
               description="Uma prévia do portfólio técnico, com contexto, categoria e mídia pronta para exploração."
             />
           </ScrollReveal>
-          <ScrollReveal delay={120}>
+          <ScrollReveal delay={120} className="hidden md:block">
             <Link className="btn btn-secondary" href="/projetos">
               Explorar projetos
             </Link>
           </ScrollReveal>
         </div>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div className="snap-row mt-8 md:mt-14 md:grid-cols-2 lg:grid-cols-4">
           {featuredProjects.map((project, index) => (
-            <ScrollReveal key={project.id} delay={index * 80}>
-              <MotionSurface
-                className={index === 0 ? "md:col-span-2 lg:col-span-2" : ""}
-              >
+            <ScrollReveal
+              key={project.id}
+              delay={index * 80}
+              className={`snap-card ${index === 0 ? "md:col-span-2" : ""}`}
+            >
+              <MotionSurface className="h-full">
                 <Link
                   href="/projetos"
                   className="group block h-full overflow-hidden rounded-[1.6rem] bg-ink-950 text-mineral-50 shadow-soft outline-none focus-visible:ring-2 focus-visible:ring-forest-700"
@@ -63,6 +65,12 @@ export function ProjectsPreview() {
             </ScrollReveal>
           ))}
         </div>
+
+        <ScrollReveal className="mt-6 md:hidden">
+          <Link className="btn btn-secondary w-full justify-center" href="/projetos">
+            Explorar todos os projetos
+          </Link>
+        </ScrollReveal>
       </div>
     </section>
   );

@@ -5,8 +5,8 @@ import { navigation, primaryWhatsappLink, site, withBasePath } from "@/lib/site"
 export function Footer() {
   return (
     <footer className="bg-ink-950 text-mineral-50">
-      <div className="mx-auto w-full max-w-7xl px-5 py-14 md:px-8">
-        <div className="grid gap-10 border-y border-white/10 py-10 md:grid-cols-[1.4fr_.8fr_.8fr]">
+      <div className="mx-auto w-full max-w-7xl px-5 py-10 md:px-8 md:py-14">
+        <div className="grid gap-8 border-y border-white/10 py-8 md:grid-cols-[1.4fr_.8fr_.8fr] md:gap-10 md:py-10">
           <div>
             <Link
               href="/"

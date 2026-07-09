@@ -14,18 +14,18 @@ export function CTASection({
   return (
     <section id="contato" className="section-padding bg-mineral-50">
       <div className="mx-auto w-full max-w-7xl px-5 md:px-8">
-        <div className="relative overflow-hidden rounded-[2rem] bg-ink-950 px-6 py-12 text-mineral-50 shadow-premium md:px-12 md:py-16">
+        <div className="relative overflow-hidden rounded-[1.6rem] bg-ink-950 px-5 py-10 text-mineral-50 shadow-premium md:rounded-[2rem] md:px-12 md:py-16">
           <div className="absolute inset-0 opacity-35 [background:radial-gradient(circle_at_18%_18%,rgba(214,182,122,.34),transparent_34%),radial-gradient(circle_at_85%_42%,rgba(79,118,87,.32),transparent_32%)]" />
           <div className="absolute inset-0 precision-grid opacity-20" />
           <div className="relative max-w-3xl">
             <span className="eyebrow text-mineral-200">{eyebrow}</span>
-            <h2 className="mt-4 text-balance font-display text-4xl font-semibold leading-tight md:text-6xl">
+            <h2 className="mt-3 text-balance font-display text-3xl font-semibold leading-tight md:mt-4 md:text-6xl">
               {title}
             </h2>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-mineral-100/75 md:text-lg">
+            <p className="mt-4 max-w-2xl text-[15px] leading-7 text-mineral-100/75 md:mt-5 md:text-lg">
               {description}
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row md:mt-8">
               <a
                 className="btn btn-primary justify-center"
                 href={primaryWhatsappLink}

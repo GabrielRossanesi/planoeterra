@@ -26,11 +26,13 @@ export function ServicesSection() {
           </ScrollReveal>
         </div>
 
-        <div className="mt-14 grid gap-5 lg:grid-cols-3">
+        <div className="snap-row mt-10 md:mt-14 md:grid-cols-3">
           {services.map((service, index) => (
-            <ScrollReveal key={service.id} delay={index * 90}>
+            <ScrollReveal key={service.id} delay={index * 90} className="snap-card">
               <MotionSurface
-                className={index === 0 ? "lg:mt-10" : index === 2 ? "lg:mt-20" : ""}
+                className={`h-full ${
+                  index === 0 ? "lg:mt-10" : index === 2 ? "lg:mt-20" : ""
+                }`}
               >
                 <a
                   href={service.href}
@@ -51,14 +53,14 @@ export function ServicesSection() {
                       {service.kicker}
                     </span>
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-2xl font-semibold text-ink-950">
+                  <div className="p-5 md:p-6">
+                    <h3 className="text-xl font-semibold text-ink-950 md:text-2xl">
                       {service.title}
                     </h3>
-                    <p className="mt-4 text-sm leading-7 text-ink-500">
+                    <p className="mt-3 text-sm leading-7 text-ink-500 md:mt-4">
                       {service.description}
                     </p>
-                    <div className="mt-7 flex flex-wrap gap-2">
+                    <div className="mt-5 flex flex-wrap gap-2 md:mt-7">
                       {service.tags.map((tag) => (
                         <span
                           key={tag}
@@ -68,7 +70,7 @@ export function ServicesSection() {
                         </span>
                       ))}
                     </div>
-                    <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-forest-700">
+                    <span className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-forest-700 md:mt-8">
                       Conversar sobre o serviço
                       <span
                         aria-hidden="true"

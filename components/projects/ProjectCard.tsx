@@ -80,7 +80,7 @@ export function ProjectCard({ project, onSelect }: ProjectCardProps) {
         </span>
 
         {/* Text information */}
-        <span className="block p-6">
+        <span className="block p-5 md:p-6">
           <span className="flex items-center justify-between gap-4 text-[10px] font-bold uppercase tracking-[0.18em] text-forest-700">
             <span>{project.id}</span>
             <span>{project.areaLabel}</span>

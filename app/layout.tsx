@@ -2,6 +2,7 @@
 import "./globals.css";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { MobileTabBar } from "@/components/MobileTabBar";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { absoluteUrl, site, withBasePath } from "@/lib/site";
 
@@ -64,6 +65,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
   themeColor: "#06100b",
 };
 
@@ -79,6 +81,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <WhatsAppFloat />
+        <MobileTabBar />
       </body>
     </html>
   );

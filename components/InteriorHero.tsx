@@ -28,7 +28,7 @@ export function InteriorHero({
   const internalSecondaryLink = secondaryHref?.startsWith("/");
 
   return (
-    <section className="relative isolate overflow-hidden bg-ink-950 pt-32 text-mineral-50">
+    <section className="relative isolate overflow-hidden bg-ink-950 pt-28 text-mineral-50 md:pt-32">
       <Image
         src={withBasePath(image)}
         alt=""
@@ -40,21 +40,21 @@ export function InteriorHero({
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,10,8,.95),rgba(5,10,8,.74)_48%,rgba(5,10,8,.36)),linear-gradient(0deg,rgba(5,10,8,.9),transparent_64%)]" />
       <div className="absolute inset-0 precision-grid opacity-[0.16]" />
 
-      <div className="relative mx-auto grid w-full max-w-7xl gap-12 px-5 pb-20 md:px-8 lg:grid-cols-[1.08fr_.92fr] lg:items-end">
+      <div className="relative mx-auto grid w-full max-w-7xl gap-12 px-5 pb-14 md:px-8 md:pb-20 lg:grid-cols-[1.08fr_.92fr] lg:items-end">
         <ScrollReveal initialVisible className="min-w-0 max-w-full lg:max-w-4xl">
           <span className="eyebrow text-mineral-200">{eyebrow}</span>
           {kicker ? (
-            <p className="mt-5 text-sm uppercase tracking-[0.34em] text-mineral-100/70">
+            <p className="mt-4 text-xs uppercase tracking-[0.26em] text-mineral-100/70 md:mt-5 md:text-sm md:tracking-[0.34em]">
               {kicker}
             </p>
           ) : null}
-          <h1 className="mt-6 max-w-full text-balance break-words font-display text-4xl font-semibold leading-[1.04] md:text-7xl">
+          <h1 className="mt-5 max-w-full text-balance break-words font-display text-[2rem] font-semibold leading-[1.08] md:mt-6 md:text-7xl md:leading-[1.04]">
             {title}
           </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-mineral-100/75">
+          <p className="mt-5 max-w-2xl text-base leading-7 text-mineral-100/75 md:mt-7 md:text-lg md:leading-8">
             {description}
           </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row md:mt-9">
             <a
               className="btn btn-primary justify-center"
               href={primaryWhatsappLink}

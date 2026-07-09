@@ -6,7 +6,7 @@ import { withBasePath } from "@/lib/site";
 export function CapabilitySection() {
   return (
     <section className="section-padding bg-ink-950 text-mineral-50">
-      <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-[1fr_1.05fr] lg:items-center">
+      <div className="mx-auto grid w-full max-w-7xl gap-8 px-5 md:gap-12 md:px-8 lg:grid-cols-[1fr_1.05fr] lg:items-center">
         <ScrollReveal className="order-2 lg:order-1">
           <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-3 shadow-premium">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[1.55rem]">
@@ -36,7 +36,7 @@ export function CapabilitySection() {
           <span className="eyebrow text-mineral-200">
             Tecnologia e precisão em campo
           </span>
-          <h2 className="mt-4 text-balance font-display text-4xl font-semibold leading-tight md:text-6xl">
+          <h2 className="mt-3 text-balance font-display text-3xl font-semibold leading-tight md:mt-4 md:text-6xl">
             Recursos que sustentam a leitura territorial.
           </h2>
           <p className="mt-6 max-w-2xl text-base leading-8 text-mineral-100/75 md:text-lg">
@@ -62,15 +62,15 @@ export function CapabilitySection() {
         </ScrollReveal>
       </div>
 
-      <div className="mx-auto mt-16 w-full max-w-7xl px-5 md:px-8">
+      <div className="mx-auto mt-10 w-full max-w-7xl px-5 md:mt-16 md:px-8">
         <ScrollReveal>
-          <div className="grid gap-3 border-y border-white/10 py-6 md:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 border-y border-white/10 py-5 md:grid-cols-4 md:py-6">
             {differentials.map((item) => (
               <div
                 key={item}
-                className="flex items-center gap-3 text-sm font-medium text-mineral-100/80"
+                className="flex items-center gap-2.5 text-[13px] font-medium text-mineral-100/80 md:gap-3 md:text-sm"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-mineral-300" />
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-mineral-300" />
                 {item}
               </div>
             ))}

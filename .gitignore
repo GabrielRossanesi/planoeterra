@@ -5,3 +5,6 @@ dist/
 *.tsbuildinfo
 .env*
 !.env.example
+
+# Raw photogrammetry sources (too large for git/deploy; optimized copies live in public/models/)
+raw-assets/

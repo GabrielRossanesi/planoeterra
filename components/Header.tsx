@@ -60,12 +60,12 @@ export function Header() {
       initial={reduceMotion ? false : { opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.55, ease: premiumEase }}
-      className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-5"
+      className="fixed inset-x-0 top-0 z-50 px-3 pt-2.5 md:px-5 md:pt-3"
     >
       <motion.div
         animate={{
           y: headerActive ? -2 : 0,
-          height: headerActive ? "4.25rem" : "4.5rem",
+          height: headerActive ? "3.75rem" : "4rem",
           backgroundColor: headerActive
             ? "rgba(6, 14, 10, 0.82)"
             : "rgba(6, 14, 10, 0.18)",
@@ -88,7 +88,7 @@ export function Header() {
           <motion.span
             whileHover={reduceMotion ? undefined : { scale: 1.03 }}
             whileTap={reduceMotion ? undefined : { scale: 0.98 }}
-            className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full bg-mineral-50/95 p-1.5 shadow-soft ring-1 ring-white/25"
+            className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-mineral-50/95 p-1 shadow-soft ring-1 ring-white/25 md:h-11 md:w-11 md:p-1.5"
           >
             <Image
               src={withBasePath("/assets/logo-plano-terra.svg")}
@@ -202,7 +202,7 @@ export function Header() {
         <motion.button
           type="button"
           whileTap={reduceMotion ? undefined : { scale: 0.94 }}
-          className="relative z-50 ml-auto grid h-11 w-11 shrink-0 place-items-center rounded-full border border-white/15 bg-white/[0.07] text-mineral-50 shadow-soft backdrop-blur-xl transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mineral-300 lg:hidden"
+          className="relative z-50 ml-auto grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/15 bg-white/[0.07] text-mineral-50 shadow-soft backdrop-blur-xl transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mineral-300 lg:hidden"
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
           aria-controls="mobile-menu"
@@ -252,7 +252,7 @@ export function Header() {
               animate="visible"
               exit="exit"
               transition={{ duration: motionDurations.overlay, ease: premiumEase }}
-              className="fixed inset-x-3 top-24 z-40 overflow-hidden rounded-[1.75rem] border border-white/12 bg-ink-950/94 shadow-premium backdrop-blur-2xl lg:hidden"
+              className="fixed inset-x-3 top-[4.75rem] z-40 overflow-hidden rounded-[1.75rem] border border-white/12 bg-ink-950/94 shadow-premium backdrop-blur-2xl lg:hidden"
             >
               <div className="pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-mineral-300/55 to-transparent" />
               <motion.nav

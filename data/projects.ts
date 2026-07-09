@@ -298,7 +298,7 @@ const baseProjects: BaseProject[] = [
     modelReadyLabel: "Modelo 3D publicado",
     has3dModel: true,
     usesDroneRTK: true,
-    model3dUrl: withBasePath("/ex3d.glb"),
+    model3dUrl: withBasePath("/models/topografia-demo.glb"),
     modelBadgeLabel: "Topografia 3D",
     modelCtaLabel: "Ver topografia 3D",
     modelSupportText: "Modelo demonstrativo de visualização topográfica em 3D.",
@@ -375,42 +375,54 @@ const baseProjects: BaseProject[] = [
   },
   {
     id: "PT-006",
-    slug: "jardim-novo-marco-cadastral",
-    title: "Jardim Novo Marco",
+    slug: "jardim-margareth-reurb",
+    title: "Jardim Margareth",
     location: "Campo Limpo Paulista, SP",
     category: "Georreferenciamento urbano",
-    serviceType: "Atualização cadastral e georreferenciamento urbano",
+    serviceType: "Levantamento cadastral urbano para REURB",
     shortDescription:
-      "Levantamento cadastral urbano para regularização fundiária (REURB).",
+      "Levantamento aerofotogramétrico e cadastral urbano para regularização fundiária (REURB), com modelo 3D real do bairro.",
     fullDescription:
-      "Mapeamento de quadras, lotes e frentes urbanas para subsidiar processos de Regularização Fundiária Urbana (REURB). Levantamento preciso dos limites consolidados para garantia da titulação dos proprietários e atualização do cadastro da Prefeitura.",
+      "Levantamento aerofotogramétrico com drone para subsidiar o processo de Regularização Fundiária Urbana (REURB) do Jardim Margareth. O voo gerou um modelo tridimensional fiel do bairro, base para leitura de quadras, lotes, arruamento e limites consolidados — garantindo precisão na titulação dos moradores e na atualização cadastral.",
     status: "Entregue",
     year: "2024",
-    areaLabel: "58 frentes",
-    modelReadyLabel: "Pipeline 3D preparado",
+    areaLabel: "Bairro completo",
+    modelReadyLabel: "Modelo 3D publicado",
     has3dModel: true,
     usesDroneRTK: true,
+    model3dUrl: withBasePath("/models/jd-margareth-reurb.glb"),
+    modelBadgeLabel: "REURB em 3D",
+    modelCtaLabel: "Ver o bairro em 3D",
+    modelSupportText:
+      "Modelo 3D real gerado por aerofotogrametria com drone. Arraste para girar e use pinça ou scroll para aproximar.",
+    model3dViewerConfig: {
+      orientation: "-90deg 0deg 0deg",
+      cameraOrbit: "25deg 60deg auto",
+      fieldOfView: "30deg",
+      minCameraOrbit: "auto 22deg auto",
+      maxCameraOrbit: "auto 84deg auto",
+    },
     viewerHint:
-      "O modal está pronto para receber um modelo tridimensional do bairro, mantendo lazy load, loading state elegante e fallback estático.",
+      "Modelo tridimensional real do levantamento, com rotação, zoom e fallback estático seguro.",
     summary: [
-      { label: "Serviço", value: "Georreferenciamento urbano" },
-      { label: "Escala", value: "58 frentes" },
+      { label: "Serviço", value: "REURB" },
+      { label: "Escala", value: "Bairro completo" },
       { label: "Ano", value: "2024" },
       { label: "Status", value: "Entregue" },
     ],
     technicalInfo: [
       { label: "Escopo", value: "Cadastro físico-territorial para REURB" },
+      { label: "Captação", value: "Aerofotogrametria com drone e apoio RTK" },
       { label: "Leitura", value: "Identificação precisa de confrontações e arruamento" },
-      { label: "Apresentação", value: "Detalhamento premium para comunicação técnica" },
-      { label: "Mídia", value: "Preparado para incorporar arquivo 3D do conjunto" },
+      { label: "Mídia", value: "Modelo 3D real do bairro, navegável no site" },
     ],
     deliverables: [
+      "Modelo tridimensional do bairro gerado por fotogrametria",
       "Malha urbana revisada com leitura clara do conjunto",
-      "Resumo técnico para apresentação comercial do case",
-      "Galeria com cenas da evolução visual do projeto",
-      "Estrutura pronta para demonstração 3D, quando houver arquivo compatível",
+      "Base técnica para instrução do processo de REURB",
+      "Material de apresentação para prefeitura e moradores",
     ],
-    galleryMetrics: ["58 frentes cadastrais", "Atualização cadastral"],
+    galleryMetrics: ["Cadastro urbano REURB", "Modelo 3D publicado"],
     palette: ["#07141b", "#112836", "#31556c", "#d0ae73", "#9bc0d7"],
   },
 ];
@@ -442,10 +454,14 @@ export const projectCategories = [
   ...Array.from(new Set(projects.map((project) => project.category))),
 ];
 
-export const featuredProjects = projects.slice(0, 4);
-
 export const hasPublished3D = (project: Project) =>
   Boolean(project.has3dModel && project.model3dUrl);
+
+// Real 3D-published cases lead the home preview.
+export const featuredProjects = [
+  ...projects.filter(hasPublished3D),
+  ...projects.filter((project) => !hasPublished3D(project)),
+].slice(0, 4);
 
 export const buildProjectWhatsappLink = (project: Project) =>
   whatsappLink(`Olá, gostaria de falar sobre o projeto ${project.title} da Plano & Terra.`);

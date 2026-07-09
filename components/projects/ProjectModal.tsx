@@ -79,7 +79,7 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: motionDurations.overlay, ease: premiumEase }}
-      className="fixed inset-0 z-[70] overflow-y-auto bg-ink-950/70 px-3 py-5 backdrop-blur-xl md:px-6 md:py-8"
+      className="fixed inset-0 z-[70] overflow-y-auto bg-ink-950/70 backdrop-blur-xl md:px-6 md:py-8"
       role="dialog"
       aria-modal="true"
       aria-labelledby="project-modal-title"
@@ -95,7 +95,7 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
         animate="visible"
         exit="exit"
         transition={{ duration: motionDurations.overlay, ease: premiumEase }}
-        className="relative mx-auto min-h-full w-full max-w-7xl overflow-hidden rounded-[2rem] bg-mineral-50 text-ink-950 shadow-premium flex flex-col"
+        className="relative mx-auto min-h-full w-full max-w-7xl overflow-hidden bg-mineral-50 text-ink-950 shadow-premium flex flex-col md:rounded-[2rem]"
       >
         {/* Sticky Close Button (Always visible on scroll, aligned to card margins) */}
         <div className="sticky top-0 z-30 h-0 w-full flex justify-end">
@@ -122,14 +122,14 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
 
         <div className="grid lg:grid-cols-[1.08fr_.92fr] flex-1">
           {/* Visual Column (Dynamic vertical stretching) */}
-          <section className="bg-ink-950 p-3 text-mineral-50 md:p-5 flex flex-col justify-between h-full min-h-[500px] lg:min-h-[600px]">
-            <div className="relative flex-1 min-h-[420px] overflow-hidden rounded-[1.55rem] border border-white/10 bg-ink-900 flex flex-col">
+          <section className="bg-ink-950 p-3 text-mineral-50 md:p-5 flex flex-col justify-between h-full min-h-0 md:min-h-[500px] lg:min-h-[600px]">
+            <div className="relative flex-1 min-h-[52svh] overflow-hidden rounded-[1.35rem] border border-white/10 bg-ink-900 flex flex-col md:min-h-[420px] md:rounded-[1.55rem]">
               <motion.div
                 key={`${activeVisual}-${activeImage}`}
                 initial={reduceMotion ? false : { opacity: 0, scale: 1.01 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.32, ease: premiumEase }}
-                className="relative flex-1 w-full h-full min-h-[420px] flex flex-col"
+                className="relative flex-1 w-full h-full min-h-[52svh] md:min-h-[420px] flex flex-col"
               >
                 {activeVisual === "3d" && published3D && project.model3dUrl ? (
                   <ModelViewer3D
@@ -148,15 +148,15 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
               </motion.div>
 
               {/* Technical overlay info */}
-              <div className="absolute inset-x-5 bottom-5 z-20 rounded-2xl border border-white/15 bg-ink-950/70 p-4 backdrop-blur shadow-premium">
-                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-mineral-300">
+              <div className="absolute inset-x-3 bottom-3 z-20 rounded-2xl border border-white/15 bg-ink-950/70 p-3 backdrop-blur shadow-premium md:inset-x-5 md:bottom-5 md:p-4">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-mineral-300 md:text-xs">
                   {activeVisual === "3d" && published3D
                     ? project.modelBadgeLabel || "Visualização 3D"
                     : project.has3dModel
                       ? project.modelReadyLabel
                       : "Galeria técnica"}
                 </span>
-                <p className="mt-2 text-xs leading-5 text-mineral-100/80">
+                <p className="mt-1.5 hidden text-xs leading-5 text-mineral-100/80 sm:block md:mt-2">
                   {activeVisual === "3d" && published3D
                     ? project.modelSupportText ||
                       "Use mouse ou toque para orbitar, aproximar e afastar."
@@ -241,7 +241,7 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
           </section>
 
           {/* Details Column */}
-          <aside className="p-6 md:p-9 lg:p-10 flex flex-col justify-between">
+          <aside className="p-5 pb-3 md:p-9 md:pb-9 lg:p-10 flex flex-col justify-between">
             <div>
               <div className="flex flex-wrap gap-2">
                 <span className="rounded-full bg-forest-800 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-mineral-50">
@@ -251,12 +251,12 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
                   {project.status}
                 </span>
               </div>
-              <p className="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-forest-700">
+              <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-forest-700 md:mt-8">
                 {project.id} · {project.location}
               </p>
               <h2
                 id="project-modal-title"
-                className="mt-3 font-display text-4xl font-semibold leading-tight md:text-5xl"
+                className="mt-2 font-display text-3xl font-semibold leading-tight md:mt-3 md:text-5xl"
               >
                 {project.title}
               </h2>
@@ -319,14 +319,16 @@ export function ProjectModal({ project, initialVisual, onClose }: ProjectModalPr
               </div>
             </div>
 
-            <a
-              className="btn btn-primary mt-9 w-full justify-center min-h-[48px]"
-              href={buildProjectWhatsappLink(project)}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Falar sobre este projeto
-            </a>
+            <div className="sticky bottom-0 -mx-5 mt-7 border-t border-ink-950/10 bg-mineral-50/95 px-5 pb-[calc(env(safe-area-inset-bottom)+0.9rem)] pt-3 backdrop-blur md:static md:m-0 md:mt-9 md:border-0 md:bg-transparent md:p-0 md:backdrop-blur-none">
+              <a
+                className="btn btn-primary w-full justify-center min-h-[48px]"
+                href={buildProjectWhatsappLink(project)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Falar sobre este projeto
+              </a>
+            </div>
           </aside>
         </div>
       </motion.div>

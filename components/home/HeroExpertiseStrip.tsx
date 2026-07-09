@@ -35,7 +35,7 @@ export function HeroExpertiseStrip() {
         ease: premiumEase,
         delay: 0.34,
       }}
-      className="mt-14 w-full max-w-3xl"
+      className="mt-9 w-full max-w-3xl md:mt-14"
     >
       <motion.div
         aria-hidden="true"
@@ -65,7 +65,7 @@ export function HeroExpertiseStrip() {
         />
 
         <motion.ul
-          className="relative grid text-sm text-mineral-100/70 sm:grid-cols-3"
+          className="relative flex flex-wrap gap-x-6 text-sm text-mineral-100/70 sm:grid sm:grid-cols-3 sm:gap-x-0"
           initial={reduceMotion ? false : "hidden"}
           animate="visible"
           variants={{
@@ -93,7 +93,7 @@ export function HeroExpertiseStrip() {
                   ease: premiumEase,
                 }}
                 onHoverStart={() => setActiveIndex(index)}
-                className="group relative min-h-14 px-0 py-4 sm:px-5"
+                className="group relative px-0 py-2.5 sm:min-h-14 sm:py-4 sm:px-5"
               >
                 <div className="flex items-center gap-3">
                   <span
