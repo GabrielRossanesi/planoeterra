@@ -22,6 +22,7 @@ export function ModelViewer3D({ src, poster, alt, config }: ModelViewer3DProps) 
 
   const containerRef = useRef<HTMLDivElement>(null);
   const viewerRef = useRef<any>(null);
+  const initialOrbitRef = useRef<string | null>(null);
 
   // Dynamic import of the model-viewer custom element script
   useEffect(() => {
@@ -57,6 +58,32 @@ export function ModelViewer3D({ src, poster, alt, config }: ModelViewer3DProps) 
     const onLoad = () => {
       // Auto-fit camera logic
       viewer.updateFraming();
+
+      // Open landscape: if the model's long axis is pointing at the camera,
+      // rotate the view 90° so terrain strips read horizontally on screen.
+      try {
+        const dims = viewer.getDimensions();
+        const orbit = viewer.getCameraOrbit();
+        if (dims && orbit) {
+          const screenWidthAt = (theta: number) =>
+            dims.x * Math.abs(Math.cos(theta)) +
+            dims.z * Math.abs(Math.sin(theta));
+          let theta = orbit.theta;
+          if (screenWidthAt(theta + Math.PI / 2) > screenWidthAt(theta)) {
+            theta += Math.PI / 2;
+          }
+          const orbitStr = `${((theta * 180) / Math.PI).toFixed(1)}deg ${(
+            (orbit.phi * 180) /
+            Math.PI
+          ).toFixed(1)}deg ${orbit.radius.toFixed(3)}m`;
+          initialOrbitRef.current = orbitStr;
+          viewer.cameraOrbit = orbitStr;
+          viewer.jumpCameraToGoal();
+        }
+      } catch {
+        // Framing heuristics are best-effort; the default orbit still works.
+      }
+
       setModelLoading(false);
     };
 
@@ -101,10 +128,13 @@ export function ModelViewer3D({ src, poster, alt, config }: ModelViewer3DProps) 
   const handleResetCamera = () => {
     const viewer = viewerRef.current;
     if (viewer) {
-      viewer.cameraOrbit = config?.cameraOrbit || "auto auto auto";
+      viewer.cameraOrbit =
+        initialOrbitRef.current || config?.cameraOrbit || "auto auto auto";
       viewer.cameraTarget = config?.cameraTarget || "auto auto auto";
       viewer.fieldOfView = config?.fieldOfView || "auto";
-      viewer.updateFraming();
+      if (!initialOrbitRef.current) {
+        viewer.updateFraming();
+      }
     }
   };
 

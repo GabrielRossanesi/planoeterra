@@ -184,21 +184,6 @@ export function Header() {
           </motion.a>
         </div>
 
-        <a
-          href={`tel:${site.phone}`}
-          aria-label={`Ligar para ${site.phoneLabel}`}
-          className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/15 bg-white/[0.07] text-mineral-50 shadow-soft backdrop-blur-xl transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mineral-300 lg:hidden"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true" className="h-[18px] w-[18px]">
-            <path
-              d="M7.1 4.2c.5-.5 1.3-.5 1.8 0l1.9 1.9c.5.5.5 1.3 0 1.8l-1 1c-.2.2-.3.6-.1.9a12.4 12.4 0 0 0 4.5 4.5c.3.2.7.1.9-.1l1-1c.5-.5 1.3-.5 1.8 0l1.9 1.9c.5.5.5 1.3 0 1.8l-1.2 1.2c-.7.7-1.7 1-2.6.7-2.5-.8-4.9-2.3-6.9-4.3s-3.5-4.4-4.3-6.9c-.3-.9 0-1.9.7-2.6l1.2-1.2Z"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </a>
       </motion.div>
     </motion.header>
   );
