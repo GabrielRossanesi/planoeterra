@@ -303,7 +303,7 @@ const baseProjects: BaseProject[] = [
     modelCtaLabel: "Ver topografia 3D",
     modelSupportText: "Modelo demonstrativo de visualização topográfica em 3D.",
     model3dViewerConfig: {
-      orientation: "-90deg 0deg 0deg",
+      // Scene is already Y-up (Sketchfab bakes the conversion into nodes).
       cameraOrbit: "38deg 68deg auto",
       cameraTarget: "10m 80m 174m",
       fieldOfView: "32deg",
@@ -396,8 +396,10 @@ const baseProjects: BaseProject[] = [
     modelSupportText:
       "Modelo 3D real gerado por aerofotogrametria com drone. Arraste para girar e use pinça ou scroll para aproximar.",
     model3dViewerConfig: {
-      orientation: "-90deg 0deg 0deg",
-      cameraOrbit: "25deg 60deg auto",
+      // model-viewer orientation is roll/pitch/yaw: pitch -90° lays the
+      // Z-up photogrammetry terrain flat on the ground plane.
+      orientation: "0deg -90deg 0deg",
+      cameraOrbit: "0deg 60deg auto",
       fieldOfView: "30deg",
       minCameraOrbit: "auto 22deg auto",
       maxCameraOrbit: "auto 84deg auto",

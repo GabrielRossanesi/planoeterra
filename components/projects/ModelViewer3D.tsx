@@ -59,27 +59,28 @@ export function ModelViewer3D({ src, poster, alt, config }: ModelViewer3DProps) 
       // Auto-fit camera logic
       viewer.updateFraming();
 
-      // Open landscape: if the model's long axis is pointing at the camera,
-      // rotate the view 90° so terrain strips read horizontally on screen.
+      // Open landscape + oblique: azimuth follows the model's long axis so
+      // the terrain spreads across the screen, and the polar angle stays low
+      // enough to read relief in perspective (never top-down).
       try {
+        // getDimensions() reports model space, before the `orientation`
+        // attribute (roll/pitch/yaw). Z-up terrains use pitch ±90° and keep
+        // the ground plane in x/y; regular Y-up models keep it in x/z.
         const dims = viewer.getDimensions();
-        const orbit = viewer.getCameraOrbit();
-        if (dims && orbit) {
-          const screenWidthAt = (theta: number) =>
-            dims.x * Math.abs(Math.cos(theta)) +
-            dims.z * Math.abs(Math.sin(theta));
-          let theta = orbit.theta;
-          if (screenWidthAt(theta + Math.PI / 2) > screenWidthAt(theta)) {
-            theta += Math.PI / 2;
-          }
-          const orbitStr = `${((theta * 180) / Math.PI).toFixed(1)}deg ${(
-            (orbit.phi * 180) /
-            Math.PI
-          ).toFixed(1)}deg ${orbit.radius.toFixed(3)}m`;
-          initialOrbitRef.current = orbitStr;
-          viewer.cameraOrbit = orbitStr;
-          viewer.jumpCameraToGoal();
-        }
+        const pitch = parseFloat(
+          (config?.orientation || "").trim().split(/\s+/)[1] || "0"
+        );
+        const zUpTerrain = Math.abs(Math.abs(pitch) - 90) < 1;
+        const depth = zUpTerrain ? dims.y : dims.z;
+        const theta = dims && depth > dims.x ? 90 : 0;
+        const configPolar = config?.cameraOrbit?.split(/\s+/)[1];
+        const polar =
+          configPolar && configPolar !== "auto" ? configPolar : "65deg";
+        // 85% of the auto-framed distance: fills the stage without clipping.
+        const orbitStr = `${theta}deg ${polar} 85%`;
+        initialOrbitRef.current = orbitStr;
+        viewer.cameraOrbit = orbitStr;
+        viewer.jumpCameraToGoal();
       } catch {
         // Framing heuristics are best-effort; the default orbit still works.
       }
@@ -219,8 +220,6 @@ export function ModelViewer3D({ src, poster, alt, config }: ModelViewer3DProps) 
           poster={poster}
           alt={alt}
           camera-controls
-          auto-rotate
-          auto-rotate-delay="1800"
           interaction-prompt-threshold="1500"
           touch-action="pan-y"
           shadow-intensity="1"
