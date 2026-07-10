@@ -12,7 +12,6 @@ import { premiumEase } from "@/lib/motion";
 
 const filterCategories = [
   "Todos",
-  "Usucapião",
   "Georreferenciamento",
   "Levantamento topográfico",
   "Drone/RTK",

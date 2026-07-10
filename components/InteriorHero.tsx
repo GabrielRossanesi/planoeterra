@@ -20,7 +20,7 @@ export function InteriorHero({
   kicker,
   title,
   description,
-  image = "/drone.avif",
+  image = "/photos/aerea-bairro-02.webp",
   children,
   secondaryHref,
   secondaryLabel,

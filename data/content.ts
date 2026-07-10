@@ -34,7 +34,7 @@ export const services = [
     kicker: "Regularização possessória",
     description:
       "Perímetro, confrontações e apoio técnico para instrução documental com base territorial clara.",
-    image: "/assets/visual-service-usucapiao.svg",
+    image: "/photos/campo-rtk-02.webp",
     href: whatsappLink(
       "Olá, gostaria de solicitar atendimento para levantamento de usucapião da Plano & Terra."
     ),
@@ -46,7 +46,7 @@ export const services = [
     kicker: "Cadastro e limites",
     description:
       "Atualização cadastral, conferência de limites e leitura espacial para imóveis e conjuntos urbanos.",
-    image: "/assets/visual-service-urban.svg",
+    image: "/photos/aerea-bairro-02.webp",
     href: whatsappLink(
       "Olá, gostaria de solicitar atendimento para georreferenciamento urbano da Plano & Terra."
     ),
@@ -58,7 +58,7 @@ export const services = [
     kicker: "Gestão territorial",
     description:
       "Mapeamento confiável para regularização, organização do imóvel rural e tomada de decisão técnica.",
-    image: "/assets/visual-service-rural.svg",
+    image: "/photos/campo-nivel-01.webp",
     href: whatsappLink(
       "Olá, gostaria de solicitar atendimento para georreferenciamento rural da Plano & Terra."
     ),

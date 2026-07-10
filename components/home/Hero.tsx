@@ -8,8 +8,8 @@ export function Hero() {
   return (
     <section className="relative isolate min-h-[94svh] overflow-hidden border-b border-ink-950/10 bg-ink-950 text-mineral-50">
       <Image
-        src={withBasePath("/drone.avif")}
-        alt="Vista aérea de área mapeada por drone"
+        src={withBasePath("/photos/aerea-bairro-01.webp")}
+        alt="Vista aérea de bairro mapeado por drone pela Plano & Terra"
         fill
         sizes="100vw"
         priority

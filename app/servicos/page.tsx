@@ -51,8 +51,8 @@ export default function ServicosPage() {
         <div className="rounded-[2rem] border border-white/10 bg-white/[0.06] p-4 shadow-premium backdrop-blur">
           <div className="relative aspect-[4/3] overflow-hidden rounded-[1.55rem]">
             <Image
-              src={withBasePath("/assets/hero-drone-photo.png")}
-              alt="Drone aplicado em levantamento de campo"
+              src={withBasePath("/photos/equip-rtk-01.webp")}
+              alt="Estação GNSS/RTK montada em levantamento de campo"
               fill
               sizes="40vw"
               className="object-cover"

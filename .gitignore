@@ -8,3 +8,6 @@ dist/
 
 # Raw photogrammetry sources (too large for git/deploy; optimized copies live in public/models/)
 raw-assets/
+
+# Raw client source images (optimized web copies live in public/photos/)
+img/

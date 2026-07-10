@@ -44,7 +44,7 @@ export default function SobrePage() {
         kicker="Topografia e agrimensura"
         title="Precisão técnica com apresentação clara."
         description="A Plano & Terra atua na leitura, medição e organização de informações territoriais para apoiar regularização, cadastro e decisão."
-        image="/assets/hero-drone-photo.png"
+        image="/photos/campo-rtk-03.webp"
         secondaryHref="/projetos"
         secondaryLabel="Ver projetos"
       >
@@ -95,8 +95,8 @@ export default function SobrePage() {
             <ScrollReveal>
               <div className="relative overflow-hidden rounded-[2rem] bg-ink-950 shadow-premium">
                 <Image
-                  src={withBasePath("/drone.avif")}
-                  alt="Vista aérea usada como referência de leitura territorial"
+                  src={withBasePath("/photos/aerea-bairro-01.webp")}
+                  alt="Vista aérea de bairro mapeado pela Plano & Terra"
                   width={1200}
                   height={800}
                   className="aspect-[4/3] w-full object-cover opacity-85"
